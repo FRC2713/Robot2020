@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -109,5 +110,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+  public static void initializeSparkDefaults(CANSparkMax... sparks) {
+    for (CANSparkMax spark : sparks) {
+      spark.setSmartCurrentLimit(RobotMap.MAX_MOTOR_STALL_AMPS, RobotMap.MAX_MOTOR_FREE_AMPS);
+    }
   }
 }

@@ -15,5 +15,19 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
+public final class RobotMap {
+
+  // Config
+  public static final int MAX_MOTOR_FREE_AMPS = 80;
+  public static final int MAX_MOTOR_STALL_AMPS = 40;
+  public static final double DEADBAND = 0.04;
+  public static final float REGULAR_SPEED = .8f;
+
+  //Motors
+  public static int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static int backLeftTalonPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static int frontRightTalonPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+
 }
+
