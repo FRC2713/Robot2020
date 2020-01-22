@@ -53,16 +53,9 @@ public class SMDrive extends CommandBase {
 
   @Override
   public void execute() {
-    System.out.println("heyyyy brogrammers");
+
     double measuredLeft;
     double measuredRight;
-
-    if(xbox == null){
-      System.out.println("brogrammers this is bad");
-    }
-    else{
-      System.out.println("brogrammers this is good");
-    }
 
     if (xbox.getRawButtonPressed(7)) {
       useTankInsteadOfBradford = !useTankInsteadOfBradford;
@@ -95,13 +88,6 @@ public class SMDrive extends CommandBase {
 
     lastLeftStickVal = measuredLeft;
     lastRightStickVal = measuredRight;
-
-    if(xbox == null){
-      System.out.println("brogrammers this is really bad");
-    }
-    else{
-      System.out.println("brogrammers this is really good");
-    }
   }
 
   @Override
