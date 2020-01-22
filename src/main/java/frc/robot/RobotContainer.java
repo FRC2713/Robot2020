@@ -25,8 +25,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
+  public static SM sm = new SM();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static DriveSubsystem driveSubsystem;
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static Preferences prefs = Preferences.getInstance();
 
 
@@ -58,4 +59,5 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
+
 }

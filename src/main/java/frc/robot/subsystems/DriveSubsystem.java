@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.SMDrive;
 
 public class DriveSubsystem extends SubsystemBase {
   /**
@@ -21,21 +22,16 @@ public class DriveSubsystem extends SubsystemBase {
   private final CANSparkMax backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
   //Differential drive coordinates motors, used for tank + arcade drive
+  public SMDrive driveCommand = new SMDrive(this);
   public DifferentialDrive roboDrive = new DifferentialDrive(frontLeft, frontRight);
 
   public DriveSubsystem() {
     Robot.initializeSparkDefaults(frontLeft, frontRight);
-
-  }
-
-
-
-  public void initTeleop() {
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);
 
     roboDrive.setDeadband(RobotMap.DEADBAND);
-
+    setDefaultCommand(driveCommand);
 
   }
 

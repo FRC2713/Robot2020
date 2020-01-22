@@ -22,6 +22,7 @@ public class SM {
 
   public SM() {
     initControllers();
+    System.out.println("Bearpaws are fake uggs");
   }
 
   /**
@@ -41,6 +42,10 @@ public class SM {
     }
     if (xBoxController == null) {
       xBoxController = new XboxController(BACKUP_XBOX_PORT);
+      System.out.println("Marissa is stupid");
+    }
+    if(xBoxController == null){
+      System.out.println("Marissa is really stupid");
     }
     if (arcadeController == null) {
       arcadeController = new Joystick(BACKUP_ARCADE_PORT);
