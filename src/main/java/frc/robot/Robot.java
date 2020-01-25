@@ -80,6 +80,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
   }
+  private final ColorSensor m_colorSensor = new ColorSensor();
 
   @Override
   public void teleopInit() {
@@ -90,14 +91,26 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    m_colorSensor.robotInit();
+
   }
 
   /**
    * This function is called periodically during operator control.
    */
+
   @Override
   public void teleopPeriodic() {
+
+    m_colorSensor.robotPeriodic();
+
+
   }
+
+
+
+
 
   @Override
   public void testInit() {
@@ -116,4 +129,5 @@ public class Robot extends TimedRobot {
       spark.setSmartCurrentLimit(RobotMap.MAX_MOTOR_STALL_AMPS, RobotMap.MAX_MOTOR_FREE_AMPS);
     }
   }
+
 }

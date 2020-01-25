@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -22,6 +25,7 @@ public final class RobotMap {
   public static final int MAX_MOTOR_STALL_AMPS = 40;
   public static final double DEADBAND = 0.04;
   public static final float REGULAR_SPEED = .8f;
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
   //Motors
   public static int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
