@@ -6,15 +6,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 package frc.robot;
-
-
-
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * This is a simple example to show how the REV Color Sensor V3 can be used to
  * detect pre-configured colors.
@@ -58,7 +54,7 @@ public class ColorSensor {
 
 
 
-  public void robotInit(){
+  public void sensorInit(){
 
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
@@ -71,7 +67,7 @@ public class ColorSensor {
 
 
 
-  public void robotPeriodic(){
+  public void testFunction(){
 
   /**
    * The method GetColor() returns a normalized color value from the sensor and can be
@@ -102,6 +98,9 @@ public class ColorSensor {
   } else {
     colorString = "Unknown";
   }
+
+
+
   /**
    * Open Smart Dashboard or Shuffleboard to see the color detected by the
    * sensor.
@@ -117,5 +116,29 @@ public class ColorSensor {
   SmartDashboard.putNumber("Blue", detectedColor.blue);
   SmartDashboard.putNumber("Confidence", match.confidence);
   SmartDashboard.putString("Detected Color", colorString);
+  }
+
+//Brigid 1/27/20
+//Returns the color detected
+  public String getColor(){
+    String colorString;
+    edu.wpi.first.wpilibj.util.Color detectedColor = m_colorSensor.getColor();
+
+    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+
+    if (match.color == kBlueTarget) {
+      colorString = "Blue";
+    } else if (match.color == kRedTarget) {
+      colorString = "Red";
+    } else if (match.color == kGreenTarget) {
+      colorString = "Green";
+    } else if (match.color == kYellowTarget) {
+      colorString = "Yellow";
+    } else {
+      colorString = "Unknown";
+    }
+
+
+    return colorString;
   }
 }
