@@ -1,7 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.command.Command;
+
 
 public class ArduinoSensors  {
   private static ArduinoSensors defaultInstance = null;
@@ -9,7 +9,7 @@ public class ArduinoSensors  {
   public static ArduinoSensors getInstance() {
     if(defaultInstance == null)
     {
-      defaultInstance = new AdruinoSensors();
+      defaultInstance = new ArduinoSensors();
     }
     return defaultInstance;
   }
