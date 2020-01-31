@@ -33,5 +33,8 @@ public final class RobotMap {
   public static int frontRightTalonPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
+  //Sensors
+  public static int blightSensor = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL,.
+
 }
 
