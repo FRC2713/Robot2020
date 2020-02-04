@@ -39,7 +39,21 @@ public class ArduinoSensors  {
         if (LRFinches != -1) System.out.println("This is the distance: " + LRFinches);
 
         break;
+
+
+      case "Switch":
+        if(port.readString().trim() == "1") {
+          System.out.println("one");
+        }
+          else if(port.readString().trim() == "0") {
+            System.out.println("zero");
+        }
+          else {
+          System.out.println("Error for switch");
+        }
+          break;
     }
   }
+}
 
 }
