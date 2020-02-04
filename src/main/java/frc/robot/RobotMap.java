@@ -26,6 +26,9 @@ public final class RobotMap {
   public static final double DEADBAND = 0.04;
   public static final float REGULAR_SPEED = .8f;
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  public static int getEncoderConstant() {
+    return 2;
+  }
 
   //Motors
   public static int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
@@ -34,7 +37,7 @@ public final class RobotMap {
   public static int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
   //Sensors
-  public static int blightSensor = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL,.
+  public static int blightSensor = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
 }
 

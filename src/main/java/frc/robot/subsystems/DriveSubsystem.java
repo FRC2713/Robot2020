@@ -29,6 +29,8 @@ public class DriveSubsystem extends SubsystemBase {
   //Differential drive coordinates motors, used for tank + arcade drive
   public SMDrive driveCommand = new SMDrive(this);
   public DifferentialDrive roboDrive = new DifferentialDrive(frontLeft, frontRight);
+  double current_E_Value = 0;
+  double old_E_Value = 0;
 
   public DriveSubsystem() {
     Robot.initializeSparkDefaults(frontLeft, frontRight);
@@ -55,6 +57,22 @@ public class DriveSubsystem extends SubsystemBase {
     System.out.println("The value of encoder 3 is: " + value3);
     System.out.println("The value of encoder 4 is: " + value4);
     // This method will be called once per scheduler run
+  }
+
+  public void encoderDistance(CANEncoder encoder) {
+    current_E_Value = encoder.getPosition();
+    double traveledUnits = (current_E_Value - old_E_Value);
+    double traveledInches = toInches(traveledUnits);
+    System.out.println("Traveled" + traveledInches + "inches since last check");
+    old_E_Value = current_E_Value;
+  }
+
+  public double toInches(double encoderValue)  {
+    return (encoderValue * RobotMap.getEncoderConstant());
+  }
+
+  public double toFeet(double encoderValue) {
+    return (toInches(encoderValue) / 12);
   }
 
   /**
