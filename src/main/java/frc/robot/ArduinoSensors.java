@@ -37,7 +37,7 @@ public class ArduinoSensors  {
           LRFinches = -1;
 
         }
-        if (LRFinches != -1) System.out.println("This is the distance: " + LRFinches);
+      //  if (LRFinches != -1) System.out.println("This is the distance: " + LRFinches);
 
         break;
 
@@ -45,16 +45,16 @@ public class ArduinoSensors  {
       case "Switch":
         String cond = port.readString().trim() ;
         if(cond.equals("1")) {
-          System.out.println("one");
+         // System.out.println("one");
           SwitchBool = 1;
         }
           else if(cond.equals("0")) {
-            System.out.println("zero");
+         //   System.out.println("zero");
             SwitchBool = 0;
         }
           else {
-          System.out.println("Error for switch");
-          System.out.println("State is: " + cond);
+       //   System.out.println("Error for switch");
+        //  System.out.println("State is: " + cond);
           SwitchBool = -1;
         }
 
