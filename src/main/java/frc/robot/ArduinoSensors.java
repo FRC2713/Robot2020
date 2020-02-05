@@ -15,7 +15,8 @@ public class ArduinoSensors  {
   }
 
   private SerialPort port = new SerialPort(9600, SerialPort.Port.kUSB);
-  public double LRFinches = 0;
+  private double LRFinches = 0;
+  private int SwitchBool = -1;
   public ArduinoSensors() {
     port.enableTermination();
 
@@ -45,15 +46,37 @@ public class ArduinoSensors  {
         String cond = port.readString().trim() ;
         if(cond.equals("1")) {
           System.out.println("one");
+          SwitchBool = 1;
         }
           else if(cond.equals("0")) {
             System.out.println("zero");
+            SwitchBool = 0;
         }
           else {
           System.out.println("Error for switch");
           System.out.println("State is: " + cond);
+          SwitchBool = -1;
         }
+
           break;
     }
   }
+  public double getLRFinches(){
+    return LRFinches;
+
+  }
+  public boolean getSwitchBool(){
+    if(SwitchBool == 1) {
+      return true;
+    }
+    if(SwitchBool == 0){
+      return false;
+    }
+    if(SwitchBool == -1){
+      System.out.println("Switch failed.");
+    }
+  }
+
+
+
 }
