@@ -57,9 +57,10 @@ public class SMDrive extends CommandBase {
 
     double measuredLeft;
     double measuredRight;
-if(ArduinoSensors.getInstance().getSwitchBool()){
-  System.out.println(":)");
-}
+    //if(ArduinoSensors.getInstance().getSwitchBool()){
+     //System.out.println(":)");
+    //}
+    //System.out.println(ArduinoSensors.getInstance().getLRFinches());
     if (xbox.getRawButtonPressed(7)) {
       useTankInsteadOfBradford = !useTankInsteadOfBradford;
       lastRightStickVal = 0;

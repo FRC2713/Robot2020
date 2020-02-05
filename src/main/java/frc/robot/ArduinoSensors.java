@@ -74,7 +74,10 @@ public class ArduinoSensors  {
     }
     if(SwitchBool == -1){
       System.out.println("Switch failed.");
+      return false;
     }
+
+    return false;
   }
 
 
