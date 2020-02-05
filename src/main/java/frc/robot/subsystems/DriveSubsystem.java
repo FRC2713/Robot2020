@@ -52,11 +52,11 @@ public class DriveSubsystem extends SubsystemBase {
     double value2 = encoder2.getPosition();
     double value3 = encoder3.getPosition();
     double value4 = encoder4.getPosition();
-   /* System.out.println("The value of encoder 1 is: " + value);
-    System.out.println("The value of encoder 2 is: " + value2);
-    System.out.println("The value of encoder 3 is: " + value3);
-    System.out.println("The value of encoder 4 is: " + value4);
-    // This method will be called once per scheduler run */
+    //System.out.println("The value of encoder 1 is: " + value);
+    //System.out.println("The value of encoder 2 is: " + value2);
+    //System.out.println("The value of encoder 3 is: " + value3);
+    //System.out.println("The value of encoder 4 is: " + value4);
+    // This method will be called once per scheduler run
   }
 
   public void encoderDistance(CANEncoder encoder) {
