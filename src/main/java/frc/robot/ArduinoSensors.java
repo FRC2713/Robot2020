@@ -14,7 +14,7 @@ public class ArduinoSensors  {
     return defaultInstance;
   }
 
-  private SerialPort port = new SerialPort(9600, SerialPort.Port.kUSB);
+  private SerialPort port = new SerialPort(9600, SerialPort.Port.kUSB2);
   public double LRFinches = 0;
   public ArduinoSensors() {
     port.enableTermination();
@@ -56,4 +56,3 @@ public class ArduinoSensors  {
   }
 }
 
-}
