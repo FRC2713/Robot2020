@@ -42,10 +42,10 @@ public class ArduinoSensors  {
 
 
       case "Switch":
-        if(port.readString().trim() == "1") {
+        if(port.readString().trim().equals("1")) {
           System.out.println("one");
         }
-          else if(port.readString().trim() == "0") {
+          else if(port.readString().trim().equals("0")) {
             System.out.println("zero");
         }
           else {
@@ -54,6 +54,4 @@ public class ArduinoSensors  {
           break;
     }
   }
-}
-
 }
