@@ -42,14 +42,16 @@ public class ArduinoSensors  {
 
 
       case "Switch":
-        if(port.readString().trim().equals("1")) {
+        String cond = port.readString().trim() ;
+        if(cond.equals("1")) {
           System.out.println("one");
         }
-          else if(port.readString().trim().equals("0")) {
+          else if(cond.equals("0")) {
             System.out.println("zero");
         }
           else {
           System.out.println("Error for switch");
+          System.out.println("State is: " + cond);
         }
           break;
     }
