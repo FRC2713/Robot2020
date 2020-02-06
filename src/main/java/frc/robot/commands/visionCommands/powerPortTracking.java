@@ -23,18 +23,14 @@ public class powerPortTracking extends CommandBase {
     int blocksDetected = frontPixySubsystem.frontPixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG2, 10);
     if (blocksDetected <= 0) {
       System.out.println("No signatures detected");
-    } else {
+    }
+    else {
       System.out.println(blocksDetected + " blocks detected");
     }
     ArrayList<Pixy2CCC.Block> blocks = frontPixySubsystem.frontPixy.getCCC().getBlocks();
     Pixy2CCC.Block block = null;
     double blockRatio = block.getWidth() / block.getHeight();
     System.out.println("Block Ratio : " + blockRatio);
-    /* for (Pixy2CCC.Block portBlock : blocks) {
-      if (blockRatio >= 1.8 && blockRatio <= 1.9) {
-          System.out.println("Block Ratio : " + blockRatio);
-      }
-    } */
   }
 
   @Override
