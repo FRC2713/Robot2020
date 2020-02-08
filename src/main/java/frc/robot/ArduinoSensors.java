@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.SerialPort;
 
 
@@ -23,12 +24,12 @@ public class ArduinoSensors  {
     {
       port = new SerialPort(9600, SerialPort.Port.kUSB);
     }
-    catch(uncleanStatusExeption u){
+    catch(UncleanStatusException u){
       try
       {
         port = new SerialPort(9600, SerialPort.Port.kUSB2);
       }
-      catch(uncleanStatusExeption u){
+      catch(UncleanStatusException u2){
         port = null;
       }
     }

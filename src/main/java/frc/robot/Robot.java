@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     //m_colorSensor.testFunction();
     //blightsensor.printOut();
-   // ArduinoSensors.getInstance().execute();
+    ArduinoSensors.getInstance().execute();
   }
 
   /**
