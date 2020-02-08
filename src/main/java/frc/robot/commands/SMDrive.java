@@ -26,6 +26,7 @@ public class SMDrive extends CommandBase {
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
+  private int polarity = 1;
 
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
@@ -67,7 +68,12 @@ public class SMDrive extends CommandBase {
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
     }
+    if (xbox.getBButtonPressed()) {
 
+      polarity *= -1;
+      SM.rumbleController(xbox, 0.2, 500);
+
+    }
     if (useTankInsteadOfBradford) {
       /*
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
@@ -75,11 +81,11 @@ public class SMDrive extends CommandBase {
       driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);*/
       measuredLeft = xbox.getY(GenericHID.Hand.kLeft);
       measuredRight = -xbox.getX(GenericHID.Hand.kRight);
-      driveSubsystem.roboDrive.curvatureDrive(-measuredLeft, measuredRight, false);
+      driveSubsystem.roboDrive.curvatureDrive(-measuredLeft * polarity, measuredRight * polarity, false);
     } else {
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft, measuredRight, true);
+      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
 
       /*
       try {
