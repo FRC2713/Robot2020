@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 
 public class ArduinoSensors  {
+
   private static ArduinoSensors defaultInstance = null;
 
   public static ArduinoSensors getInstance() {
@@ -14,16 +15,32 @@ public class ArduinoSensors  {
     return defaultInstance;
   }
 
-  private SerialPort port = new SerialPort(9600, SerialPort.Port.kUSB);
   private double LRFinches = 0;
   private int SwitchBool = -1;
+  private SerialPort port;
   public ArduinoSensors() {
-    port.enableTermination();
+    try
+    {
+      port = new SerialPort(9600, SerialPort.Port.kUSB);
+    }
+    catch(uncleanStatusExeption u){
+      try
+      {
+        port = new SerialPort(9600, SerialPort.Port.kUSB2);
+      }
+      catch(uncleanStatusExeption u){
+        port = null;
+      }
+    }
+    if(port != null){
+      port.enableTermination();
+    }
 
   }
 
   public void execute() {
     String str = null;
+    if(port == null) return;
     str = port.readString().trim();
 
     switch (str) {
