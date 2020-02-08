@@ -37,9 +37,16 @@ public class Robot extends TimedRobot {
     m_colorSensor.sensorInit();
 
     //camera server
-    UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("camera 1", 0);
-    cam.setResolution(1280, 690);
-    cam.setFPS(15);
+   /* UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
+    cam.setResolution(640, 480);
+    cam.setFPS(30);
+
+    //camera server 2
+    UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture();
+    cam2.setResolution(640, 480);
+    cam2.setFPS(30);*/
+
+
   }
 
   /**
