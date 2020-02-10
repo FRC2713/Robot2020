@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.ConfigureBed;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.SMDrive;
@@ -18,14 +19,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   /*Creates motors, getting motor controller (CANSparkMax) ports from RobotMap
   * MAKE SURE TEST BED IS SET TO BRUSHED*/
-  public final CANSparkMax frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANEncoder encoder1 = frontLeft.getEncoder();
-  private CANEncoder encoder2 = backLeft.getEncoder();
-  private CANEncoder encoder3 = frontRight.getEncoder();
-  private CANEncoder encoder4 = backRight.getEncoder();
+  private CANSparkMax frontLeft;
+  private CANSparkMax frontRight;
+  private CANSparkMax backLeft;
+  private CANSparkMax backRight;
+
+  CANEncoder encoder1;
+  CANEncoder encoder2;
+  CANEncoder encoder3;
+  CANEncoder encoder4;
   //Differential drive coordinates motors, used for tank + arcade drive
   public SMDrive driveCommand = new SMDrive(this);
   public DifferentialDrive roboDrive = new DifferentialDrive(frontLeft, frontRight);
@@ -41,8 +43,31 @@ public class DriveSubsystem extends SubsystemBase {
     roboDrive.setDeadband(RobotMap.DEADBAND);
     setDefaultCommand(driveCommand);
 
+    if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE || ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
+      System.out.println("this is a test; 1");
+      frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
+    }
+    else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.TWO){
+      System.out.println("this is a test; 2");
+      frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
 
+    }
+    else{
+      System.out.println("An error has occurred with the jumper");
+      System.exit(-1);
+    }
+
+    encoder1 = frontLeft.getEncoder();
+    encoder2 = backRight.getEncoder();
+    encoder3 = frontRight.getEncoder();
+    encoder4 = frontLeft.getEncoder();
 
   }
 

@@ -35,18 +35,13 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_colorSensor.sensorInit();
-
-    //camera server
-   /* UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
-    cam.setResolution(640, 480);
-    cam.setFPS(30);
-
-    //camera server 2
-    UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture();
-    cam2.setResolution(640, 480);
-    cam2.setFPS(30);*/
-
-
+    initCamera();
+  }
+  private void initCamera() {
+    CameraServer cs = CameraServer.getInstance();
+    UsbCamera u = cs.startAutomaticCapture();
+    u.setResolution(256, 144);
+    u.setFPS(30);
   }
 
   /**
@@ -65,7 +60,19 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     //m_colorSensor.testFunction();
     //blightsensor.printOut();
-    ArduinoSensors.getInstance().execute();
+    if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE){
+      System.out.println("this is a test; 1");
+    }
+    else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.TWO){
+      System.out.println("this is a test; 2");
+    }
+    else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
+      System.out.println("this is a test; 3");
+    }
+    else{
+      System.out.println("this is a test; 4");
+    }
+
   }
 
   /**
@@ -145,6 +152,7 @@ public class Robot extends TimedRobot {
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
     for (CANSparkMax spark : sparks) {
       spark.setSmartCurrentLimit(RobotMap.MAX_MOTOR_STALL_AMPS, RobotMap.MAX_MOTOR_FREE_AMPS);
+
     }
   }
 
