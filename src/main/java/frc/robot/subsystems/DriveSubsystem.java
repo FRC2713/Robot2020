@@ -32,6 +32,26 @@ public class DriveSubsystem extends SubsystemBase {
   double current_E_Value = 0;
   double old_E_Value = 0;
 
+  public DifferentialDrive getRoboDrive () {
+    return roboDrive;
+  }
+
+  public CANEncoder getEncoder(int number) {
+    if (number == 1) {
+      return encoder1;
+    }
+    else if (number == 2) {
+      return encoder2;
+    }
+    else if (number == 3) {
+      return encoder3;
+    }
+    else if (number == 4) {
+      return encoder4;
+    }
+    else return null;
+  }
+
   public DriveSubsystem() {
     Robot.initializeSparkDefaults(frontLeft, frontRight);
 
@@ -59,12 +79,12 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void encoderDistance(CANEncoder encoder) {
+  public double encoderDistance(CANEncoder encoder) {
     current_E_Value = encoder.getPosition();
     double traveledUnits = (current_E_Value - old_E_Value);
     double traveledInches = toInches(traveledUnits);
-    System.out.println("Traveled" + traveledInches + "inches since last check");
     old_E_Value = current_E_Value;
+    return traveledInches;
   }
 
   public double toInches(double encoderValue)  {
