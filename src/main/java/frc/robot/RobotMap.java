@@ -30,6 +30,11 @@ public final class RobotMap {
     return 2;
   }
 
+  //Config Jumpers
+  public static final int configOnePort = 0;
+  public static final int configTwoPort = 1;
+  public static final int configThreePort = 2;
+
   //Motors
   public static int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static int backLeftTalonPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
