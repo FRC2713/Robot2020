@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -29,7 +30,8 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static Preferences prefs = Preferences.getInstance();
-
+  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
+  private boolean doAutonomous = false;
 
 
   /**
@@ -57,7 +59,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+      return m_autonomousCommand;
   }
 
 }
