@@ -39,9 +39,13 @@ public class Robot extends TimedRobot {
   }
   private void initCamera() {
     CameraServer cs = CameraServer.getInstance();
-    UsbCamera u = cs.startAutomaticCapture();
-    u.setResolution(256, 144);
-    u.setFPS(30);
+    UsbCamera frontCamera = cs.startAutomaticCapture();
+    UsbCamera backCamera = cs.startAutomaticCapture();
+
+    frontCamera.setResolution(256, 144);
+    frontCamera.setFPS(30);
+    backCamera.setResolution(256, 144);
+    backCamera.setFPS(30);
   }
 
   /**
