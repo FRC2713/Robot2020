@@ -31,7 +31,7 @@ public class PixyTracking extends CommandBase {
     blockCount = m_pixySubsystem.pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 10);
     SmartDashboard.putNumber("Block Count", blockCount);
 
-    block = null;
+    //block = null;
     blockWidth = block.getWidth();
     blockHeight = block.getHeight();
 
