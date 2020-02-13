@@ -134,15 +134,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
-
-
-
   }
-
-
-
-
 
   @Override
   public void testInit() {
@@ -156,6 +148,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
     for (CANSparkMax spark : sparks) {
       spark.setSmartCurrentLimit(RobotMap.MAX_MOTOR_STALL_AMPS, RobotMap.MAX_MOTOR_FREE_AMPS);
