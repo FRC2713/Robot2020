@@ -10,6 +10,7 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -28,6 +29,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   private LightSensor blightsensor = new LightSensor();
+  public static final Compressor compressor = new Compressor();
+
+  private int currCam = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -39,6 +43,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     //m_colorSensor.sensorInit();
     initCamera();
+    compressor.start();
   }
   private void initCamera() {
     CameraServer cs = CameraServer.getInstance();
@@ -52,7 +57,13 @@ public class Robot extends TimedRobot {
     backCamera.setFPS(30);
   }
   private void changeCamera(){
+    if(currCam == 0){
+      currCam = 1;
 
+    }
+    else{
+      currCam = 0;
+    }
   }
 
   /**
