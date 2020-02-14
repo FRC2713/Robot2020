@@ -2,14 +2,14 @@ package frc.robot.commands.visionCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
+import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+import java.util.ArrayList;
 
 public class PixyTracking extends CommandBase {
 
   private final PixySubsystem m_pixySubsystem;
-
-  Pixy2CCC.Block block;
 
   int blockCount;
   int blockWidth;
@@ -28,15 +28,23 @@ public class PixyTracking extends CommandBase {
 
   @Override
   public void execute() {
-    blockCount = m_pixySubsystem.pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 10);
+    blockCount = m_pixySubsystem.pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG2, 10);
     SmartDashboard.putNumber("Block Count", blockCount);
 
-    //block = null;
-    blockWidth = block.getWidth();
-    blockHeight = block.getHeight();
+    ArrayList<Pixy2CCC.Block> blocks = m_pixySubsystem.getPixy().getCCC().getBlocks();
 
-    System.out.println("Block Width : " + blockWidth); // delete after testing
-    System.out.println("Block Height :" + blockHeight); // delete after testing
+    if (blocks == null) {
+      System.err.println("No blocks");
+      return;
+    }
+
+    for (Pixy2CCC.Block block : blocks) {
+      blockWidth = block.getWidth();
+      blockHeight = block.getHeight();
+
+      System.out.println("Block Width : " + blockWidth); // delete after testing
+      System.out.println("Block Height :" + blockHeight); // delete after testing
+    }
   }
 
   @Override
