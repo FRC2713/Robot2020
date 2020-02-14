@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -32,6 +33,7 @@ public class RobotContainer {
   public static Preferences prefs = Preferences.getInstance();
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
   private boolean doAutonomous = false;
+  public JoystickButton intakeGateButton;
 
 
   /**

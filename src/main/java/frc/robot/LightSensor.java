@@ -6,7 +6,7 @@ public class LightSensor {
 
   public DigitalInput blightSensor = new DigitalInput(RobotMap.blightSensor);
 
-  public boolean isTripped() {
+  public  boolean isTripped() {
     return !blightSensor.get();
   }
 

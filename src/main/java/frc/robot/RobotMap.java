@@ -9,6 +9,7 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -40,9 +41,26 @@ public final class RobotMap {
   public static int backLeftTalonPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static int frontRightTalonPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static int intakeMotorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static int intakeConveyorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int gateSolenoid = 13;
+  public static int IntakeGateUpNode = 0;
+  public static int IntakeGateDownNode = 1;
+
+
+ // public static int hatchInNodeId = 2;
+ // public static int hatchOutNodeId = 3;
+  public static int plateCloseNodeId = 4;
+  public static int plateOpenNodeId = 5;
 
   //Sensors
   public static int blightSensor = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+
+
+  JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
+
+  //public static JoystickButton intakeConveyerButton = new JoystickButton(joystick, 5);
+//  public static JoystickButton intakeArmButton= new JoystickButton(joystick, 5);
 
 }
 
