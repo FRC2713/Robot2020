@@ -16,21 +16,20 @@ public class DriveSubsystem extends SubsystemBase {
    */
 
 
-
   /*Creates motors, getting motor controller (CANSparkMax) ports from RobotMap
   * MAKE SURE TEST BED IS SET TO BRUSHED*/
-  private CANSparkMax frontLeft;
-  private CANSparkMax frontRight;
-  private CANSparkMax backLeft;
-  private CANSparkMax backRight;
+  private CANSparkMax frontLeft;// = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax frontRight;// = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax backLeft;// = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax backRight;// = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
   CANEncoder encoder1;
   CANEncoder encoder2;
   CANEncoder encoder3;
   CANEncoder encoder4;
   //Differential drive coordinates motors, used for tank + arcade drive
-  public SMDrive driveCommand = new SMDrive(this);
-  public DifferentialDrive roboDrive = new DifferentialDrive(frontLeft, frontRight);
+  public SMDrive driveCommand;
+  public DifferentialDrive roboDrive;
   double current_E_Value = 0;
   double old_E_Value = 0;
 
@@ -55,13 +54,6 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public DriveSubsystem() {
-    Robot.initializeSparkDefaults(frontLeft, frontRight);
-
-    backLeft.follow(frontLeft);
-    backRight.follow(frontRight);
-
-    roboDrive.setDeadband(RobotMap.DEADBAND);
-    setDefaultCommand(driveCommand);
 
     if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE || ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
       System.out.println("this is a test; 1");
@@ -81,14 +73,27 @@ public class DriveSubsystem extends SubsystemBase {
     }
     else{
       System.out.println("An error has occurred with the jumper");
-      System.exit(-1);
+      //System.exit(-1);
+      frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
+    Robot.initializeSparkDefaults(frontLeft, frontRight);
+
+    backLeft.follow(frontLeft);
+    backRight.follow(frontRight);
 
     encoder1 = frontLeft.getEncoder();
     encoder2 = backRight.getEncoder();
     encoder3 = frontRight.getEncoder();
     encoder4 = frontLeft.getEncoder();
 
+    driveCommand = new SMDrive(this);
+    roboDrive = new DifferentialDrive(frontLeft, frontRight);
+
+    roboDrive.setDeadband(RobotMap.DEADBAND);
+    setDefaultCommand(driveCommand);
   }
 
   @Override
@@ -101,6 +106,7 @@ public class DriveSubsystem extends SubsystemBase {
     //System.out.println("The value of encoder 2 is: " + value2);
     //System.out.println("The value of encoder 3 is: " + value3);
     //System.out.println("The value of encoder 4 is: " + value4);
+
     // This method will be called once per scheduler run
   }
 

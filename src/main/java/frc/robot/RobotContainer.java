@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.visionSubsystems.PixySubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,6 +32,8 @@ public class RobotContainer {
   public static SM sm = new SM();//Subsystem Management (SM) needs to be instantiated first
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static PixySubsystem pixySubsystem = new PixySubsystem();
+  public static PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   public static Preferences prefs = Preferences.getInstance();
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
   private boolean doAutonomous = false;

@@ -10,6 +10,7 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -28,7 +29,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   private LightSensor blightsensor = new LightSensor();
-  private DriveSubsystem m_encoderobject = new DriveSubsystem();
+  public static final Compressor compressor = new Compressor();
+
+  private int currCam = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -38,14 +41,29 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_colorSensor.sensorInit();
+    //m_colorSensor.sensorInit();
     initCamera();
+    compressor.start();
   }
   private void initCamera() {
     CameraServer cs = CameraServer.getInstance();
-    UsbCamera u = cs.startAutomaticCapture();
-    u.setResolution(256, 144);
-    u.setFPS(30);
+    UsbCamera frontCamera = cs.startAutomaticCapture();
+    UsbCamera backCamera = cs.startAutomaticCapture();
+
+    frontCamera.setResolution(256, 144);
+    //frontCamera.close();
+    frontCamera.setFPS(30);
+    backCamera.setResolution(256, 144);
+    backCamera.setFPS(30);
+  }
+  private void changeCamera(){
+    if(currCam == 0){
+      currCam = 1;
+
+    }
+    else{
+      currCam = 0;
+    }
   }
 
   /**
@@ -109,7 +127,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
   }
-  private final ColorSensor m_colorSensor = new ColorSensor();
+  //private final ColorSensor m_colorSensor = new ColorSensor();
 
   @Override
   public void teleopInit() {
@@ -131,15 +149,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
-
-
-
   }
-
-
-
-
 
   @Override
   public void testInit() {
@@ -153,6 +163,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
     for (CANSparkMax spark : sparks) {
       spark.setSmartCurrentLimit(RobotMap.MAX_MOTOR_STALL_AMPS, RobotMap.MAX_MOTOR_FREE_AMPS);
