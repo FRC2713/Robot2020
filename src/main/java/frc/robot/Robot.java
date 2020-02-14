@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_colorSensor.sensorInit();
+    //m_colorSensor.sensorInit();
     initCamera();
   }
   private void initCamera() {
@@ -46,9 +46,13 @@ public class Robot extends TimedRobot {
     UsbCamera backCamera = cs.startAutomaticCapture();
 
     frontCamera.setResolution(256, 144);
+    //frontCamera.close();
     frontCamera.setFPS(30);
     backCamera.setResolution(256, 144);
     backCamera.setFPS(30);
+  }
+  private void changeCamera(){
+
   }
 
   /**
@@ -112,7 +116,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
   }
-  private final ColorSensor m_colorSensor = new ColorSensor();
+  //private final ColorSensor m_colorSensor = new ColorSensor();
 
   @Override
   public void teleopInit() {

@@ -15,7 +15,7 @@ public class ConfigureBed {
   Jumper config;
 
   public enum Jumper{
-    ONE, TWO, THREE, FOUR; // one is last years robot, two is test bot, three is this years robot
+    ONE, TWO, THREE; // one is last years robot, two is test bot, three is this years robot
 
   }
 

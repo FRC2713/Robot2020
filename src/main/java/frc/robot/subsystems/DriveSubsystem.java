@@ -18,18 +18,18 @@ public class DriveSubsystem extends SubsystemBase {
 
   /*Creates motors, getting motor controller (CANSparkMax) ports from RobotMap
   * MAKE SURE TEST BED IS SET TO BRUSHED*/
-  private CANSparkMax frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANSparkMax frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANSparkMax backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANSparkMax backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax frontLeft;// = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax frontRight;// = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax backLeft;// = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax backRight;// = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
   CANEncoder encoder1;
   CANEncoder encoder2;
   CANEncoder encoder3;
   CANEncoder encoder4;
   //Differential drive coordinates motors, used for tank + arcade drive
-  public SMDrive driveCommand = new SMDrive(this);
-  public DifferentialDrive roboDrive = new DifferentialDrive(frontLeft, frontRight);
+  public SMDrive driveCommand;
+  public DifferentialDrive roboDrive;
   double current_E_Value = 0;
   double old_E_Value = 0;
 
@@ -54,44 +54,46 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public DriveSubsystem() {
-    Robot.initializeSparkDefaults(frontLeft, frontRight);
-
-    backLeft.follow(frontLeft);
-    backRight.follow(frontRight);
-
-    roboDrive.setDeadband(RobotMap.DEADBAND);
-    setDefaultCommand(driveCommand);
 
     if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE || ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
       System.out.println("this is a test; 1");
-      //frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     }
     else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.TWO){
       System.out.println("this is a test; 2");
-      //frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-      //frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-      //backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-      //backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+      backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
 
     }
     else{
       System.out.println("An error has occurred with the jumper");
       //System.exit(-1);
-      //frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      frontLeft = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      frontRight = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backLeft = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+      backRight = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
+    Robot.initializeSparkDefaults(frontLeft, frontRight);
+
+    backLeft.follow(frontLeft);
+    backRight.follow(frontRight);
 
     encoder1 = frontLeft.getEncoder();
     encoder2 = backRight.getEncoder();
     encoder3 = frontRight.getEncoder();
     encoder4 = frontLeft.getEncoder();
 
+    driveCommand = new SMDrive(this);
+    roboDrive = new DifferentialDrive(frontLeft, frontRight);
+
+    roboDrive.setDeadband(RobotMap.DEADBAND);
+    setDefaultCommand(driveCommand);
   }
 
   @Override
