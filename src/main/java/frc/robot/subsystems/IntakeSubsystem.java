@@ -18,16 +18,16 @@ import static javax.print.attribute.standard.PrinterState.STOPPED;
 
 public class IntakeSubsystem extends SubsystemBase {
   //private final CANSparkMax intakeConveyor = new CANSparkMax(RobotMap.intakeConveyorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-//  public final CANSparkMax intakeMotor = new CANSparkMax(RobotMap.intakeMotorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
- // public final DoubleSolenoid ballIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.ballIntakeUpNodeId, RobotMap.ballIntakeDownNodeId);
+  //public final CANSparkMax intakeMotor = new CANSparkMax(RobotMap.intakeMotorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+  //public final DoubleSolenoid ballIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.ballIntakeUpNodeId, RobotMap.ballIntakeDownNodeId);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
-  public static JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
+  public static final JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
 
 
-  //public final  IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
+  //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
   //public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
-  public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
-//  public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, ballIntakeSolenoid);
+  //public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
+  //public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, ballIntakeSolenoid);
   public IntakeSubsystem() {
 
     // Robot.initializeSparkDefaults(intakeMotor, intakeConveyor);
@@ -43,8 +43,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public static void initControls() {
 
-    intakeGateButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition.UP)));
-     // intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
+    intakeGateButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeGateCommand.getIntakeGatePosition() == IntakeGatePosition.UP ? IntakeGatePosition.DOWN : IntakeGatePosition.UP)));
+    //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
 
     }
 
