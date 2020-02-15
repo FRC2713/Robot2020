@@ -37,6 +37,7 @@ public class RobotContainer {
   public static PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   public static Preferences prefs = Preferences.getInstance();
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
+  private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
   private boolean doAutonomous = false;
   public JoystickButton intakeGateButton;
 

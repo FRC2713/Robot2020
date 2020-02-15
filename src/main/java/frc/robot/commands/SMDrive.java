@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.SM;
+import frc.robot.ShuffleboardManagement;
 import frc.robot.subsystems.DriveSubsystem;
 
 import java.io.Writer;
@@ -26,6 +27,7 @@ public class SMDrive extends CommandBase {
   private DriveSubsystem driveSubsystem;
   private XboxController xbox = SM.xBoxController;
   private boolean useTankInsteadOfBradford = false;
+  private boolean polarityBoolean = false;
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
@@ -48,23 +50,6 @@ public class SMDrive extends CommandBase {
     joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03);
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
 
-        /*SlewRateLimiter filter = new SlewRateLimiter(0.5);
-    filter.calculate(input);
-    */
-
-    //SmartDashboard.putBoolean("Driving Reverse", xbox.getBButtonPressed());
-    //SmartDashboard.putNumber("Slew Limit", joystickChangeLimit);
-    /**Below are the updated versions of above **/
-    NetworkTableEntry slewLimit = Shuffleboard.getTab("Slew Limit")
-      .add("Slew Limit", true)
-      .withWidget("Toggle Button")
-      .getEntry();
-
-    NetworkTableEntry reversedControls = Shuffleboard.getTab("Control Reversed")
-      .add("B Button Pressed", false)
-      .withWidget("Boolean Box")
-      .withProperties(Map.of("colorWhenTrue", "red", "colorWhenFalse", "green"))
-      .getEntry();
 
     /*
     try {
@@ -91,7 +76,8 @@ public class SMDrive extends CommandBase {
       SM.rumbleController(xbox, .5, 500);
     }
     if (xbox.getBButtonPressed()) {
-
+      polarityBoolean = !polarityBoolean;
+     // ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean);
       polarity *= -1;
       SM.rumbleController(xbox, 0.2, 500);
 
