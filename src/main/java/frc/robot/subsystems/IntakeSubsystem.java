@@ -24,7 +24,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   //public final  IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
   //public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
-  public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand();
+  public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
 //  public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, ballIntakeSolenoid);
   public IntakeSubsystem() {
 
@@ -45,7 +45,6 @@ public class IntakeSubsystem extends SubsystemBase {
      // intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
 
     }
-
 
     public enum IntakeGatePosition {
       UP, DOWN

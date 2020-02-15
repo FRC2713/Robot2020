@@ -8,11 +8,16 @@ import static java.math.RoundingMode.DOWN;
 import static java.math.RoundingMode.UP;
 
 public class IntakeGateCommand {
+
   private IntakeSubsystem intakeSubsystem;
   private static IntakeSubsystem.IntakeGatePosition currentState;
   private IntakeSubsystem.IntakeGatePosition position = IntakeSubsystem.IntakeGatePosition.UP;
   public IntakeSubsystem.IntakeGatePosition getIntakeGatePosition(){
   return currentState;
+
+  }
+  public IntakeGateCommand(IntakeSubsystem intakeSubsystem){
+    this.intakeSubsystem = intakeSubsystem;
   }
   public static boolean setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition inputState){
 currentState = inputState;
@@ -37,7 +42,6 @@ return true;
     if (intakeSubsystem.intakeGateCommand.getIntakeGatePosition() == IntakeSubsystem.IntakeGatePosition.DOWN) {
       DriverStation.reportWarning("Gate Position not changed for safety reasons", false);
     }
-    update();
 
       }
       }
