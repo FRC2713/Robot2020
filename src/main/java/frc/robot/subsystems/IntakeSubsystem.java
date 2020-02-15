@@ -39,7 +39,7 @@ public class IntakeSubsystem extends SubsystemBase {
       //Robot.initializeTalonDefaults(intakeTalon);
     }
 
-    public void initControls () {
+    public static void initControls() {
 
     RobotMap.intakeGateButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition.UP)));
      // intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));

@@ -17,6 +17,7 @@ import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
 
 /**
@@ -55,6 +56,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    IntakeSubsystem.initControls();
   }
 
 
