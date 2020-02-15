@@ -11,7 +11,7 @@ public class IntakeArmCommand {
 }
 
  /* private IntakeSubsystem intakeSubsystem;
-  private IntakeSubsystem.IntakeArmPosition position = IntakeSubsystem.IntakeArmPosition.UP;
+  private IntakeSubsystem.IntakeArmPosition position = Intak  eSubsystem.IntakeArmPosition.UP;
   private void update() {
     switch(position) {
       default:

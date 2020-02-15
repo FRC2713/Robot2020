@@ -54,13 +54,13 @@ public final class RobotMap {
   public static int plateOpenNodeId = 5;
 
   //Sensors
-  public static int blightSensor = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static int blightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
 
-  public static JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
+  //public static JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
 
   //public static JoystickButton intakeConveyerButton = new JoystickButton(joystick, 5);
-//  public static JoystickButton intakeArmButton= new JoystickButton(joystick, 5);
+  // public static JoystickButton intakeArmButton= new JoystickButton(joystick, 5);
 
 }
 
