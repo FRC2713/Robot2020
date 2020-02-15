@@ -18,6 +18,7 @@ public class IntakeGateCommand {
   }
   public IntakeGateCommand(IntakeSubsystem intakeSubsystem){
     this.intakeSubsystem = intakeSubsystem;
+    update();
   }
   public static boolean setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition inputState){
 currentState = inputState;

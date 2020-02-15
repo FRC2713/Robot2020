@@ -1,8 +1,10 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,6 +15,7 @@ import frc.robot.SM;
 import frc.robot.subsystems.DriveSubsystem;
 
 import java.io.Writer;
+import java.util.Map;
 
 import static frc.robot.RobotMap.REGULAR_SPEED;
 
@@ -44,6 +47,25 @@ public class SMDrive extends CommandBase {
     DriverStation.reportWarning("Starting SMDrive", false);
     joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03);
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
+
+        /*SlewRateLimiter filter = new SlewRateLimiter(0.5);
+    filter.calculate(input);
+    */
+
+    //SmartDashboard.putBoolean("Driving Reverse", xbox.getBButtonPressed());
+    //SmartDashboard.putNumber("Slew Limit", joystickChangeLimit);
+    /**Below are the updated versions of above **/
+    NetworkTableEntry slewLimit = Shuffleboard.getTab("Slew Limit")
+      .add("Slew Limit", true)
+      .withWidget("Toggle Button")
+      .getEntry();
+
+    NetworkTableEntry reversedControls = Shuffleboard.getTab("Control Reversed")
+      .add("B Button Pressed", false)
+      .withWidget("Boolean Box")
+      .withProperties(Map.of("colorWhenTrue", "red", "colorWhenFalse", "green"))
+      .getEntry();
+
     /*
     try {
       writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Timer.getFPGATimestamp() + ".txt"), StandardCharsets.UTF_8));
@@ -79,9 +101,10 @@ public class SMDrive extends CommandBase {
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
       driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);*/
-      measuredLeft = xbox.getY(GenericHID.Hand.kLeft);
-      measuredRight = -xbox.getX(GenericHID.Hand.kRight);
-      driveSubsystem.roboDrive.curvatureDrive(-measuredLeft * polarity, measuredRight * polarity, false);
+      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+      measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
+      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+      /** changed to arcade at top **/
     } else {
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
