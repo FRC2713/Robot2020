@@ -9,12 +9,12 @@ import static java.math.RoundingMode.UP;
 
 public class IntakeGateCommand {
   private IntakeSubsystem intakeSubsystem;
-  private IntakeSubsystem.IntakeGatePosition currentState;
+  private static IntakeSubsystem.IntakeGatePosition currentState;
   private IntakeSubsystem.IntakeGatePosition position = IntakeSubsystem.IntakeGatePosition.UP;
   public IntakeSubsystem.IntakeGatePosition getIntakeGatePosition(){
   return currentState;
   }
-  public boolean setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition inputState){
+  public static boolean setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition inputState){
 currentState = inputState;
 return true;
   }

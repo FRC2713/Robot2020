@@ -21,6 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
  // public final DoubleSolenoid ballIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.ballIntakeUpNodeId, RobotMap.ballIntakeDownNodeId);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
 
+
   //public final  IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
   //public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
   public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand();
@@ -40,7 +41,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void initControls () {
 
-    intakeGateButton.whenPressed(new InstantCommand(() -> this.intakeCoveyerCommand.setConveyerPosition(STOPPED)));
+    RobotMap.intakeGateButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition.UP)));
      // intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
 
     }
