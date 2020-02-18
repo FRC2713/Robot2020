@@ -118,7 +118,7 @@ public class DriveSubsystem extends SubsystemBase {
     return traveledInches;
   }
 
-  public double toInches(double encoderValue)  {
+  private double toInches(double encoderValue)  {
     return (encoderValue * RobotMap.getEncoderConstant());
   }
 

@@ -36,7 +36,7 @@ public class RobotContainer {
   public static PixySubsystem pixySubsystem = new PixySubsystem();
   public static PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   public static Preferences prefs = Preferences.getInstance();
-  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
+  private final AutonomousCommand m_moveForwardCommand = new AutonomousCommand(driveSubsystem);
   private boolean doAutonomous = false;
   public JoystickButton intakeGateButton;
 
@@ -67,7 +67,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-      return m_autonomousCommand;
+      return m_moveForwardCommand;
   }
 
 }
