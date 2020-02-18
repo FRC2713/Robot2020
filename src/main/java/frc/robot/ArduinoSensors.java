@@ -40,7 +40,7 @@ public class ArduinoSensors  {
   }
 
   public void execute() {
-    String str = null;
+    String str ;
     if(port == null) return;
     str = port.readString().trim();
 
@@ -77,6 +77,9 @@ public class ArduinoSensors  {
         }
 
           break;
+
+      default:
+        break;
     }
   }
   public double getLRFinches(){

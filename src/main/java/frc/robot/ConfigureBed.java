@@ -10,12 +10,11 @@ public class ConfigureBed {
   //Creates jumpers
   DigitalInput configOne = new DigitalInput(RobotMap.configOnePort);
   DigitalInput configTwo = new DigitalInput(RobotMap.configTwoPort);
-  DigitalInput configThree = new DigitalInput(RobotMap.configThreePort);
 
   Jumper config;
 
   public enum Jumper{
-    ONE, TWO, THREE; // one is last years robot, two is test bot, three is this years robot
+    ONE, TWO, THREE // one is last years robot, two is test bot, three is this years robot
 
   }
 

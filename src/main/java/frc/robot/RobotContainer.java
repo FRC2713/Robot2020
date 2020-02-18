@@ -28,17 +28,15 @@ import frc.robot.subsystems.visionSubsystems.PixySubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  public static SM sm = new SM();//Subsystem Management (SM) needs to be instantiated first
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
-  public static PixySubsystem pixySubsystem = new PixySubsystem();
-  public static PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
-  public static Preferences prefs = Preferences.getInstance();
-  private final AutonomousCommand m_moveForwardCommand = new AutonomousCommand(driveSubsystem);
-  private boolean doAutonomous = false;
-  public JoystickButton intakeGateButton;
+  private final SM sm = new SM(); //Subsystem Management (SM) needs to be instantiated first
+  public  static Preferences prefs = Preferences.getInstance();
+
+  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private final PixySubsystem pixySubsystem = new PixySubsystem();
+  private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
+  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
+  private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
 
 
   /**
@@ -67,7 +65,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-      return m_moveForwardCommand;
+      return m_autonomousCommand;
   }
 
 }

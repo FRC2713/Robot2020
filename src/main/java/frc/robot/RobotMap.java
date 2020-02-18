@@ -26,7 +26,7 @@ public final class RobotMap {
   public static final int MAX_MOTOR_STALL_AMPS = 40;
   public static final double DEADBAND = 0.04;
   public static final float REGULAR_SPEED = .8f;
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  private static final I2C.Port i2cPort = I2C.Port.kOnboard;
   public static int getEncoderConstant() {
     return 2;
   }
@@ -37,24 +37,23 @@ public final class RobotMap {
   public static final int configThreePort = 2;
 
   //Motors
-  public static int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static int backLeftTalonPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static int frontRightTalonPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static int intakeMotorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static int intakeConveyorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int gateSolenoid = 13;
-  public static int IntakeGateUpNode = 0;
-  public static int IntakeGateDownNode = 1;
+  public static final int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int backLeftTalonPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int frontRightTalonPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int intakeMotorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int intakeConveyorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int IntakeGateUpNode = 0;
+  public static final int IntakeGateDownNode = 1;
 
 
- // public static int hatchInNodeId = 2;
- // public static int hatchOutNodeId = 3;
-  public static int plateCloseNodeId = 4;
-  public static int plateOpenNodeId = 5;
+ // public static final int hatchInNodeId = 2;
+ // public static final int hatchOutNodeId = 3;
+  public static final int plateCloseNodeId = 4;
+  public static final int plateOpenNodeId = 5;
 
   //Sensors
-  public static int blightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int blightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
 
   //public static JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
