@@ -37,23 +37,17 @@ public final class RobotMap {
   public static final int configThreePort = 2;
 
   //Motors
-  public static final int frontLeftTalonPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int backLeftTalonPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int frontRightTalonPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int frontLeftMotorPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int backLeftMotorPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int frontRightMotorPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int backRightMotorPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeMotorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeConveyorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int IntakeGateUpNode = 2;
-  public static final int IntakeGateDownNode = 3;
-
-
- // public static final int hatchInNodeId = 2;
- // public static final int hatchOutNodeId = 3;
-  public static final int plateCloseNodeId = 4;
-  public static final int plateOpenNodeId = 5;
+  public static final int IntakeGateUpNode = 5;
+  public static final int IntakeGateDownNode = 7;
 
   //Sensors
-  public static final int blightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int lightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
   //Buttons
   public static final int intakeGateUpButtonNum = 5;
