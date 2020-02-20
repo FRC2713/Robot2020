@@ -1,27 +1,20 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.*;
-import frc.robot.commands.IntakeArmCommand;
-import frc.robot.commands.IntakeConveyerCommand;
-import frc.robot.commands.IntakeCountCommand;
 import frc.robot.commands.IntakeGateCommand;
-
-import static frc.robot.RobotMap.*;
-import static java.math.RoundingMode.UP;
-import static javax.print.attribute.standard.PrinterState.STOPPED;
 
 public class IntakeSubsystem extends SubsystemBase {
   //private final CANSparkMax intakeConveyor = new CANSparkMax(RobotMap.intakeConveyorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   //public final CANSparkMax intakeMotor = new CANSparkMax(RobotMap.intakeMotorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   //public final DoubleSolenoid ballIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.ballIntakeUpNodeId, RobotMap.ballIntakeDownNodeId);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
-  public static final JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
+  public static final JoystickButton intakeGateUpButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
+  public static final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
+
 
 
   //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
@@ -43,7 +36,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public static void initControls() {
 
-    intakeGateButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeGateCommand.getIntakeGatePosition() == IntakeGatePosition.UP ? IntakeGatePosition.DOWN : IntakeGatePosition.UP)));
+    intakeGateUpButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
+    intakeGateDownButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
     //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
 
     }
