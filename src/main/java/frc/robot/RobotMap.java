@@ -43,8 +43,8 @@ public final class RobotMap {
   public static final int backRightTalonPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeMotorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeConveyorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int IntakeGateUpNode = 0;
-  public static final int IntakeGateDownNode = 1;
+  public static final int IntakeGateUpNode = 2;
+  public static final int IntakeGateDownNode = 3;
 
 
  // public static final int hatchInNodeId = 2;
@@ -55,11 +55,9 @@ public final class RobotMap {
   //Sensors
   public static final int blightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
-
-  //public static JoystickButton intakeGateButton = new JoystickButton(SM.xBoxController, 5);
-
-  //public static JoystickButton intakeConveyerButton = new JoystickButton(joystick, 5);
-  // public static JoystickButton intakeArmButton= new JoystickButton(joystick, 5);
+  //Buttons
+  public static final int intakeGateUpButtonNum = 5;
+  public static final int intakeGateDownButtonNum = 6;
 
 }
 
