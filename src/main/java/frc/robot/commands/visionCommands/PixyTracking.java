@@ -28,13 +28,14 @@ public class PixyTracking extends CommandBase {
 
   @Override
   public void execute() {
-    blockCount = m_pixySubsystem.pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG2, 10);
+    blockCount = m_pixySubsystem.pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 1); // change 1 to 10 or something later
     SmartDashboard.putNumber("Block Count", blockCount);
 
     ArrayList<Pixy2CCC.Block> blocks = m_pixySubsystem.getPixy().getCCC().getBlocks();
+    System.out.println("count :" + blocks.size());
 
     if (blocks == null) {
-      System.err.println("No blocks");
+      System.out.println("No blocks");
       return;
     }
 
