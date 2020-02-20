@@ -80,16 +80,16 @@ public class Robot extends TimedRobot {
     //m_colorSensor.testFunction();
     //blightsensor.printOut();
     if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE){
-      System.out.println("this is a test; 1");
+      //System.out.println("this is a test; 1");
     }
     else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.TWO){
-      System.out.println("this is a test; 2");
+    //  System.out.println("this is a test; 2");
     }
     else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
-      System.out.println("this is a test; 3");
+  //    System.out.println("this is a test; 3");
     }
     else{
-      System.out.println("this is a test; 4");
+//      System.out.println("this is a test; 4");
     }
 
   }

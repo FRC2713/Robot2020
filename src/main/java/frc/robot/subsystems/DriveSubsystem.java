@@ -115,6 +115,8 @@ public class DriveSubsystem extends SubsystemBase {
     double traveledUnits = (current_E_Value - old_E_Value);
     double traveledInches = toInches(traveledUnits);
     old_E_Value = current_E_Value;
+    System.out.println();
+    System.out.println("Traveled " + traveledInches + "Inches");
     return traveledInches;
   }
 

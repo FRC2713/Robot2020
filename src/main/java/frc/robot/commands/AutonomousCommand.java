@@ -20,30 +20,26 @@ public class AutonomousCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    originalDist = m_driveSubsystem.getEncoder(1).getPosition();
+    originalDist = m_driveSubsystem.toFeet(m_driveSubsystem.getEncoder(1).getPosition());
     newDist = originalDist;
   }
 
   @Override
   public void execute() {
-      leftSpeed = 0.25;
-      rightSpeed = 0.25;
-      m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed,rightSpeed);
-      newDist = m_driveSubsystem.getEncoder(1).getPosition();
-      accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1))); //adds old distance to encoder input, translated to feet
-      System.out.println("I do kinda be moving forward exactly 10 feet tho, not gonna lie");
-      checkDistance();
-  }
-
-  public void checkDistance () {
-    if (accumulatedDist > 10) {
-      m_driveSubsystem.getRoboDrive().stopMotor();
-    }
-  }
+    System.out.println("This got to execute");
+    leftSpeed = 0.5;
+    rightSpeed = 0.5;
+    m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
+    newDist = m_driveSubsystem.getEncoder(1).getPosition();
+    accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1))); //adds old distance to encoder input, translated to feet;
+    System.out.println("It should be moving right now");
+    System.out.println("Traveled " + accumulatedDist + "Feet");
+}
 
   @Override
   public boolean isFinished() {
     if (accumulatedDist > 10) { //if traveled more than 10 feet, end autonomous
+      m_driveSubsystem.getRoboDrive().stopMotor();
       return true;
     }
     else return false;

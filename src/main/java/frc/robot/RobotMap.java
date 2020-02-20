@@ -27,8 +27,8 @@ public final class RobotMap {
   public static final double DEADBAND = 0.04;
   public static final float REGULAR_SPEED = .8f;
   private static final I2C.Port i2cPort = I2C.Port.kOnboard;
-  public static int getEncoderConstant() {
-    return 2;
+  public static double getEncoderConstant() {
+    return 1.2;
   }
 
   //Config Jumpers
