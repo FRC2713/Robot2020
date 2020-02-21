@@ -19,7 +19,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
   //public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
-  //public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
+  public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
   //public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, ballIntakeSolenoid);
   public IntakeSubsystem() {
 
@@ -34,11 +34,11 @@ public class IntakeSubsystem extends SubsystemBase {
       //Robot.initializeTalonDefaults(intakeTalon);
     }
 
-    public static void initControls() {
+    public void initControls() {
 
-    intakeGateUpButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
-    intakeGateDownButton.whenPressed(new InstantCommand(() -> IntakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
-    //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
+      intakeGateUpButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
+      intakeGateDownButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
+      //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
 
     }
 

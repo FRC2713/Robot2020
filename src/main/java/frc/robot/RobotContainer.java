@@ -37,6 +37,7 @@ public class RobotContainer {
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
   private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
+  public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 
   /**
@@ -54,7 +55,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    IntakeSubsystem.initControls();
+    intakeSubsystem.initControls();
   }
 
 

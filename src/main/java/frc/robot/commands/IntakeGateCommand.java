@@ -2,25 +2,37 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 
 import static java.math.RoundingMode.DOWN;
 import static java.math.RoundingMode.UP;
 
-public class IntakeGateCommand {
+public class IntakeGateCommand extends CommandBase {
+
+  private boolean isInitialized = false;
 
   private IntakeSubsystem intakeSubsystem;
-  private static IntakeSubsystem.IntakeGatePosition position = IntakeSubsystem.IntakeGatePosition.UP;
+  private static IntakeSubsystem.IntakeGatePosition position = IntakeSubsystem.IntakeGatePosition.DOWN;
 
   public IntakeGateCommand(IntakeSubsystem intakeSubsystem){
     this.intakeSubsystem = intakeSubsystem;
+    addRequirements(intakeSubsystem);
     update();
   }
-  public static void setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition inputState){
-    position = inputState;
+  public void setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition inputState) {
+    if (inputState != getIntakeGatePosition() && isInitialized) {
+      position = inputState;
+      update();
+    }
+    else if(!isInitialized){
+      position = inputState;
+      isInitialized = true;
+      update();
+    }
   }
 
-  public static IntakeSubsystem.IntakeGatePosition getIntakeGatePosition(){
+  public IntakeSubsystem.IntakeGatePosition getIntakeGatePosition(){
     return position;
   }
 
@@ -29,12 +41,12 @@ public class IntakeGateCommand {
       default:
       case UP:
         intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kReverse);
-        setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition.UP);
+        position = IntakeSubsystem.IntakeGatePosition.UP;
         break;
 
       case DOWN:
         intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kForward);
-        setIntakeGatePosition(IntakeSubsystem.IntakeGatePosition.DOWN);
+        position = IntakeSubsystem.IntakeGatePosition.DOWN;
         break;
 
     }

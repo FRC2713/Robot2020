@@ -56,7 +56,7 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
 
     if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE || ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
-      System.out.println("this is a test; 1");
+      //System.out.println("this is a test; 1");
       frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
       frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
       backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -64,7 +64,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     }
     else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.TWO){
-      System.out.println("this is a test; 2");
+      //System.out.println("this is a test; 2");
       frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
