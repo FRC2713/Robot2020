@@ -41,8 +41,10 @@ public final class RobotMap {
   public static final int backLeftMotorPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int frontRightMotorPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int backRightMotorPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int intakeMotorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int intakeConveyorTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int intakeTalonPort = 6; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int intakeArmTalonPort = 7; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int intakeArmUpNode = 4;//CHECK WHAT IS UP/DOWN FOR ARM
+  public static final int intakeArmDownNode = 6;
   public static final int IntakeGateUpNode = 5;
   public static final int IntakeGateDownNode = 7;
 

@@ -1,17 +1,20 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.*;
 import frc.robot.commands.IntakeArmCommand;
+import frc.robot.commands.IntakeConveyerCommand;
 import frc.robot.commands.IntakeGateCommand;
 
 public class IntakeSubsystem extends SubsystemBase {
-  //private final CANSparkMax intakeConveyor = new CANSparkMax(RobotMap.intakeConveyorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  //public final CANSparkMax intakeMotor = new CANSparkMax(RobotMap.intakeMotorTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  //public final DoubleSolenoid ballIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.ballIntakeUpNodeId, RobotMap.ballIntakeDownNodeId);
+  public final CANSparkMax intakeMotor = new CANSparkMax(RobotMap.intakeTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+  public final CANSparkMax intakeArmMotor = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+  public final DoubleSolenoid intakeArmSolenoid = SM.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
   public final JoystickButton intakeGateUpButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
   public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
@@ -21,7 +24,7 @@ public class IntakeSubsystem extends SubsystemBase {
   //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
   public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
   public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
-  //public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, ballIntakeSolenoid);
+  public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, intakeArmSolenoid);
   public IntakeSubsystem() {
 
     // Robot.initializeSparkDefaults(intakeMotor, intakeConveyor);
@@ -39,7 +42,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
       intakeGateUpButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
       intakeGateDownButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
-      //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(UP)));
+
+      //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(IntakeArmPosition.UP)));
 
     }
 
@@ -47,10 +51,9 @@ public class IntakeSubsystem extends SubsystemBase {
       UP, DOWN
     }
 
-    /*public enum IntakeConveyerPosition {
+    public enum IntakePosition {
       ON, STOPPED
     }
-    */
 
     public enum IntakeArmPosition {
       UP, DOWN
