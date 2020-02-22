@@ -8,10 +8,20 @@ import static java.math.RoundingMode.DOWN;
 import static java.math.RoundingMode.UP;
 
 public class IntakeArmCommand {
-}
+  public IntakeArmCommand(IntakeSubsystem intakeSubsystem) {
+    this.intakeSubsystem = intakeSubsystem;
+    update();
+  }
+  public static void setIntakeArmPosition(IntakeSubsystem.IntakeGatePosition inputState){
+    position = inputState;
+  }
+  public static IntakeSubsystem.IntakeGatePosition getIntakeArmPosition(){
+    return position;
+  }
 
- /* private IntakeSubsystem intakeSubsystem;
-  private IntakeSubsystem.IntakeArmPosition position = Intak  eSubsystem.IntakeArmPosition.UP;
+
+  private IntakeSubsystem intakeSubsystem;
+  private IntakeSubsystem.IntakeArmPosition position = IntakeSubsystem.IntakeArmPosition.UP;
   private void update() {
     switch(position) {
       default:
@@ -36,11 +46,11 @@ public class IntakeArmCommand {
       return true;
     }
     }
-    if (intakeSubsystem.intakeArmCommand.getIntakeGatePosition() == IntakeSubsystem.IntakeArmPosition.DOWN) {
+    if (intakeSubsystem.intakeArmCommand.getIntakeArmPosition() == IntakeSubsystem.IntakeArmPosition.DOWN) {
       DriverStation.reportWarning("Arm Position not changed for safety reasons", false);
       return false;
     }
     update();
     return true;
-    */
+
 
