@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.*;
+import frc.robot.commands.IntakeArmCommand;
 import frc.robot.commands.IntakeGateCommand;
 
 public class IntakeSubsystem extends SubsystemBase {
@@ -18,7 +19,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
 
   //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
-  //public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
+  public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
   public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
   //public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this, ballIntakeSolenoid);
   public IntakeSubsystem() {
@@ -49,9 +50,11 @@ public class IntakeSubsystem extends SubsystemBase {
     /*public enum IntakeConveyerPosition {
       ON, STOPPED
     }
+    */
+
     public enum IntakeArmPosition {
       UP, DOWN
-    }*/
+    }
   }
 
 
