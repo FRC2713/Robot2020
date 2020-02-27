@@ -21,6 +21,9 @@ public class ShuffleboardManagement {
 
   public ShuffleboardManagement() {
 
+
+
+
         /*SlewRateLimiter filter = new SlewRateLimiter(0.5);
     filter.calculate(input);
     */
@@ -38,9 +41,13 @@ public class ShuffleboardManagement {
       .withWidget("Boolean Box")
       .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "red"))
       .getEntry();
+
     reversedControls.setBoolean(true);
 
   }
+
+
+
   public void setReversedControlValue(boolean value) {
     reversedControls.setBoolean(value);
   }

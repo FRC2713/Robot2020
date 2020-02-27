@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -30,6 +31,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private LightSensor lightsensor = new LightSensor();
   public static final Compressor compressor = new Compressor();
+  public WPI_TalonSRX sensorMotor;
+  private ColorSensor m_colorSensor;
 
   private int currCam = 0;
   /**
@@ -41,9 +44,11 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    //m_colorSensor.sensorInit();
     initCamera();
     compressor.start();
+    m_colorSensor = new ColorSensor();
+    m_colorSensor.sensorInit();
+
   }
   private void initCamera() {
     CameraServer cs = CameraServer.getInstance();
@@ -149,6 +154,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+
+
   }
 
   @Override
@@ -170,5 +177,8 @@ public class Robot extends TimedRobot {
 
     }
   }
+
+
+
 
 }

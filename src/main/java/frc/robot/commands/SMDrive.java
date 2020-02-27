@@ -36,6 +36,7 @@ public class SMDrive extends CommandBase {
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
+  String chosenColor = "no color";
 
   Writer writer;
 
@@ -62,6 +63,7 @@ public class SMDrive extends CommandBase {
 
   @Override
   public void execute() {
+
 
     double measuredLeft;
     double measuredRight;
