@@ -110,10 +110,15 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public void resetEncoder(CANEncoder encoder) {
+    old_E_Value = encoder1.getPosition();
+  }
+
   public double encoderDistance(CANEncoder encoder) {
+    double traveledInches;
     current_E_Value = encoder.getPosition();
     double traveledUnits = (current_E_Value - old_E_Value);
-    double traveledInches = toInches(traveledUnits);
+    traveledInches = toInches(traveledUnits);
     old_E_Value = current_E_Value;
     System.out.println();
     System.out.println("Traveled " + traveledInches + "Inches");

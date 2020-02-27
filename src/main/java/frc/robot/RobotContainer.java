@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutoA;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.turnLeft45;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -36,8 +38,11 @@ public class RobotContainer {
   private final PixySubsystem pixySubsystem = new PixySubsystem();
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
+  private final turnLeft45 turnLeft = new turnLeft45(driveSubsystem);
   private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final AutoA m_autonomous1 = new AutoA(driveSubsystem);
+
 
 
   /**
@@ -66,7 +71,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-      return m_autonomousCommand;
+    return turnLeft;
   }
 
 }

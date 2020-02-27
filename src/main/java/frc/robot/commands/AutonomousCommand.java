@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.SM;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class AutonomousCommand extends CommandBase {
@@ -16,6 +17,7 @@ public class AutonomousCommand extends CommandBase {
   public AutonomousCommand(DriveSubsystem driveSubsystem) {
     m_driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem); //establishes drive subsystem as subsystem used
+    accumulatedDist = 0;
   }
 
   @Override
