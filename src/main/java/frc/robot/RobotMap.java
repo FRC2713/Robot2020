@@ -47,8 +47,14 @@ public final class RobotMap {
   public static final int intakeArmDownNode = 6;
   public static final int IntakeGateUpNode = 5;
   public static final int IntakeGateDownNode = 7;
+  public static final int ClimberUpMotorPort = 8;
+  public static final int WitchUpMotorPort = 10;
+  public static final int WitchDownMotorPort = 10;
+
 
   //Sensors
+  public static int climberLimitSwitchPort = 3;
+
   public static final int lightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
   //Buttons
