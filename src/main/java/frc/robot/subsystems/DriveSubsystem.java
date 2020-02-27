@@ -115,7 +115,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public double encoderDistance(CANEncoder encoder) {
-    double traveledInches;
+    double traveledInches = 0;
     current_E_Value = encoder.getPosition();
     double traveledUnits = (current_E_Value - old_E_Value);
     traveledInches = toInches(traveledUnits);
