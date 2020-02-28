@@ -10,13 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.commandGroups.initLineOnly;
+import frc.robot.commands.moveCommands.AutonomousCommand;
+import frc.robot.commands.moveCommands.turnLeft45;
+import frc.robot.commands.moveCommands.turnRight45;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
@@ -37,6 +37,9 @@ public class RobotContainer {
   private final PixySubsystem pixySubsystem = new PixySubsystem();
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
+  private final turnLeft45 turnLeft = new turnLeft45(driveSubsystem);
+  private final turnRight45 turnRight = new turnRight45(driveSubsystem);
+  private final initLineOnly initLineOnly = new initLineOnly(driveSubsystem);
   private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
@@ -69,7 +72,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-      return m_autonomousCommand;
+      return initLineOnly;
   }
 
 }
