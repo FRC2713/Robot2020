@@ -1,10 +1,9 @@
-package frc.robot.commands;
+package frc.robot.commands.moveCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.SM;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class AutonomousCommand extends CommandBase {
+public class moveForward8Feet extends CommandBase {
   double originalDist = 0;
   double newDist = 0;
   double accumulatedDist = 0;
@@ -14,7 +13,7 @@ public class AutonomousCommand extends CommandBase {
 
   private final DriveSubsystem m_driveSubsystem;
 
-  public AutonomousCommand(DriveSubsystem driveSubsystem) {
+  public moveForward8Feet(DriveSubsystem driveSubsystem) {
     m_driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem); //establishes drive subsystem as subsystem used
     accumulatedDist = 0;
@@ -37,11 +36,11 @@ public class AutonomousCommand extends CommandBase {
     accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1))); //adds old distance to encoder input, translated to feet;
     System.out.println("It should be moving right now");
     System.out.println("Traveled " + accumulatedDist + "Feet");
-}
+  }
 
   @Override
   public boolean isFinished() {
-    if (accumulatedDist > 10) { //if traveled more than 10 feet, end autonomous
+    if (accumulatedDist > 8) { //if traveled more than 10 feet, end autonomous
       m_driveSubsystem.getRoboDrive().stopMotor();
       return true;
     }
