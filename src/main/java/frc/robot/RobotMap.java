@@ -66,6 +66,7 @@ public final class RobotMap {
 
   public static final int intakeGateUpButtonNum = 5;
   public static final int intakeGateDownButtonNum = 6;
+  public static final int intakeOnButtonNum = 7;
 
 }
 

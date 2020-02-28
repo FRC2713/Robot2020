@@ -27,7 +27,7 @@ public class SMDrive extends CommandBase {
   private DriveSubsystem driveSubsystem;
   private XboxController xbox = SM.xBoxController;
   private boolean useTankInsteadOfBradford = false;
-  private boolean polarityBoolean = false;
+  public boolean polarityBoolean = false;
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;

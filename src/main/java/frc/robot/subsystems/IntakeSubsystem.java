@@ -18,6 +18,8 @@ public class IntakeSubsystem extends SubsystemBase {
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
   public final JoystickButton intakeGateUpButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
   public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
+  public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
+  boolean toggleState = true;
 
 
 
@@ -42,9 +44,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
       intakeGateUpButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
       intakeGateDownButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
-
+      //intakeOnButton.whenPressed(new InstantCommand(() -> (toggleState)? intakeConveyerCommand.setIntakeMode(IntakePosition.ON): intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED))));
       //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(IntakeArmPosition.UP)));
-
+      intakeOnButton.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON)));
+      intakeOnButton.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
     }
 
     public enum IntakeGatePosition {

@@ -18,10 +18,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   /*Creates motors, getting motor controller (CANSparkMax) ports from RobotMap
   * MAKE SURE TEST BED IS SET TO BRUSHED*/
-  private CANSparkMax frontLeft;// = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANSparkMax frontRight;// = new CANSparkMax(RobotMap.frontRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANSparkMax backLeft;// = new CANSparkMax(RobotMap.backLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private CANSparkMax backRight;// = new CANSparkMax(RobotMap.backRightTalonPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax frontLeft;// = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax frontRight;// = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax backLeft;// = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private CANSparkMax backRight;// = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
   CANEncoder encoder1;
   CANEncoder encoder2;
