@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.visionCommands.PixyTracking;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -38,6 +39,7 @@ public class RobotContainer {
   private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
   private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
 
   /**
@@ -56,6 +58,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     intakeSubsystem.initControls();
+    climberSubsystem.initControls();
   }
 
 

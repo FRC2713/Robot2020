@@ -8,8 +8,9 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class ClimbCommand extends CommandBase {
 private ClimberSubsystem climberSubsystem;
   private static ClimberSubsystem.ClimberPosition position = ClimberSubsystem.ClimberPosition.STOPPED;
-  public static void setClimberPosition(ClimberSubsystem.ClimberPosition inputState) {
+  public void setClimberPosition(ClimberSubsystem.ClimberPosition inputState) {
     position = inputState;
+    update();
   }
 
 
@@ -21,21 +22,29 @@ public ClimbCommand(ClimberSubsystem climberSubsystem){
   update();
 }
 private void update() {
+    System.out.println("Update has been called");
   switch (position) {
     default:
-    case ON:
-      position = ClimberSubsystem.ClimberPosition.ON;
+    case UP:
+      position = ClimberSubsystem.ClimberPosition.UP;
+      ClimberSubsystem.ClimberUp.set(0.2);
+
+      break;
+    case DOWN:
+      position = ClimberSubsystem.ClimberPosition.DOWN;
+      ClimberSubsystem.ClimberUp.set(-0.2);
 
       break;
     case STOPPED:
       position = ClimberSubsystem.ClimberPosition.STOPPED;
+      ClimberSubsystem.ClimberUp.set(0);
       break;
   }
 
-  if (ClimberSubsystem.climberLimitSwitch.get()) {
-    position = ClimberSubsystem.ClimberPosition.STOPPED;
+ // if (ClimberSubsystem.climberLimitSwitch.get()) {
+ //   position = ClimberSubsystem.ClimberPosition.STOPPED;
 
-  }
+ // }
 }
 
 

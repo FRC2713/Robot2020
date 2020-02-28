@@ -47,7 +47,7 @@ public final class RobotMap {
   public static final int intakeArmDownNode = 6;
   public static final int IntakeGateUpNode = 5;
   public static final int IntakeGateDownNode = 7;
-  public static final int ClimberUpMotorPort = 8;
+  public static final int ClimberUpMotorPort = 11;
   public static final int WitchUpMotorPort = 10;
   public static final int WitchDownMotorPort = 10;
 
@@ -58,6 +58,12 @@ public final class RobotMap {
   public static final int lightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
   //Buttons
+  public static final int climberUpButton = 3;
+  public static final int climberDownButton = 2;
+  public static final int witchUpButton = 5;
+  public static final int WitchDownButton = 6;
+
+
   public static final int intakeGateUpButtonNum = 5;
   public static final int intakeGateDownButtonNum = 6;
 
