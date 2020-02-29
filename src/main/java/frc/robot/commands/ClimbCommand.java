@@ -27,12 +27,12 @@ private void update() {
     default:
     case UP:
       position = ClimberSubsystem.ClimberPosition.UP;
-      ClimberSubsystem.ClimberUp.set(0.2);
+      ClimberSubsystem.ClimberUp.set(0.4);
 
       break;
     case DOWN:
       position = ClimberSubsystem.ClimberPosition.DOWN;
-      ClimberSubsystem.ClimberUp.set(-0.2);
+      ClimberSubsystem.ClimberUp.set(-0.4);
 
       break;
     case STOPPED:

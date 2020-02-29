@@ -22,6 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public final JoystickButton climberUpButton = new JoystickButton (SM.leftAttack, RobotMap.climberUpButton);
   public final JoystickButton climberDownButton = new JoystickButton (SM.leftAttack, RobotMap.climberDownButton);
 
+
   public final JoystickButton witchDownButton = new JoystickButton(SM.leftAttack, RobotMap.WitchDownMotorPort);
   public final JoystickButton witchUpButton = new JoystickButton(SM.leftAttack, RobotMap.WitchUpMotorPort);
 
@@ -33,8 +34,9 @@ public class ClimberSubsystem extends SubsystemBase {
 }
 
   public void initControls() {
-    climberUpButton.whenPressed(new InstantCommand(() -> climbCommand.setClimberPosition(ClimberSubsystem.ClimberPosition.UP)));
-    climberDownButton.whenPressed(new InstantCommand(() -> climbCommand.setClimberPosition(ClimberSubsystem.ClimberPosition.DOWN)));
+    climberUpButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition(ClimberSubsystem.ClimberPosition.UP)));
+    climberDownButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition(ClimberSubsystem.ClimberPosition.DOWN)));
+
     witchUpButton.whenPressed(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.UP)));
     witchDownButton.whenPressed(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.DOWN)));
 
@@ -47,6 +49,11 @@ public class ClimberSubsystem extends SubsystemBase {
   }
   public enum WitchPosition {
     UP, DOWN, STOPPED
+  }
+  @Override
+  public void periodic(){
+    climbCommand.setClimberPosition(ClimberPosition.STOPPED);
+
   }
 
 }

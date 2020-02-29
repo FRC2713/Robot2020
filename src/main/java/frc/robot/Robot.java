@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
   public static final Compressor compressor = new Compressor();
   public WPI_TalonSRX sensorMotor;
   private ColorSensor m_colorSensor;
-  public IntakeSubsystem intakeSubsystem2 = new IntakeSubsystem();
+ // public IntakeSubsystem intakeSubsystem2 = new IntakeSubsystem();
   CameraServer cs = CameraServer.getInstance();
   private UsbCamera frontCamera = cs.startAutomaticCapture(0);
   private UsbCamera backCamera = cs.startAutomaticCapture(1);
@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
     backCamera.setResolution(256, 144);
     backCamera.setFPS(30);
     backCamera.close();
-  };
+  }
   private void changeCamera(){
     if(currCam == 1){
       backCamera.close();

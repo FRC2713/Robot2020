@@ -64,6 +64,7 @@ public final class RobotMap {
   //Buttons
   public static final int climberUpButton = 3;
   public static final int climberDownButton = 2;
+
   public static final int witchUpButton = 5;
   public static final int WitchDownButton = 6;
 
