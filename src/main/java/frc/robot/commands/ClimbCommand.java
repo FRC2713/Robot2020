@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 
 public class ClimbCommand extends CommandBase {
 private ClimberSubsystem climberSubsystem;
@@ -40,7 +38,7 @@ private void update() {
       ClimberSubsystem.ClimberUp.set(0);
       break;
   }
-
+//Limit switch code: probably don't need
  // if (ClimberSubsystem.climberLimitSwitch.get()) {
  //   position = ClimberSubsystem.ClimberPosition.STOPPED;
 
