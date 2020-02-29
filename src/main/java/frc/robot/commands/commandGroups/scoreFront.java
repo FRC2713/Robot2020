@@ -15,7 +15,7 @@ public class scoreFront extends SequentialCommandGroup {
 
       new moveBackwards10Feet(driveSubsystem),
 
-      new outputGateCommand(intakeSubsystem, intakeGateCommand),
+//      new outputGateCommand(intakeSubsystem, intakeGateCommand),
 
       new moveForward15Feet(driveSubsystem)
     );

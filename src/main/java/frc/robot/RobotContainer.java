@@ -31,10 +31,10 @@ import frc.robot.commands.commandGroups.scoreRight;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  DigitalInput PortFour = new DigitalInput(RobotMap.configFourPort);
-  DigitalInput PortFive = new DigitalInput(RobotMap.configFivePort);
   DigitalInput PortSix = new DigitalInput(RobotMap.configSixPort);
   DigitalInput PortSeven = new DigitalInput(RobotMap.configSevenPort);
+  DigitalInput PortEight = new DigitalInput(RobotMap.configEightPort);
+  DigitalInput PortNine = new DigitalInput(RobotMap.configNinePort);
 
   // The robot's subsystems and commands are defined here...
 
@@ -84,16 +84,16 @@ public class RobotContainer {
     //PORT 5 RETURNS SCORE FROM FRONT
     //PORT 6 RETURN SCORE FROM LEFT
     //PORT 7 RETURNS SCORE FROM RIGHT
-    if(PortFour.get() == false) {
+    if(PortSix.get() == false) {
       return initLineOnly;
     }
-    else if (PortFive.get() == false) {
+    else if (PortSeven.get() == false) {
       return scoreFront;
     }
-    else if (PortSix.get() == false) {
+    else if (PortEight.get() == false) {
       return scoreLeft;
     }
-    else if (PortSeven.get() == false) {
+    else if (PortNine.get() == false) {
       return scoreRight;
     }
     else return null;
