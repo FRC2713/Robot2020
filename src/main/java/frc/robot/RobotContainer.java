@@ -7,19 +7,22 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.IntakeGateCommand;
 import frc.robot.commands.commandGroups.initLineOnly;
-import frc.robot.commands.moveCommands.AutonomousCommand;
-import frc.robot.commands.moveCommands.turnLeft45;
-import frc.robot.commands.moveCommands.turnRight45;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
+import frc.robot.commands.commandGroups.scoreFront;
+import frc.robot.commands.commandGroups.scoreLeft;
+import frc.robot.commands.commandGroups.scoreRight;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -28,6 +31,11 @@ import frc.robot.subsystems.visionSubsystems.PixySubsystem;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  DigitalInput PortFour = new DigitalInput(RobotMap.configFourPort);
+  DigitalInput PortFive = new DigitalInput(RobotMap.configFivePort);
+  DigitalInput PortSix = new DigitalInput(RobotMap.configSixPort);
+  DigitalInput PortSeven = new DigitalInput(RobotMap.configSevenPort);
+
   // The robot's subsystems and commands are defined here...
 
   private final SM sm = new SM(); //Subsystem Management (SM) needs to be instantiated first
@@ -36,13 +44,14 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final PixySubsystem pixySubsystem = new PixySubsystem();
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
-  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(driveSubsystem);
-  private final turnLeft45 turnLeft = new turnLeft45(driveSubsystem);
-  private final turnRight45 turnRight = new turnRight45(driveSubsystem);
   private final initLineOnly initLineOnly = new initLineOnly(driveSubsystem);
   private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  private final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(intakeSubsystem);
+  private final scoreFront scoreFront = new scoreFront(driveSubsystem, intakeSubsystem, intakeGateCommand);
+  private final scoreLeft scoreLeft = new scoreLeft(driveSubsystem, intakeSubsystem, intakeGateCommand);
+  private final scoreRight scoreRight = new scoreRight(driveSubsystem, intakeSubsystem, intakeGateCommand);
 
 
   /**
@@ -71,8 +80,23 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
+    //PORT 4 RETURNS INITIATION LINE ONLY
+    //PORT 5 RETURNS SCORE FROM FRONT
+    //PORT 6 RETURN SCORE FROM LEFT
+    //PORT 7 RETURNS SCORE FROM RIGHT
+    if(PortFour.get() == false) {
       return initLineOnly;
+    }
+    else if (PortFive.get() == false) {
+      return scoreFront;
+    }
+    else if (PortSix.get() == false) {
+      return scoreLeft;
+    }
+    else if (PortSeven.get() == false) {
+      return scoreRight;
+    }
+    else return null;
   }
 
 }

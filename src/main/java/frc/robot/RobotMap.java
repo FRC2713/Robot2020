@@ -35,6 +35,10 @@ public final class RobotMap {
   public static final int configOnePort = 0;
   public static final int configTwoPort = 1;
   public static final int configThreePort = 2;
+  public static final int configFourPort = 3;
+  public static final int configFivePort = 4;
+  public static final int configSixPort = 5;
+  public static final int configSevenPort = 6;
 
   //Motors
   public static final int frontLeftMotorPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
