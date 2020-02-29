@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.SMDrive;
+import frc.robot.subsystems.IntakeSubsystem;
 
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.DOWN;
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
@@ -33,6 +35,10 @@ public class Robot extends TimedRobot {
   public static final Compressor compressor = new Compressor();
   public WPI_TalonSRX sensorMotor;
   private ColorSensor m_colorSensor;
+  public IntakeSubsystem intakeSubsystem2 = new IntakeSubsystem();
+  CameraServer cs = CameraServer.getInstance();
+  private UsbCamera frontCamera = cs.startAutomaticCapture(0);
+  private UsbCamera backCamera = cs.startAutomaticCapture(1);
 
   private int currCam = 0;
   /**
@@ -51,23 +57,22 @@ public class Robot extends TimedRobot {
 
   }
   private void initCamera() {
-    CameraServer cs = CameraServer.getInstance();
-    UsbCamera frontCamera = cs.startAutomaticCapture();
-    UsbCamera backCamera = cs.startAutomaticCapture();
-
     frontCamera.setResolution(256, 144);
-    //frontCamera.close();
     frontCamera.setFPS(30);
     backCamera.setResolution(256, 144);
     backCamera.setFPS(30);
-  }
+    backCamera.close();
+  };
   private void changeCamera(){
-    if(currCam == 0){
-      currCam = 1;
-
-    }
-    else{
+    if(currCam == 1){
+      backCamera.close();
       currCam = 0;
+      frontCamera = cs.startAutomaticCapture(currCam);
+    }
+    else if(currCam == 0){
+      frontCamera.close();
+      currCam = 1;
+      backCamera = cs.startAutomaticCapture(currCam);
     }
   }
 
@@ -169,6 +174,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    if(SM.xBoxController.getBButtonPressed()){
+      changeCamera();
+    }
   }
 
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
