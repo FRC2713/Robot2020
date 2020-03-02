@@ -1,7 +1,9 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.ColorMatchResult;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.ColorSensor;
 import frc.robot.SM;
@@ -9,21 +11,23 @@ import frc.robot.subsystems.ColorWheelSubsystem;
 
 public class ColorWheelCommand extends CommandBase {
 
-  public  ColorSensor colorsensor = new ColorSensor();
   private XboxController xbox = SM.xBoxController;
-//  private ColorWheelSubsystem m_colorwheelsubsystem = new ColorWheelSubsystem();
-  private ColorWheelSubsystem colorwheelsubsystem;
-
+  private ColorWheelSubsystem colormatchwheelsubsystem;
+  public int stop = -1;
+  public String chosenColor = "no color";
+  public int chosenColorInt = 1;
 
   public ColorWheelCommand(ColorWheelSubsystem colorwheelsubsystem) {
-    this.colorwheelsubsystem = colorwheelsubsystem;
+    this.colormatchwheelsubsystem = colorwheelsubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(colorwheelsubsystem);
+
   }
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
 
+    //colormatchwheelsubsystem.sensorMotor.set(0.5);
 
 
 
@@ -32,50 +36,93 @@ public class ColorWheelCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    String colorString;
+    colorString = colormatchwheelsubsystem.colorsensor.getColor();
 
-    String chosenColor = "no color";
 
+
+
+    /**
+     * Open Smart Dashboard or Shuffleboard to see the color detected by the
+     * sensor.
+     */
     if (xbox.getAButtonPressed()) {
       SM.rumbleController(xbox, .5, 500);
-      if (chosenColor == "no color") {
+      chosenColorInt ++;
+      if(chosenColorInt >= 5){
 
-        chosenColor = "red";
-
-      }
-      if (chosenColor == "red") {
-
-        chosenColor = "green";
+        chosenColorInt = 1;
 
       }
-      if (chosenColor == "green") {
 
-        chosenColor = "blue";
-
-      }
-      if (chosenColor == "blue") {
-
-        chosenColor = "yellow";
-
-      }
-      if (chosenColor == "yellow") {
-
-        chosenColor = "no color";
-
-      }
     }
+
+    if(chosenColorInt == 1){
+
+      chosenColor = "Red";
+    }
+
+    if(chosenColorInt == 2){
+
+      chosenColor = "Green";
+    }
+    if(chosenColorInt == 3){
+
+      chosenColor = "Blue";
+    }
+    if(chosenColorInt == 4){
+
+      chosenColor = "Yellow";
+    }
+    System.out.println("Color is: " + colorString);
+    System.out.println("Red: " + colormatchwheelsubsystem.colorsensor.detectedColor.red);
+    System.out.println("Green: " + colormatchwheelsubsystem.colorsensor.detectedColor.green);
+    System.out.println("Blue: " + colormatchwheelsubsystem.colorsensor.detectedColor.blue);
+    System.out.println("Confidence: " + colormatchwheelsubsystem.colorsensor.match.confidence);
+
+    SmartDashboard.putNumber("Red", colormatchwheelsubsystem.colorsensor.detectedColor.red);
+    SmartDashboard.putNumber("Green", colormatchwheelsubsystem.colorsensor.detectedColor.green);
+    SmartDashboard.putNumber("Blue", colormatchwheelsubsystem.colorsensor.detectedColor.blue);
+    SmartDashboard.putString("Match Color", chosenColor);
+    //SmartDashboard.putNumber("Confidence", colormatchwheelsubsystem.colorsensor.match.confidence);
+    SmartDashboard.putString("Detected Color", colorString);
+
+    System.out.println("hey look this is working");
+
+
+
+   // if(colormatchwheelsubsystem.colorsensor.getColor() == "Red"){
+
+    //  colormatchwheelsubsystem.sensorMotor.set(0);
+
+ //   }
+
+
+
+
+    if(colormatchwheelsubsystem.colorsensor.getColor() == chosenColor ){
+
+      colormatchwheelsubsystem.sensorMotor.set(0);
+
+    }
+
 
     if (xbox.getYButtonPressed()) {
-      SM.rumbleController(xbox, .2, 200);
         //if (colorsensor.getColor() == chosenColor) {
-         // colorwheelsubsystem.sensorMotor.set(0);
+         // colormathwheelsubsystem.sensorMotor.set(0);
+     // stop = stop * -1;
+      SM.rumbleController(xbox, .4, 200);
 
-        //} else {
-          colorwheelsubsystem.sensorMotor.set(0.5);
+      //} else {
+     // if(stop == 1) {
 
+        colormatchwheelsubsystem.sensorMotor.set(0.5);
 
-    //     }
+     // }else{
+       // colormatchwheelsubsystem.sensorMotor.set(0);
+     // }
+
     }
-
 
   }
 

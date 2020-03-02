@@ -10,7 +10,7 @@ import frc.robot.commands.ColorWheelCommand;
 
 public class ColorWheelSubsystem extends SubsystemBase {
   public CANSparkMax sensorMotor;
-  private ColorSensor colorsensor = new ColorSensor();
+  public ColorSensor colorsensor = new ColorSensor();
 
   /**
    * Creates a new ExampleSubsystem.
@@ -18,10 +18,12 @@ public class ColorWheelSubsystem extends SubsystemBase {
  public ColorWheelCommand colorWheelCommand;
 
   public ColorWheelSubsystem() {
-    colorWheelCommand = new ColorWheelCommand(this);
 
-    sensorMotor = new CANSparkMax(12, CANSparkMaxLowLevel.MotorType.kBrushed);
+    sensorMotor = new CANSparkMax(12, CANSparkMax.MotorType.kBrushed);
+
+    colorWheelCommand = new ColorWheelCommand(this);
     setDefaultCommand(colorWheelCommand);
+    colorsensor.sensorInit();
 
 
   }
@@ -32,7 +34,6 @@ public class ColorWheelSubsystem extends SubsystemBase {
 
     // This method will be called once per scheduler run
 
-   // colorWheelCommand.execute();
 
   }
 }

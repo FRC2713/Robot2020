@@ -23,10 +23,6 @@ public class ColorSensor {
    */
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
- // private CANSparkMax colorMotor = new CANSparkMax(RobotMap.frontLeftTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  //private int r = 1;
-  //private int g = 1;
-  //private int b = 1;
   private XboxController xbox = SM.xBoxController;
   private int color = 0;
 
@@ -45,19 +41,23 @@ public class ColorSensor {
    * with given confidence range.
    */
 
-  private final ColorMatch m_colorMatcher = new ColorMatch();
+  public final ColorMatch m_colorMatcher = new ColorMatch();
+  public edu.wpi.first.wpilibj.util.Color detectedColor = m_colorSensor.getColor();
+
+  public  ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
 
-  /**
+  /**58]0
    * Note: Any example colors should be calibrated as the user needs, these
    * are here as a basic example.
    */
 
 
-  private final edu.wpi.first.wpilibj.util.Color kBlueTarget = ColorMatch.makeColor(0.0, 0.0, 1.0);
-  private final edu.wpi.first.wpilibj.util.Color kGreenTarget = ColorMatch.makeColor(0.0, 1.0, 0.0);
-  private final edu.wpi.first.wpilibj.util.Color kRedTarget = ColorMatch.makeColor(1.0, 0.0, 0.0);
-  private final edu.wpi.first.wpilibj.util.Color kYellowTarget = ColorMatch.makeColor(1.0, 1.0, 0);
+  public final edu.wpi.first.wpilibj.util.Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  public final edu.wpi.first.wpilibj.util.Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+  public final edu.wpi.first.wpilibj.util.Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  public final edu.wpi.first.wpilibj.util.Color kYellowTarget =  ColorMatch.makeColor(0.361, 0.524, 0.113);
+
 
 
   public void sensorInit() {
@@ -85,7 +85,6 @@ public class ColorSensor {
      * an object is the more light from the surroundings will bleed into the
      * measurements and make it difficult to accurately determine its color.
      */
-    edu.wpi.first.wpilibj.util.Color detectedColor = m_colorSensor.getColor();
 
     /**
      * Run the color match algorithm on our detected color
@@ -96,37 +95,7 @@ public class ColorSensor {
 
 
 
-    String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
-    if (match.color == kBlueTarget) {
-      colorString = "Blue";
-    } else if (match.color == kRedTarget) {
-      colorString = "Red";
-    } else if (match.color == kGreenTarget) {
-      colorString = "Green";
-    } else if (match.color == kYellowTarget) {
-      colorString = "Yellow";
-    } else {
-      colorString = "Unknown";
-    }
-
-
-    /**
-     * Open Smart Dashboard or Shuffleboard to see the color detected by the
-     * sensor.
-     */
-    System.out.println("Color is: " + colorString);
-    System.out.println("Red: " + detectedColor.red);
-    System.out.println("Green: " + detectedColor.green);
-    System.out.println("Blue: " + detectedColor.blue);
-    System.out.println("Confidence: " + match.confidence);
-
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
   }
 
   //Brigid 1/27/20

@@ -52,9 +52,6 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     initCamera();
     compressor.start();
-    m_colorSensor = new ColorSensor();
-    m_colorSensor.sensorInit();
-
   }
   private void initCamera() {
     frontCamera.setResolution(256, 144);
