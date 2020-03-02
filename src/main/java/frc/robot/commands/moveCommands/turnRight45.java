@@ -33,14 +33,14 @@ public class turnRight45 extends CommandBase {
     rightSpeed = 0.25;
     m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = m_driveSubsystem.getEncoder(1).getPosition();
-    accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1))); //adds old distance to encoder input, translated to feet;
+    accumulatedDist += -(m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1)))); //adds old distance to encoder input, translated to feet;
     System.out.println("It should be moving right now");
     System.out.println("Traveled " + accumulatedDist + "Feet");
   }
 
   @Override
   public boolean isFinished() {
-    if (accumulatedDist > 1) { //if traveled more than 10 feet, end autonomous
+    if (accumulatedDist > 1) { //largely arbitrary, guess-and-check
       m_driveSubsystem.getRoboDrive().stopMotor();
       return true;
     }

@@ -57,4 +57,3 @@ public class IntakeGateCommand extends CommandBase {
 
   }
  }
-
