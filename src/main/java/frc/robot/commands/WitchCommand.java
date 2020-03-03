@@ -21,7 +21,7 @@ public class WitchCommand extends CommandBase {
   }
 
   private void update() {
-    System.out.println("Update has been called");
+    //System.out.println("Update has been called");
     switch (position) {
       default:
       case UP:
