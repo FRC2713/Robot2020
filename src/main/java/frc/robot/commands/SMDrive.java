@@ -79,7 +79,7 @@ public class SMDrive extends CommandBase {
     }
     if (xbox.getBButtonPressed()) {
       polarityBoolean = !polarityBoolean;
-     // ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean);
+     ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button
       polarity *= -1;
       SM.rumbleController(xbox, 0.2, 500);
 

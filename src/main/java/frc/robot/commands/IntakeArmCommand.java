@@ -8,7 +8,7 @@ import static java.math.RoundingMode.DOWN;
 import static java.math.RoundingMode.UP;
 
 public class IntakeArmCommand {
-  public IntakeArmCommand(IntakeSubsystem intakeSubsystem) {
+   public IntakeArmCommand(IntakeSubsystem intakeSubsystem) {
     this.intakeSubsystem = intakeSubsystem;
     update();
   }
