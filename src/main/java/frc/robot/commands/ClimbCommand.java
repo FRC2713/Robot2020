@@ -20,7 +20,7 @@ public ClimbCommand(ClimberSubsystem climberSubsystem){
   update();
 }
 private void update() {
-    System.out.println("Update has been called");
+    //System.out.println("Update has been called");
   switch (position) {
     default:
     case UP:
