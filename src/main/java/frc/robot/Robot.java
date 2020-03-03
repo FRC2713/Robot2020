@@ -13,6 +13,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.SMDrive;
@@ -37,9 +38,8 @@ public class Robot extends TimedRobot {
   private ColorSensor m_colorSensor;
  // public IntakeSubsystem intakeSubsystem2 = new IntakeSubsystem();
   CameraServer cs = CameraServer.getInstance();
-  private UsbCamera frontCamera = cs.startAutomaticCapture(0);
-  private UsbCamera backCamera = cs.startAutomaticCapture(1);
-
+  private UsbCamera frontCamera;
+  private UsbCamera backCamera;
   private int currCam = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -50,10 +50,14 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    SmartDashboard.putBoolean("is this running", false);
     initCamera();
     compressor.start();
   }
   private void initCamera() {
+    cs = CameraServer.getInstance();
+    frontCamera = cs.startAutomaticCapture(0);
+    backCamera = cs.startAutomaticCapture(1);
     frontCamera.setResolution(256, 144);
     frontCamera.setFPS(30);
     backCamera.setResolution(256, 144);
@@ -65,11 +69,15 @@ public class Robot extends TimedRobot {
       backCamera.close();
       currCam = 0;
       frontCamera = cs.startAutomaticCapture(currCam);
+      System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
+      SmartDashboard.putBoolean("is this running", true);
     }
     else if(currCam == 0){
       frontCamera.close();
       currCam = 1;
       backCamera = cs.startAutomaticCapture(currCam);
+      System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
+      SmartDashboard.putBoolean("is this running", true);
     }
   }
 
@@ -156,8 +164,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
-
+    if(SM.xBoxController.getBButtonPressed()){
+      changeCamera();
+    }
+    else {
+      SmartDashboard.putBoolean("is this running", false);
+    }
   }
 
   @Override
@@ -171,9 +183,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    if(SM.xBoxController.getBButtonPressed()){
-      changeCamera();
-    }
   }
 
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
