@@ -34,8 +34,8 @@ public class IntakeConveyerCommand extends CommandBase {
       default:
       case ON:
         //intakeSubsystem.intakeArmSolenoid.set(DoubleSolenoid.Value.kReverse);
-        intakeSubsystem.intakeArmMotor.set(.5);
-        intakeSubsystem.intakeMotor.set(.5);
+        intakeSubsystem.intakeArmMotor.set(1);
+        intakeSubsystem.intakeMotor.set(1);
         position = IntakeSubsystem.IntakePosition.ON;
         System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
         break;

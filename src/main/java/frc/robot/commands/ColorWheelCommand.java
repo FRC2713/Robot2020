@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.ColorSensor;
+import frc.robot.RobotMap;
 import frc.robot.SM;
 import frc.robot.subsystems.ColorWheelSubsystem;
 
@@ -46,7 +47,7 @@ public class ColorWheelCommand extends CommandBase {
      * Open Smart Dashboard or Shuffleboard to see the color detected by the
      * sensor.
      */
-    if (xbox.getAButtonPressed()) {
+    if (xbox.getRawButtonPressed(RobotMap.colorWheelButtonNum)) {
       SM.rumbleController(xbox, .5, 500);
       chosenColorInt ++;
       if(chosenColorInt >= 5){
@@ -107,7 +108,7 @@ public class ColorWheelCommand extends CommandBase {
     }
 
 
-    if (xbox.getYButtonPressed()) {
+    if (xbox.getRawButtonPressed(RobotMap.colorWheelButtonNum2)) {
         //if (colorsensor.getColor() == chosenColor) {
          // colormathwheelsubsystem.sensorMotor.set(0);
      // stop = stop * -1;
