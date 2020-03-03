@@ -62,16 +62,20 @@ public final class RobotMap {
   public static final int lightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
   //Buttons
-  public static final int climberUpButton = 3;
-  public static final int climberDownButton = 2;
+  public static final int climberUpButton = 3; //3 on attack
+  public static final int climberDownButton = 2;//2 on attack
 
-  public static final int witchUpButton = 4;
-  public static final int witchDownButton = 5;
+  public static final int witchUpButton = 4;//4 on attack
+  public static final int witchDownButton = 5;//5 on attack
 
 
-  public static final int intakeGateUpButtonNum = 5;
-  public static final int intakeGateDownButtonNum = 6;
-  public static final int intakeOnButtonNum = 7;
+  public static final int intakeGateUpButtonNum = 5;//left trigger
+  public static final int intakeGateDownButtonNum = 6; // start button
+  public static final int intakeOnButtonNum = 7; //back button
+  public static final int colorWheelButtonNum = 1; //green button
+  public static final int colorWheelButtonNum2 = 2; // red button
 
+// click cntrl,click, cntrl B to open this link
+  //https://lh3.googleusercontent.com/proxy/VyMFFJiQKEKMG8VfSe1n_6l68CJGXqrNmn_XDL9cHaGYlOlciuLke42YyTyEu3bqI0t7AlsZbevt6Cnmg2pg4xTuqvDc3PCQMEOAjRhL6szu5D4EKeJPVpz7eirlnelayN8kShrb
 }
 

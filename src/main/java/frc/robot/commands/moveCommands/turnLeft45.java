@@ -42,7 +42,7 @@ public class turnLeft45 extends CommandBase {
 
     @Override
     public boolean isFinished() {
-      if (accumulatedDist > 1) { //if traveled more than 10 feet, end autonomous
+      if (accumulatedDist > 1) { //arbitrary guess-and-checked this number
         m_driveSubsystem.getRoboDrive().stopMotor();
         return true;
       }
