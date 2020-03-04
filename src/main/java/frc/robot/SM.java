@@ -29,37 +29,29 @@ public class SM {
    */
   private void initControllers() {
     // TODO Use generics
-    int emptyPort = 0;
-
-
-    //This goes through and checks if anything is plugged into driver station ports
+    int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
       if (test.getName().equals(XBOX_NAME)) {
         xBoxController = new XboxController(i);
-      }
-      else if (test.getName().equals(ARCADE_NAME)) {
+      } else if (test.getName().equals(ARCADE_NAME)) {
         arcadeController = new Joystick(i);
-      }
-      else if (test.getName().equals(ATTACK_NAME)) {
+      } else if (test.getName().equals(ATTACK_NAME)) {
         leftAttack = new Joystick(i);
-        if((test.getName().isEmpty())) {
-        emptyPort = i;
-        }
+      }
+      if (test.getName().isEmpty()){
+        empty_port = i;
       }
     }
-
-
-
     if (xBoxController == null) {
-      xBoxController = new XboxController(emptyPort);
+      xBoxController = new XboxController(empty_port);
     }
     if (arcadeController == null) {
-      arcadeController = new Joystick(emptyPort);
+      arcadeController = new Joystick(empty_port);
     }
     //rightAttack = new Joystick(ATTACK_RIGHT_PORT);
     if (leftAttack == null) {
-      leftAttack = new Joystick(emptyPort);
+      leftAttack = new Joystick(empty_port);
     }
   }
 
