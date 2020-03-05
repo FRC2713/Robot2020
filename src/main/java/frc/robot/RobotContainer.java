@@ -45,7 +45,6 @@ public class RobotContainer {
   private final PixySubsystem pixySubsystem = new PixySubsystem();
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   private final initLineOnly initLineOnly = new initLineOnly(driveSubsystem);
-  private final ShuffleboardManagement shuffleboardManagement = new ShuffleboardManagement();
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   private final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(intakeSubsystem);
