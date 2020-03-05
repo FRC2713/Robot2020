@@ -15,10 +15,13 @@ public class SM {
   public static final int BACKUP_XBOX_PORT = 0;
   public static final int BACKUP_ARCADE_PORT = 1;
   public static final int ATTACK_LEFT_PORT = 2;
+
   //public static final int ATTACK_RIGHT_PORT = 3;
   public static final String XBOX_NAME = "Controller (XBOX 360 For Windows)";
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
+  public static final String XBOX2_NAME = "Controller (XBOX 360 for Gamepad)";
+
 
   public SM() {
     initControllers();
@@ -32,7 +35,7 @@ public class SM {
     int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
-      if (test.getName().equals(XBOX_NAME)) {
+      if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)) {
         xBoxController = new XboxController(i);
       } else if (test.getName().equals(ARCADE_NAME)) {
         arcadeController = new Joystick(i);

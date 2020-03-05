@@ -26,7 +26,7 @@ public class SMDrive extends CommandBase {
 
   private DriveSubsystem driveSubsystem;
   private XboxController xbox = SM.xBoxController;
-  private boolean useTankInsteadOfBradford = false;
+  private boolean useArcadeInsteadOfBradford = false;
   public boolean polarityBoolean = false;
 
   private double lastLeftStickVal = 0;
@@ -72,7 +72,7 @@ public class SMDrive extends CommandBase {
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
     if (xbox.getRawButtonPressed(7)) {
-      useTankInsteadOfBradford = !useTankInsteadOfBradford;
+      useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
@@ -84,7 +84,7 @@ public class SMDrive extends CommandBase {
       SM.rumbleController(xbox, 0.2, 500);
 
     }
-    if (useTankInsteadOfBradford) {
+    if (useArcadeInsteadOfBradford) {
       /*
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
