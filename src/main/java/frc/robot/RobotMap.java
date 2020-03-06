@@ -46,7 +46,7 @@ public final class RobotMap {
   public static final int frontRightMotorPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int backRightMotorPort = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeTalonPort = 6; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
-  public static final int intakeArmTalonPort = 7; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
+  public static final int intakeArmTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeArmUpNode = 4;//CHECK WHAT IS UP/DOWN FOR ARM
   public static final int intakeArmDownNode = 6;
   public static final int IntakeGateUpNode = 5;
@@ -71,7 +71,7 @@ public final class RobotMap {
 
   public static final int intakeGateUpButtonNum = 5;//left trigger
   public static final int intakeGateDownButtonNum = 6; // start button
-  public static final int intakeOnButtonNum = 7; //back button
+  public static final int intakeOnButtonNum = 8;// right start button on black xbox controller
   public static final int colorWheelButtonNum = 1; //green button
   public static final int colorWheelButtonNum2 = 2; // red button
 

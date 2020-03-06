@@ -42,12 +42,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void initControls() {
 
-      //intakeGateUpButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
-      //intakeGateDownButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
+      intakeGateUpButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
+      intakeGateDownButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
       //intakeOnButton.whenPressed(new InstantCommand(() -> (toggleState)? intakeConveyerCommand.setIntakeMode(IntakePosition.ON): intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED))));
       //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(IntakeArmPosition.UP)));
-      //intakeOnButton.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON)));
-      //intakeOnButton.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
+      intakeOnButton.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON)));
+      intakeOnButton.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
     }
 
     public enum IntakeGatePosition {

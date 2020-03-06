@@ -30,6 +30,7 @@ public class IntakeConveyerCommand extends CommandBase {
   }
 
   private void updateConveyer(){
+    System.out.println("We aren't going to see this :->))))))))))))))))))))");
     switch(position) {
       default:
       case ON:
@@ -37,7 +38,6 @@ public class IntakeConveyerCommand extends CommandBase {
         intakeSubsystem.intakeArmMotor.set(1);
         intakeSubsystem.intakeMotor.set(1);
         position = IntakeSubsystem.IntakePosition.ON;
-        //System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
         break;
 
       case STOPPED:
