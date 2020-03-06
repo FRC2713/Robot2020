@@ -77,6 +77,8 @@ public class SMDrive extends CommandBase {
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
     }
+
+    //The Xbox command that switches the controls in order to drive backwards
     if (xbox.getBButtonPressed()) {
       polarityBoolean = !polarityBoolean;
      ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button

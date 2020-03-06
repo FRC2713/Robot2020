@@ -20,7 +20,7 @@ public class SM {
   public static final String XBOX_NAME = "Controller (XBOX 360 For Windows)";
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
-  public static final String XBOX2_NAME = "Controller (XBOX 360 for Gamepad)";
+  public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
 
 
   public SM() {
@@ -35,8 +35,10 @@ public class SM {
     int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
+      //System.out.println("This is the name of the joystick " + test.getName());
       if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)) {
         xBoxController = new XboxController(i);
+       // System.out.println("This should have been reached!!");
       } else if (test.getName().equals(ARCADE_NAME)) {
         arcadeController = new Joystick(i);
       } else if (test.getName().equals(ATTACK_NAME)) {
@@ -47,6 +49,10 @@ public class SM {
       }
     }
     if (xBoxController == null) {
+      //System.out.println("THis should not be reached -Brigid");
+      //System.out.println(xBoxController);
+      //System.out.println(leftAttack);
+      //System.exit(-1);
       xBoxController = new XboxController(empty_port);
     }
     if (arcadeController == null) {
