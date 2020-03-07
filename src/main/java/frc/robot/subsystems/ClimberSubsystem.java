@@ -19,8 +19,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final CANSparkMax WitchTwo = new CANSparkMax(RobotMap.WitchTwoMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   public static final DigitalInput climberLimitSwitch = new DigitalInput(RobotMap.climberLimitSwitchPort);
 
-  public final JoystickButton climberUpButton = new JoystickButton (SM.leftAttack, RobotMap.climberUpButton);
-  public final JoystickButton climberDownButton = new JoystickButton (SM.leftAttack, RobotMap.climberDownButton);
+  public final JoystickButton climberButton = new JoystickButton (SM.leftAttack, RobotMap.climberButton);
 
 
   public final JoystickButton witchDownButton = new JoystickButton(SM.leftAttack, RobotMap.witchUpButton);
@@ -37,21 +36,20 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void initControls() {
-    climberUpButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition(ClimberSubsystem.ClimberPosition.UP)));
-    climberDownButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition(ClimberSubsystem.ClimberPosition.DOWN)));
+    climberButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition()));
 
     witchUpButton.whileHeld(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.UP)));
     witchDownButton.whileHeld(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.DOWN)));
   }
-  public enum ClimberPosition {
-    UP, DOWN, STOPPED
-  }
+  //public enum ClimberPosition {
+ //   UP, DOWN, STOPPED
+  //}
   public enum WitchPosition {
     UP, DOWN, STOPPED
   }
   @Override
   public void periodic(){
-    climbCommand.setClimberPosition(ClimberPosition.STOPPED);
+   // climbCommand.setClimberPosition(ClimberPosition.STOPPED);
     witchCommand.setWitchPosition(WitchPosition.STOPPED);
 
   }

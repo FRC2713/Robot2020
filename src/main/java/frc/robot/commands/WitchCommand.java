@@ -26,12 +26,12 @@ public class WitchCommand extends CommandBase {
       default:
       case UP:
         position = ClimberSubsystem.WitchPosition.UP;
-        ClimberSubsystem.WitchOne.set(0.2);
+        ClimberSubsystem.WitchOne.set(1);
 
         break;
       case DOWN:
         position = ClimberSubsystem.WitchPosition.DOWN;
-        ClimberSubsystem.WitchOne.set(-0.2);
+        ClimberSubsystem.WitchOne.set(-1);
 
         break;
       case STOPPED:
