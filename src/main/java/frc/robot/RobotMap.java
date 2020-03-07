@@ -73,6 +73,7 @@ public final class RobotMap {
   public static final int intakeOnButtonNum = 8;// right start button on black xbox controller
   public static final int colorWheelButtonNum = 1; //green button
   public static final int colorWheelButtonNum2 = 2; // red button
+  public static final int reverseIntakeButtonNum = 6;
 
 }
 

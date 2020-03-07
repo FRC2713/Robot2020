@@ -1,16 +1,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+import static frc.robot.subsystems.IntakeSubsystem.IntakeArmPosition.UP;
+import static frc.robot.subsystems.IntakeSubsystem.IntakePosition.ON;
+import static frc.robot.subsystems.IntakeSubsystem.IntakePosition.STOPPED;
 
 
 public class IntakeConveyerCommand extends CommandBase {
   private IntakeSubsystem intakeSubsystem;
-  private static IntakeSubsystem.IntakePosition position = IntakeSubsystem.IntakePosition.STOPPED;
-  private static IntakeSubsystem.IntakeArmPosition armPosition = IntakeSubsystem.IntakeArmPosition.UP;
+  private static IntakeSubsystem.IntakePosition position = STOPPED;
+  private static IntakeSubsystem.IntakeArmPosition armPosition = UP;
 
-  public IntakeConveyerCommand(IntakeSubsystem intakeSubsystem, DoubleSolenoid intakeArmSolenoid){
+  public IntakeConveyerCommand(IntakeSubsystem intakeSubsystem){
     this.intakeSubsystem = intakeSubsystem;
     addRequirements(intakeSubsystem);
   }
@@ -30,22 +35,27 @@ public class IntakeConveyerCommand extends CommandBase {
   }
 
   private void updateConveyer(){
-    System.out.println("We aren't going to see this :->))))))))))))))))))))");
     switch(position) {
       default:
       case ON:
-        //intakeSubsystem.intakeArmSolenoid.set(DoubleSolenoid.Value.kReverse);
-        intakeSubsystem.intakeArmMotor.set(1);
+        //intakeSubsystem.intakeArmSolenoid.set(kReverse);
+        intakeSubsystem.intakeArmMotor.set(.5);
+        //.delay(.5);
         intakeSubsystem.intakeMotor.set(1);
-        position = IntakeSubsystem.IntakePosition.ON;
+        position = ON;
         break;
 
       case STOPPED:
-        //intakeSubsystem.intakeArmSolenoid.set(DoubleSolenoid.Value.kForward);
+        //intakeSubsystem.intakeArmSolenoid.set(kForward);
         intakeSubsystem.intakeArmMotor.stopMotor();
+        //Timer.delay(1.6);
         intakeSubsystem.intakeMotor.stopMotor();
-        position = IntakeSubsystem.IntakePosition.STOPPED;
+        position = STOPPED;
         break;
+
+      case REVERSED:
+        intakeSubsystem.intakeArmMotor.set(-.5);
+        intakeSubsystem.intakeMotor.set(-1);
     }
   }
 
