@@ -21,6 +21,7 @@ public class SM {
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
   public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
+  public static final String XBOX3_NAME = "Controller (Gamepad)";
 
 
   public SM() {
@@ -36,7 +37,7 @@ public class SM {
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
       //System.out.println("This is the name of the joystick " + test.getName());
-      if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)) {
+      if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)||test.getName().equals(XBOX3_NAME)) {
         xBoxController = new XboxController(i);
        // System.out.println("This should have been reached!!");
       } else if (test.getName().equals(ARCADE_NAME)) {
