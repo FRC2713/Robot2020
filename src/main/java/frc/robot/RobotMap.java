@@ -73,7 +73,7 @@ public final class RobotMap {
   public static final int colorWheelButtonNum2 = 2; // red button
   //public static final int reverseIntakeButtonNum = 6;
   public static final int intakeGateUpButtonNum = 5;
-  public static final int intakeGateDownButtonNum = 6;
+ //ublic static final int intakeGateDownButtonNum = 6;
 
 
 }
