@@ -50,15 +50,16 @@ public class SM {
       }
     }
     if (xBoxController == null) {
-      System.out.println("THis should not be reached -Brigid");
-      System.out.println(xBoxController);
-      System.out.println(leftAttack);
-      System.exit(-1);
-      //xBoxController = new XboxController(empty_port);
+      //System.out.println("THis should not be reached -Brigid");
+      //System.out.println(xBoxController);
+      //System.out.println(leftAttack);
+      //System.exit(-1);
+     // xBoxController = new XboxController(empty_port);
     }
     if (arcadeController == null) {
       arcadeController = new Joystick(empty_port);
     }
+    //rightAttack = new Joystick(ATTACK_RIGHT_PORT);
     if (leftAttack == null) {
       leftAttack = new Joystick(empty_port);
     }
