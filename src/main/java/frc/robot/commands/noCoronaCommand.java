@@ -2,11 +2,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class noEvilCommand extends CommandBase {
+public class noCoronaCommand extends CommandBase {
 
-  private boolean turningEvil = true;
+  private boolean coronavirus = true;
 
-  public noEvilCommand() {
+  public noCoronaCommand() {
     addRequirements();
   }
 
@@ -16,8 +16,8 @@ public class noEvilCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if (turningEvil) {
-      dont();
+    if (coronavirus) {
+      cure();
     }
   }
 
@@ -26,8 +26,8 @@ public class noEvilCommand extends CommandBase {
     return true;
 
   }
-  private void dont() {
-    turningEvil = !turningEvil;
-    System.out.println("Robot, do not turn evil.");
+  private void cure() {
+    coronavirus = !coronavirus;
+    System.out.println("bing bong coronavirus is gone");
   }
 }
