@@ -22,6 +22,7 @@ import frc.robot.subsystems.visionSubsystems.PixySubsystem;
 import frc.robot.commands.commandGroups.scoreFront;
 import frc.robot.commands.commandGroups.scoreLeft;
 import frc.robot.commands.commandGroups.scoreRight;
+import frc.robot.commands.commandGroups.experimentalScoreFront;
 
 
 /**
@@ -49,6 +50,7 @@ public class RobotContainer {
   public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   private final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(intakeSubsystem);
   private final scoreFront scoreFront = new scoreFront(driveSubsystem, intakeSubsystem, intakeGateCommand);
+  private final experimentalScoreFront experimentalScoreFront = new experimentalScoreFront(driveSubsystem, intakeSubsystem);
   private final scoreLeft scoreLeft = new scoreLeft(driveSubsystem, intakeSubsystem, intakeGateCommand);
   private final scoreRight scoreRight = new scoreRight(driveSubsystem, intakeSubsystem, intakeGateCommand);
 
@@ -87,7 +89,7 @@ public class RobotContainer {
       return initLineOnly;
     }
     else if (PortSeven.get() == false) {
-      return scoreFront;
+      return experimentalScoreFront;
     }
     else if (PortEight.get() == false) {
       return scoreLeft;

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.IntakeGateCommand;
 import frc.robot.commands.moveCommands.moveForward8Feet;
 import frc.robot.commands.moveCommands.turnLeft45;
+import frc.robot.commands.noEvilCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
@@ -13,11 +14,11 @@ public class scoreLeft extends SequentialCommandGroup {
 
       new moveForward8Feet(driveSubsystem),
 
-      new turnLeft45(driveSubsystem),
+      new turnLeft45(driveSubsystem, 90),
 
-      new turnLeft45(driveSubsystem),
+      new experimentalScoreFront(driveSubsystem, intakeSubsystem)
 
-      new scoreFront(driveSubsystem, intakeSubsystem, intakeGateCommand)
+//      new noEvilCommand()
     );
   }
 }

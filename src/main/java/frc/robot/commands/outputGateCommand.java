@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 
@@ -22,6 +23,7 @@ outputGateCommand extends CommandBase {
   @Override
   public void execute() {
     intakeSubsystem.intakeGateCommand.setIntakeGatePosition(position);
+    Timer.delay(5);
   } //tells the gate to open if closed, or close if open
 
  @Override

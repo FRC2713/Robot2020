@@ -9,11 +9,13 @@ public class turnLeft45 extends CommandBase {
     double accumulatedDist = 0;
     double leftSpeed = 0;
     double rightSpeed = 0;
+    double targetAngle = 0;
 
     private final DriveSubsystem m_driveSubsystem;
 
-    public turnLeft45(DriveSubsystem driveSubsystem) {
+    public turnLeft45(DriveSubsystem driveSubsystem, double Angle) {
       m_driveSubsystem = driveSubsystem;
+      targetAngle = Angle;
       addRequirements(driveSubsystem); //establishes drive subsystem as subsystem used
       m_driveSubsystem.resetEncoder(m_driveSubsystem.getEncoder(1));
       accumulatedDist = 0;
@@ -30,8 +32,8 @@ public class turnLeft45 extends CommandBase {
     @Override
     public void execute() {
       System.out.println("This got to execute");
-      leftSpeed = 0.25;
-      rightSpeed = -0.25;
+      leftSpeed = -0.25;
+      rightSpeed = 0.25;
       m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
       newDist = m_driveSubsystem.getEncoder(1).getPosition();
       accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1))); //adds old distance to encoder input, translated to feet;
@@ -42,7 +44,7 @@ public class turnLeft45 extends CommandBase {
 
     @Override
     public boolean isFinished() {
-      if (accumulatedDist > 1) { //arbitrary guess-and-checked this number
+      if (accumulatedDist > targetAngle/45) { //arbitrary guess-and-checked this number
         m_driveSubsystem.getRoboDrive().stopMotor();
         return true;
       }

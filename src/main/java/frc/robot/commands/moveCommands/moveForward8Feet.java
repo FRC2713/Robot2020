@@ -29,8 +29,8 @@ public class moveForward8Feet extends CommandBase {
   @Override
   public void execute() {
     System.out.println("This got to execute");
-    leftSpeed = 0.5;
-    rightSpeed = 0.5;
+    leftSpeed = -0.5;
+    rightSpeed = -0.5;
     m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = m_driveSubsystem.getEncoder(1).getPosition();
     accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(m_driveSubsystem.getEncoder(1))); //adds old distance to encoder input, translated to feet;

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.moveCommands.AutonomousCommand;
 import frc.robot.commands.moveCommands.turnLeft45;
 import frc.robot.commands.moveCommands.turnRight45;
+import frc.robot.commands.noEvilCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class initLineOnly extends SequentialCommandGroup {
@@ -12,9 +13,11 @@ public class initLineOnly extends SequentialCommandGroup {
     //move forward 10 feet
       new AutonomousCommand(driveSubsystem),
     //turn left 45 degrees
-      new turnLeft45(driveSubsystem),
+      new turnLeft45(driveSubsystem, 45),
       //turn right 45 degrees
-      new turnRight45(driveSubsystem)
+      new turnRight45(driveSubsystem, 45)
+
+//      new noEvilCommand()
     );
   }
 }
