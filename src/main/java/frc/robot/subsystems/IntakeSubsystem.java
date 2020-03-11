@@ -17,12 +17,10 @@ public class IntakeSubsystem extends SubsystemBase {
   public final CANSparkMax intakeArmMotor = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   public final DoubleSolenoid intakeArmSolenoid = SM.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
-  //public final JoystickButton intakeGateUpButton = new JoystickButton(SM.arcadeController, RobotMap.intakeGateUpButtonNum);
-  //public final JoystickButton intakeGateDownButton = new JoystickButton(SM.arcadeController, RobotMap.intakeGateDownButtonNum);
   public final JoystickButton intakeGateUpButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
   public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
-  public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
-  public final JoystickButton intakeReverse = new JoystickButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
+  //public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
+  //public final JoystickButton intakeReverse = new JoystickButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
   boolean toggleState = true;
   boolean testyIntake = false;
 
@@ -53,8 +51,8 @@ public class IntakeSubsystem extends SubsystemBase {
       //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(IntakeArmPosition.UP)));
       //intakeOnButton.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON)));
       //intakeOnButton.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
-      intakeReverse.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.REVERSED)));
-      intakeReverse.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
+      //intakeReverse.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.REVERSED)));
+      //intakeReverse.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
     }
 
     @Override

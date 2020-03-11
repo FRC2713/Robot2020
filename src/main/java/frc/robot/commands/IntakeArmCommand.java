@@ -27,12 +27,12 @@ public class IntakeArmCommand {
     switch (position) {
       default:
       case UP:
-        //intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kReverse);
+        intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kReverse);
         position = IntakeSubsystem.IntakeArmPosition.UP;
         break;
 
       case DOWN:
-        //intakeSubsystem.ballIntakeSolenoid.set(DoubleSolenoid.Value.kForward);
+        intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kForward);
         position = IntakeSubsystem.IntakeArmPosition.DOWN;
         break;
 

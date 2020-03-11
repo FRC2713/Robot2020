@@ -38,7 +38,7 @@ public class IntakeConveyerCommand extends CommandBase {
     switch(position) {
       default:
       case ON:
-        //intakeSubsystem.intakeArmSolenoid.set(kReverse);
+        intakeSubsystem.intakeArmSolenoid.set(kReverse);
         intakeSubsystem.intakeArmMotor.set(.5);
         //.delay(.5);
         intakeSubsystem.intakeMotor.set(1);
@@ -46,7 +46,7 @@ public class IntakeConveyerCommand extends CommandBase {
         break;
 
       case STOPPED:
-        //intakeSubsystem.intakeArmSolenoid.set(kForward);
+        intakeSubsystem.intakeArmSolenoid.set(kForward);
         intakeSubsystem.intakeArmMotor.stopMotor();
         //Timer.delay(1.6);
         intakeSubsystem.intakeMotor.stopMotor();

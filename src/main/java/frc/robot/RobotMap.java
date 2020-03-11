@@ -68,12 +68,13 @@ public final class RobotMap {
   public static final int witchDownButton = 2;//5 on attack
 
 
-  public static final int intakeGateUpButtonNum = 5;// trigger
-  public static final int intakeGateDownButtonNum = 6; // start button
-  public static final int intakeOnButtonNum = 8;// right start button on black xbox controller
+  //public static final int intakeOnButtonNum = 8;// right start button on black xbox controller
   public static final int colorWheelButtonNum = 1; //green button
   public static final int colorWheelButtonNum2 = 2; // red button
-  public static final int reverseIntakeButtonNum = 6;
+  //public static final int reverseIntakeButtonNum = 6;
+  public static final int intakeGateUpButtonNum = 5;
+  public static final int intakeGateDownButtonNum = 6;
+
 
 }
 
