@@ -9,7 +9,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
-import edu.wpi.cscore.*;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.SMDrive;
 import frc.robot.subsystems.IntakeSubsystem;
-import org.opencv.core.Mat;
 
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.DOWN;
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
@@ -37,11 +36,10 @@ public class Robot extends TimedRobot {
   public static final Compressor compressor = new Compressor();
   public WPI_TalonSRX sensorMotor;
   private ColorSensor m_colorSensor;
-  VideoSink cs;
+  CameraServer cs = CameraServer.getInstance();
   private UsbCamera frontCamera;
   private UsbCamera backCamera;
-  private int currCam = 1;
-
+  private int currCam = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -56,26 +54,30 @@ public class Robot extends TimedRobot {
     compressor.start();
   }
   private void initCamera() {
-    frontCamera = CameraServer.getInstance().startAutomaticCapture(0);
-    backCamera = CameraServer.getInstance().startAutomaticCapture(1);
-    cs = CameraServer.getInstance().addSwitchedCamera("Switcheroo");
-
-    frontCamera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    backCamera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    changeCamera();
+    cs = CameraServer.getInstance();
+    frontCamera = cs.startAutomaticCapture(0);
+    backCamera = cs.startAutomaticCapture(1);
+    frontCamera.setResolution(256, 144);
+    frontCamera.setFPS(30);
+    backCamera.setResolution(256, 144);
+    backCamera.setFPS(30);
+    backCamera.close();
   }
   private void changeCamera(){
     if(currCam == 1){
+      backCamera.close();
       currCam = 0;
-      cs.setSource(frontCamera);
+      frontCamera = cs.startAutomaticCapture(currCam);
+      System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
       SmartDashboard.putBoolean("is this running", true);
     }
     else if(currCam == 0){
+      frontCamera.close();
       currCam = 1;
-      cs.setSource(backCamera);
+      backCamera = cs.startAutomaticCapture(currCam);
+      System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
       SmartDashboard.putBoolean("is this running", true);
     }
-    //outputStream.putFrame(image);
   }
 
   /**
@@ -151,9 +153,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    if(SM.leftAttack.getRawButtonPressed(11)){
-      SmartDashboard.putBoolean("joystick test", true);
-    }
+
 
   }
 
@@ -163,9 +163,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    if(SM.xBoxController.getBButtonPressed()){
-      changeCamera();
-    }
+    //if(SM.xBoxController.getBButtonPressed()){
+   // //  changeCamera();
+   // }
+   // else {
+   //   SmartDashboard.putBoolean("is this running", false);
+   // }
+
+
   }
 
   @Override
@@ -187,4 +192,8 @@ public class Robot extends TimedRobot {
 
     }
   }
+
+
+
+
 }

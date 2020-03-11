@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatchResult;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -47,7 +48,7 @@ public class ColorWheelCommand extends CommandBase {
      * Open Smart Dashboard or Shuffleboard to see the color detected by the
      * sensor.
      */
-    if (xbox.getRawButtonPressed(RobotMap.colorWheelButtonNum)) {
+    if (xbox.getRawButtonPressed(1)) {
       SM.rumbleController(xbox, .5, 500);
       chosenColorInt ++;
       if(chosenColorInt >= 5){
@@ -103,12 +104,14 @@ public class ColorWheelCommand extends CommandBase {
 
     if(colormatchwheelsubsystem.colorsensor.getColor() == chosenColor ){
 
+      Timer.delay(3);
+
       colormatchwheelsubsystem.sensorMotor.set(0);
 
     }
 
 
-    if (xbox.getRawButtonPressed(RobotMap.colorWheelButtonNum2)) {
+    if (xbox.getRawButtonPressed(4)) {
         //if (colorsensor.getColor() == chosenColor) {
          // colormathwheelsubsystem.sensorMotor.set(0);
      // stop = stop * -1;
@@ -130,6 +133,7 @@ public class ColorWheelCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
   }
 
   // Returns true when the command should end.

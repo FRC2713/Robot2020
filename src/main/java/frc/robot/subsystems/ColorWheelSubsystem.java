@@ -20,11 +20,9 @@ public class ColorWheelSubsystem extends SubsystemBase {
   public ColorWheelSubsystem() {
 
     sensorMotor = new CANSparkMax(12, CANSparkMax.MotorType.kBrushed);
-
     colorWheelCommand = new ColorWheelCommand(this);
     setDefaultCommand(colorWheelCommand);
     colorsensor.sensorInit();
-
 
   }
 
