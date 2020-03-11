@@ -1,5 +1,6 @@
 package frc.robot.commands.moveCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -42,8 +43,9 @@ public class turnRight45 extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (accumulatedDist > targetAngle / 45) { //largely arbitrary, guess-and-check
+    if (accumulatedDist > targetAngle/45) { //largely arbitrary, guess-and-check
       m_driveSubsystem.getRoboDrive().stopMotor();
+      Timer.delay(0.25);
       return true;
     } else return false;
   }

@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -76,15 +77,19 @@ public class SMDrive extends CommandBase {
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
+      System.out.println("switch active");
+
     }
+    System.out.println("reverse not active");
 
     //The Xbox command that switches the controls in order to drive backwards
-    if (xbox.getBButtonPressed()) {
+    if (xbox.getRawButtonPressed(2)) {
+      System.out.println("reverse active");
+    //  Timer.delay(0.5);
       polarityBoolean = !polarityBoolean;
-     ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button
+      ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button
       polarity *= -1;
-      SM.rumbleController(xbox, 0.2, 500);
-
+      SM.rumbleController(xbox, 0.5, 500);
     }
     if (useArcadeInsteadOfBradford) {
       /*

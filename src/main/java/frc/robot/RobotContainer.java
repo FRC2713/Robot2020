@@ -15,6 +15,7 @@ import frc.robot.commands.IntakeGateCommand;
 import frc.robot.commands.commandGroups.initLineOnly;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -44,6 +45,7 @@ public class RobotContainer {
 
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final PixySubsystem pixySubsystem = new PixySubsystem();
+  private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
   private final initLineOnly initLineOnly = new initLineOnly(driveSubsystem);
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
