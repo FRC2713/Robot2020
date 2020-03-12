@@ -20,9 +20,7 @@ public class newScoreRight extends SequentialCommandGroup {
 
       new turnLeft45(driveSubsystem, 30),
 
-      new moveBackward(8, driveSubsystem),
-
-      new noCoronaCommand()
+      new moveBackward(8, driveSubsystem)
     );
   }
 }

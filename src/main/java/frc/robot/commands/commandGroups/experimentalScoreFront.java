@@ -15,9 +15,7 @@ public class experimentalScoreFront extends SequentialCommandGroup {
 
       new outputGateCommand(intakeSubsystem),
 
-      new moveForward(15, driveSubsystem),
-
-      new noCoronaCommand()
+      new moveForward(15, driveSubsystem)
     );
   }
 }

@@ -17,9 +17,7 @@ public class scoreRight extends SequentialCommandGroup {
 
       new turnRight45(driveSubsystem, 45),
 
-      new experimentalScoreFront(driveSubsystem, intakeSubsystem),
-
-      new noCoronaCommand()
+      new experimentalScoreFront(driveSubsystem, intakeSubsystem)
     );
   }
 

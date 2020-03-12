@@ -14,9 +14,7 @@ public class initLineOnly extends SequentialCommandGroup {
     //turn left 45 degrees
       new turnLeft45(driveSubsystem, 45),
       //turn right 45 degrees
-      new turnRight45(driveSubsystem, 45),
-
-      new noCoronaCommand()
+      new turnRight45(driveSubsystem, 45)
     );
   }
 }
