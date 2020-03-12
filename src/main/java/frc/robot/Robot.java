@@ -134,6 +134,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
     m_robotContainer.intakeSubsystem.intakeGateCommand.setIntakeGatePosition(DOWN);
+    m_robotContainer.intakeSubsystem.humanIntakeCommand.setIntakeGatePosition(IntakeSubsystem.HumanIntakePosition.DOWN);
+
   }
 
   /**

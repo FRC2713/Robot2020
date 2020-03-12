@@ -49,6 +49,8 @@ public final class RobotMap {
   public static final int intakeArmTalonPort = 5; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int intakeArmUpNode = 4;//CHECK WHAT IS UP/DOWN FOR ARM
   public static final int intakeArmDownNode = 6;
+  public static final int humanIntakeUpNode = 27; //Random Number
+  public static final int humanIntakeDownNode = 28; //Random number
   public static final int IntakeGateUpNode = 5;
   public static final int IntakeGateDownNode = 7;
   public static final int ClimberUpMotorPort = 11;

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.*;
+import frc.robot.commands.HumanIntakeCommand;
 import frc.robot.commands.IntakeArmCommand;
 import frc.robot.commands.IntakeConveyerCommand;
 import frc.robot.commands.IntakeGateCommand;
@@ -17,6 +18,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public final CANSparkMax intakeArmMotor = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   public final DoubleSolenoid intakeArmSolenoid = SM.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
+  public final DoubleSolenoid humanIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.humanIntakeUpNode, RobotMap.humanIntakeDownNode);
   public final JoystickButton intakeGateUpButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
  // public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
   //public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
@@ -27,7 +29,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
 
   //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
-  public final IntakeArmCommand intakeArmCommand = new IntakeArmCommand(this);
+  public final HumanIntakeCommand humanIntakeCommand = new HumanIntakeCommand(this);
   public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
   public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this);
   public IntakeSubsystem() {
@@ -77,6 +79,9 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public enum IntakeArmPosition {
+      UP, DOWN
+    }
+    public enum HumanIntakePosition {
       UP, DOWN
     }
   }
