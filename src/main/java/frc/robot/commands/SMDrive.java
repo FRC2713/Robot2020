@@ -119,7 +119,7 @@ public class SMDrive extends CommandBase {
     lastLeftStickVal = measuredLeft;
     lastRightStickVal = measuredRight;
 
-    if(getBPressed() == true){
+    if(SM.xBoxController.getBButtonPressed()){
       setBPressed();
     }
   }

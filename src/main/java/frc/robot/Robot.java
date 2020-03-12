@@ -165,13 +165,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    //if(SM.xBoxController.getBButtonPressed()){
-   // //  changeCamera();
-   // }
-   // else {
-   //   SmartDashboard.putBoolean("is this running", false);
-   // }
+    if((m_robotContainer.driveSubsystem.driveCommand.getBPressed())) {
+      changeCamera();
 
+    }
+    else {
+      SmartDashboard.putBoolean("is this running", false);
+    }
 
   }
 

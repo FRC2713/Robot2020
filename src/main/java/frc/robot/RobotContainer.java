@@ -43,7 +43,7 @@ public class RobotContainer {
   private final SM sm = new SM(); //Subsystem Management (SM) needs to be instantiated first
   public  static Preferences prefs = Preferences.getInstance();
 
-  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final PixySubsystem pixySubsystem = new PixySubsystem();
   private final ColorWheelSubsystem colorWheelSubsystem = new ColorWheelSubsystem();
   private final PixyTracking pixyTracking = new PixyTracking(pixySubsystem);
