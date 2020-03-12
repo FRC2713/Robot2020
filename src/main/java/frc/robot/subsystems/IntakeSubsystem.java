@@ -56,7 +56,7 @@ public class IntakeSubsystem extends SubsystemBase {
       //intakeOnButton.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
       intakeReverse.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.REVERSED)));
       intakeReverse.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
-      
+
     }
 
     @Override
