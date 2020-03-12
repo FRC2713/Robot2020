@@ -33,6 +33,7 @@ public class SMDrive extends CommandBase {
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
   private int polarity = 1;
+  private boolean bPressed = false;
 
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
@@ -83,7 +84,7 @@ public class SMDrive extends CommandBase {
     System.out.println("reverse not active");
 
     //The Xbox command that switches the controls in order to drive backwards
-    if (xbox.getRawButtonPressed(2)) {
+    if (getBPressed()) {
       System.out.println("reverse active");
     //  Timer.delay(0.5);
       polarityBoolean = !polarityBoolean;
@@ -93,7 +94,7 @@ public class SMDrive extends CommandBase {
     }
     if (useArcadeInsteadOfBradford) {
       /*
-      
+
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
       driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);*/
@@ -117,6 +118,10 @@ public class SMDrive extends CommandBase {
 
     lastLeftStickVal = measuredLeft;
     lastRightStickVal = measuredRight;
+
+    if(getBPressed() == true){
+      setBPressed();
+    }
   }
 
   @Override
@@ -126,6 +131,13 @@ public class SMDrive extends CommandBase {
     //try {writer.close();} catch (Exception ex) {/*ignore*/}
   }
 
+  public boolean getBPressed(){
+    return bPressed;
+  }
+
+  public void setBPressed(){
+    bPressed = !bPressed;
+  }
 
 
   @Override
