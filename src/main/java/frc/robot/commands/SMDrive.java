@@ -1,10 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -69,6 +66,7 @@ public class SMDrive extends CommandBase {
 
     double measuredLeft;
     double measuredRight;
+    xbox = SM.xBoxController;
     //if(ArduinoSensors.getInstance().getSwitchBool()){
      //System.out.println(":)");
     //}
@@ -114,6 +112,18 @@ public class SMDrive extends CommandBase {
         ex.printStackTrace();
       }
       */
+    }
+
+    if (RobotBase.isSimulation()) {
+      System.out.print("Dive Mode: ");
+      if (useArcadeInsteadOfBradford) {
+        System.out.println("Arcade");
+      } else {
+        System.out.println("Bradford");
+      }
+      System.out.println("Speed: " + -measuredLeft * polarity);
+      System.out.println("Turn: " + measuredRight * polarity);
+      System.out.println("Polarity: " + polarity);
     }
 
     lastLeftStickVal = measuredLeft;

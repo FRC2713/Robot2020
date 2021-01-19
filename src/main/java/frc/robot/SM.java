@@ -22,6 +22,7 @@ public class SM {
   public static final String ATTACK_NAME = "Logitech Attack 3";
   public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
   public static final String XBOX3_NAME = "Controller (Gamepad)";
+  public static final String XBOX4_NAME = "Logitech Dual Action";
 
 
   public SM() {
@@ -31,13 +32,14 @@ public class SM {
   /**
    * Scans all (7) controller ports and assigns them via known names
    */
-  private void initControllers() {
+  public static void initControllers() {
     // TODO Use generics
     int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
       //System.out.println("This is the name of the joystick " + test.getName());
-      if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)||test.getName().equals(XBOX3_NAME)) {
+      if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)
+        ||test.getName().equals(XBOX3_NAME)||test.getName().equals(XBOX4_NAME)) {
         xBoxController = new XboxController(i);
        // System.out.println("This should have been reached!!");
       } else if (test.getName().equals(ARCADE_NAME)) {
@@ -54,7 +56,7 @@ public class SM {
       //System.out.println(xBoxController);
       //System.out.println(leftAttack);
       //System.exit(-1);
-     // xBoxController = new XboxController(empty_port);
+     xBoxController = new XboxController(empty_port);
     }
     if (arcadeController == null) {
       arcadeController = new Joystick(empty_port);
