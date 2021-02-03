@@ -14,10 +14,10 @@ public class encoderTurnRight extends CommandBase {
   double targetAngle = 0;
   CANEncoder encoder1;
 
-  private final DriveSubsystem m_driveSubsystem;
+  private final DriveSubsystem m_DS;
 
   public encoderTurnRight(double angle, DriveSubsystem driveSubsystem) {
-    m_driveSubsystem = driveSubsystem;
+    m_DS = driveSubsystem;
     targetAngle = angle;
     addRequirements(driveSubsystem); //establishes drive subsystem as subsystem used
     accumulatedDist = 0;
@@ -25,10 +25,10 @@ public class encoderTurnRight extends CommandBase {
 
   @Override
   public void initialize() {
-    encoder1 = m_driveSubsystem.getEncoder(1);
-    originalDist = m_driveSubsystem.toFeet(encoder1.getPosition());
+    encoder1 = m_DS.getEncoder(1);
+    originalDist = m_DS.toFeet(encoder1.getPosition());
     newDist = originalDist;
-    m_driveSubsystem.resetEncoder(encoder1);
+    m_DS.resetEncoder(encoder1);
   }
 
   @Override
@@ -36,9 +36,9 @@ public class encoderTurnRight extends CommandBase {
     System.out.println("Execute loop");
     leftSpeed = 0.5;
     rightSpeed = -0.5;
-    m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
+    m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = encoder1.getPosition();
-    accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(encoder1)); //adds old distance to encoder input, translated to feet;
+    accumulatedDist = m_DS.improvedEncoderDist(encoder1); //adds old distance to encoder input, translated to feet;
     System.out.println("Should be moving right now");
     System.out.println("Traveled " + accumulatedDist + " Feet");
   }
@@ -46,7 +46,7 @@ public class encoderTurnRight extends CommandBase {
   @Override
   public boolean isFinished() {
     if (accumulatedDist > targetAngle/45) { //Guess-and-checked number
-      m_driveSubsystem.getRoboDrive().stopMotor();
+      m_DS.getRoboDrive().stopMotor();
       Timer.delay(0.25);
       return true;
     }
