@@ -54,7 +54,7 @@ public final class RobotMap {
   public static final int IntakeGateUpNode = 5;
   public static final int IntakeGateDownNode = 7;
   public static final int ClimberUpMotorPort = 11;
-  public static final int WitchOneMotorPort = 14;
+  public static final int WitchOneMotorPort = 14;  // Phil - should Witch be Winch?
   public static final int WitchTwoMotorPort = 12;
 
 
@@ -66,7 +66,7 @@ public final class RobotMap {
   //Buttons
   public static final int climberButton = 1; //3 on attack
 
-  public static final int witchUpButton = 3;//4 on attack
+  public static final int witchUpButton = 3;//4 on attack  Phil - should witch be winch?
   public static final int witchDownButton = 2;//5 on attack
 
 
