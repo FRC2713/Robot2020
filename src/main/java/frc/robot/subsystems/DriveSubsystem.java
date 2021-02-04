@@ -32,6 +32,8 @@ public class DriveSubsystem extends SubsystemBase {
   public DifferentialDrive roboDrive;
   double current_E_Value = 0;
   double old_E_Value = 0;
+  double traveledInches = 0;
+  double traveledFeet = 0;
   public double distanceToDrive = 0;
 
   public DifferentialDrive getRoboDrive () {
@@ -113,6 +115,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void resetEncoder(CANEncoder encoder) {
     old_E_Value = encoder.getPosition();
+    traveledInches = 0;
+    traveledFeet = 0;
   }
 
   public double encoderDistance(CANEncoder encoder) {
@@ -122,6 +126,14 @@ public class DriveSubsystem extends SubsystemBase {
     traveledInches = toInches(traveledUnits);
     old_E_Value = current_E_Value;
     System.out.println("Traveled " + traveledInches + "Inches");
+    return traveledInches;
+  }
+
+  public double improvedEncoderDist(CANEncoder encoder) {
+    current_E_Value = encoder.getPosition();
+    double traveledUnits = (current_E_Value - old_E_Value);
+    traveledFeet = toFeet(traveledUnits);
+    System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
     return traveledInches;
   }
 
