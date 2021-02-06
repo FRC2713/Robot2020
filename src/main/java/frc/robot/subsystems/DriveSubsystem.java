@@ -129,15 +129,7 @@ public class DriveSubsystem extends SubsystemBase {
     return traveledInches;
   }
 
-  public double improvedEncoderDist(CANEncoder encoder) {
-    current_E_Value = encoder.getPosition();
-    double traveledUnits = (current_E_Value - old_E_Value);
-    traveledFeet = toFeet(traveledUnits);
-    System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
-    return traveledInches;
-  }
-
-  public double improvedEncoderDist(CANEncoder encoder) {
+  public double improvedEncoderDist(CANEncoder encoder) { //Now a constantly saved number (rather than constantly recalculated from 0), and returns distance in feet, making autonomous code look a lot nicer
     current_E_Value = encoder.getPosition();
     double traveledUnits = (current_E_Value - old_E_Value);
     traveledFeet = toFeet(traveledUnits);

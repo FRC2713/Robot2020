@@ -99,9 +99,7 @@ public class RobotContainer {
     else if (PortNine.get() == false) {
       return scoreRight;
     }
-    else return null; */
-
-    return calibrateAutonomous;
+    else return null;
   }
 
 }
