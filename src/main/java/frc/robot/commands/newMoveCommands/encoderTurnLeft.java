@@ -15,7 +15,6 @@ public class encoderTurnLeft extends CommandBase {
   CANEncoder encoder1;
 
   private final DriveSubsystem m_DS;
-
   public encoderTurnLeft(double angle, DriveSubsystem driveSubsystem) {
     m_DS = driveSubsystem;
     targetAngle = angle;

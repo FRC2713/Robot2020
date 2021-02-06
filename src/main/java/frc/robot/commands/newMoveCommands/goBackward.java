@@ -15,10 +15,10 @@ public class goBackward extends CommandBase {
   double targetDist = 0;
   CANEncoder encoder1;
 
-  private final DriveSubsystem m_DS;
+  private final DriveSubsystem m_driveSubsystem;
 
   public goBackward(double distanceToTravel, DriveSubsystem driveSubsystem) {
-    m_DS = driveSubsystem;
+    m_driveSubsystem = driveSubsystem;
     targetDist = distanceToTravel;
     addRequirements(driveSubsystem); //establishes drive subsystem as subsystem used
     accumulatedDist = 0;
@@ -26,10 +26,10 @@ public class goBackward extends CommandBase {
 
   @Override
   public void initialize() {
-    encoder1 = m_DS.getEncoder(1);
-    originalDist = m_DS.toFeet(encoder1.getPosition());
+    encoder1 = m_driveSubsystem.getEncoder(1);
+    originalDist = m_driveSubsystem.toFeet(encoder1.getPosition());
     newDist = originalDist;
-    m_DS.resetEncoder(encoder1);
+    m_driveSubsystem.resetEncoder(encoder1);
   }
 
   @Override
@@ -37,9 +37,9 @@ public class goBackward extends CommandBase {
     System.out.println("Execute loop");
     leftSpeed = 0.5;
     rightSpeed = 0.5;
-    m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
+    m_driveSubsystem.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = encoder1.getPosition();
-    accumulatedDist = m_DS.improvedEncoderDist(encoder1); //adds old distance to encoder input, translated to feet;
+    accumulatedDist += m_driveSubsystem.toFeet(m_driveSubsystem.encoderDistance(encoder1)); //adds old distance to encoder input, translated to feet;
     System.out.println("Should be moving right now");
     System.out.println("Traveled " + accumulatedDist + " Feet");
   }
@@ -47,7 +47,7 @@ public class goBackward extends CommandBase {
   @Override
   public boolean isFinished() {
     if (accumulatedDist > targetDist) { //if traveled more than target amount of feet, stop motors and end autonomous
-      m_DS.getRoboDrive().stopMotor();
+      m_driveSubsystem.getRoboDrive().stopMotor();
       Timer.delay(0.25);
       return true;
     }

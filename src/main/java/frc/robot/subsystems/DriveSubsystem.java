@@ -137,6 +137,14 @@ public class DriveSubsystem extends SubsystemBase {
     return traveledInches;
   }
 
+  public double improvedEncoderDist(CANEncoder encoder) {
+    current_E_Value = encoder.getPosition();
+    double traveledUnits = (current_E_Value - old_E_Value);
+    traveledFeet = toFeet(traveledUnits);
+    System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
+    return traveledInches;
+  }
+
   private double toInches(double encoderValue)  {
     return (encoderValue * RobotMap.getEncoderConstant());
   }
