@@ -31,7 +31,7 @@ public class SMDrive extends CommandBase {
   private double lastRightStickVal = 0;
   private int polarity = 1;
   private boolean bPressed = false;
-
+ private int count = 0;
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
@@ -130,6 +130,8 @@ public class SMDrive extends CommandBase {
     lastRightStickVal = measuredRight;
 
     if(SM.xBoxController.getBButtonPressed()){
+      setBPressed();
+    } else if (getBPressed()) {
       setBPressed();
     }
   }
