@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.IntakeGateCommand;
-import frc.robot.commands.commandGroups.initLineOnly;
+import frc.robot.commands.commandGroups.*;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
@@ -20,10 +20,6 @@ import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
-import frc.robot.commands.commandGroups.scoreFront;
-import frc.robot.commands.commandGroups.scoreLeft;
-import frc.robot.commands.commandGroups.scoreRight;
-import frc.robot.commands.commandGroups.experimentalScoreFront;
 
 
 /**
@@ -55,6 +51,7 @@ public class RobotContainer {
   private final experimentalScoreFront experimentalScoreFront = new experimentalScoreFront(driveSubsystem, intakeSubsystem);
   private final scoreLeft scoreLeft = new scoreLeft(driveSubsystem, intakeSubsystem, intakeGateCommand);
   private final scoreRight scoreRight = new scoreRight(driveSubsystem, intakeSubsystem, intakeGateCommand);
+  private final calibrateAutonomous calibrateAutonomous = new calibrateAutonomous(driveSubsystem);
 
 
   /**
@@ -83,23 +80,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    //PORT 4 RETURNS INITIATION LINE ONLY
-    //PORT 5 RETURNS SCORE FROM FRONT
-    //PORT 6 RETURN SCORE FROM LEFT, FACING TOWARDS SCORING PORT
-    //PORT 7 RETURNS SCORE FROM RIGHT, FACING TOWARDS SCORING PORT
-    if(PortSix.get() == false) {
-      return initLineOnly;
-    }
-    else if (PortSeven.get() == false) {
-      return experimentalScoreFront;
-    }
-    else if (PortEight.get() == false) {
-      return scoreLeft;
-    }
-    else if (PortNine.get() == false) {
-      return scoreRight;
-    }
-    else return null;
+    return calibrateAutonomous;
   }
 
 }
