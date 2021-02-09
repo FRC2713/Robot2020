@@ -131,6 +131,8 @@ public class SMDrive extends CommandBase {
 
     if(SM.xBoxController.getBButtonPressed()){
       setBPressed();
+    } else if (getBPressed()) {
+      setBPressed();
     }
   }
 

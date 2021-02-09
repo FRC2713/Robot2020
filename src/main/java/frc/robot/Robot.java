@@ -50,28 +50,34 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     SmartDashboard.putBoolean("is this running", false);
-    //initCamera();
+    initCamera();
     compressor.start();
   }
   private void initCamera() {
-    cs = CameraServer.getInstance();
-    frontCamera = cs.startAutomaticCapture(0);
-    backCamera = cs.startAutomaticCapture(1);
-    frontCamera.setResolution(256, 144);
-    frontCamera.setFPS(30);
-    backCamera.setResolution(256, 144);
-    backCamera.setFPS(30);
-    backCamera.close();
+    try {
+      cs = CameraServer.getInstance();
+      frontCamera = cs.startAutomaticCapture(0);
+      backCamera = cs.startAutomaticCapture(1);
+      frontCamera.setResolution(256, 144);
+      frontCamera.setFPS(30);
+      backCamera.setResolution(256, 144);
+      backCamera.setFPS(30);
+      backCamera.close();
+    } catch(Exception e) {
+      frontCamera = null;
+      backCamera = null;
+    }
+
   }
   private void changeCamera(){
-    if(currCam == 1){
+    if(currCam == 1 && backCamera != null){
       backCamera.close();
       currCam = 0;
       frontCamera = cs.startAutomaticCapture(currCam);
       System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
       SmartDashboard.putBoolean("is this running", true);
     }
-    else if(currCam == 0){
+    else if(currCam == 0 && frontCamera != null){
       frontCamera.close();
       currCam = 1;
       backCamera = cs.startAutomaticCapture(currCam);
