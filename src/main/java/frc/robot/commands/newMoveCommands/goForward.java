@@ -39,7 +39,7 @@ public class goForward extends CommandBase {
     rightSpeed = -0.5;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = encoder1.getPosition();
-    accumulatedDist = m_DS.improvedEncoderDist(encoder1); //adds old distance to encoder input, translated to feet;
+    accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1)); //adds old distance to encoder input, translated to feet;
     System.out.println("Should be moving right now");
     System.out.println("Traveled " + accumulatedDist + " Feet");
   }

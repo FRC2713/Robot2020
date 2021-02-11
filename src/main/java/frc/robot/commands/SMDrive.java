@@ -47,7 +47,7 @@ public class SMDrive extends CommandBase {
   @Override
   public void initialize() {
     DriverStation.reportWarning("Starting SMDrive", false);
-    joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03);
+    joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
 
 

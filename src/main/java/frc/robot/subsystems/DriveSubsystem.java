@@ -134,7 +134,7 @@ public class DriveSubsystem extends SubsystemBase {
     double traveledUnits = (current_E_Value - old_E_Value);
     traveledFeet = toFeet(traveledUnits);
     System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
-    return traveledInches;
+    return traveledFeet;
   }
 
   private double toInches(double encoderValue)  {
