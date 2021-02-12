@@ -14,6 +14,7 @@ public class goForward extends CommandBase {
   double rightSpeed = 0;
   double targetDist = 0;
   CANEncoder encoder1;
+  CANEncoder encoder2;
 
   private final DriveSubsystem m_DS;
 
@@ -35,8 +36,8 @@ public class goForward extends CommandBase {
   @Override
   public void execute() {
     System.out.println("Execute loop");
-    leftSpeed = -0.5;
-    rightSpeed = -0.5;
+    leftSpeed = 0.25;
+    rightSpeed = 0.25;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = encoder1.getPosition();
     accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1)); //adds old distance to encoder input, translated to feet;
