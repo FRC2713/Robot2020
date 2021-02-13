@@ -36,8 +36,8 @@ public class goForward extends CommandBase {
   @Override
   public void execute() {
     System.out.println("Execute loop");
-    leftSpeed = 0.25;
-    rightSpeed = 0.25;
+    leftSpeed = 0.5;
+    rightSpeed = 0.5;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = encoder1.getPosition();
     accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1)); //adds old distance to encoder input, translated to feet;

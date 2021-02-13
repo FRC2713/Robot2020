@@ -52,6 +52,7 @@ public class RobotContainer {
   private final scoreLeft scoreLeft = new scoreLeft(driveSubsystem, intakeSubsystem, intakeGateCommand);
   private final scoreRight scoreRight = new scoreRight(driveSubsystem, intakeSubsystem, intakeGateCommand);
   private final calibrateAutonomous calibrateAutonomous = new calibrateAutonomous(driveSubsystem);
+  private final barrelPathCommand barrelPathCommand = new barrelPathCommand(driveSubsystem);
 
 
   /**
@@ -80,7 +81,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return calibrateAutonomous;
+    return barrelPathCommand;
   }
 
 }
