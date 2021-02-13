@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
   private UsbCamera frontCamera;
   private UsbCamera backCamera;
   private int currCam = 0;
+  ADXRS450_Gyro gyro= new ADXRS450_Gyro();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    gyro.calibrate();
     m_robotContainer = new RobotContainer();
     SmartDashboard.putBoolean("is this running", false);
     initCamera();
@@ -102,6 +105,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     //m_colorSensor.testFunction();
     //blightsensor.printOut();
+    SmartDashboard.putNumber("GyroAngle", gyro.getAngle());
     if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE){
       //System.out.println("this is a test; 1");
     }
@@ -123,6 +127,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     SM.initControllers();
+    gyro.reset();
   }
 
   @Override
