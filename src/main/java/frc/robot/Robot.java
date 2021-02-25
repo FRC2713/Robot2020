@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.SM;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.DOWN;
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   private LightSensor lightsensor = new LightSensor();
+  private DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static final Compressor compressor = new Compressor();
   public WPI_TalonSRX sensorMotor;
   private ColorSensor m_colorSensor;
@@ -41,7 +43,7 @@ public class Robot extends TimedRobot {
   private UsbCamera frontCamera;
   private UsbCamera backCamera;
   private int currCam = 0;
-  ADXRS450_Gyro gyro= new ADXRS450_Gyro();
+  ADXRS450_Gyro gyro = driveSubsystem.getGyro();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ConfigureBed;
@@ -35,6 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
   double traveledInches = 0;
   double traveledFeet = 0;
   public double distanceToDrive = 0;
+  ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
   public DifferentialDrive getRoboDrive () {
     return roboDrive;
@@ -54,6 +56,10 @@ public class DriveSubsystem extends SubsystemBase {
       return encoder4;
     }
     else return null;
+  }
+
+  public ADXRS450_Gyro getGyro() {
+    return gyro;
   }
 
   public DriveSubsystem() {
