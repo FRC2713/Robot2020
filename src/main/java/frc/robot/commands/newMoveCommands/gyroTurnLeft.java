@@ -15,7 +15,7 @@ public class gyroTurnLeft extends CommandBase {
 
   private final DriveSubsystem m_DS;
 
-  public gyroTurnLeft( double Angle, DriveSubsystem driveSubsystem) {
+  public gyroTurnLeft(double Angle, DriveSubsystem driveSubsystem) {
     m_DS = driveSubsystem;
     targetAngle = Angle;
     addRequirements(driveSubsystem);
