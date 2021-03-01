@@ -34,8 +34,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private DriveSubsystem driveSubsystem;
   private LightSensor lightsensor = new LightSensor();
-  private DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static final Compressor compressor = new Compressor();
   public WPI_TalonSRX sensorMotor;
   private ColorSensor m_colorSensor;
@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   private UsbCamera frontCamera;
   private UsbCamera backCamera;
   private int currCam = 0;
-  ADXRS450_Gyro gyro = driveSubsystem.getGyro();
+  ADXRS450_Gyro gyro;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -52,8 +52,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    gyro.calibrate();
+
     m_robotContainer = new RobotContainer();
+    driveSubsystem = m_robotContainer.driveSubsystem;
+    gyro = driveSubsystem.getGyro();
+    gyro.calibrate();
     SmartDashboard.putBoolean("is this running", false);
     initCamera();
     compressor.start();
