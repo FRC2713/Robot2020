@@ -24,7 +24,8 @@ public class gyroTurnRight extends CommandBase {
 
   @Override
   public void initialize() {
-    gyro.reset();
+//    gyro.reset();
+//    gyro.calibrate();
     currentAngle = gyro.getAngle();
     originalAngle = currentAngle;
   }
@@ -34,7 +35,7 @@ public class gyroTurnRight extends CommandBase {
     leftSpeed = 0.25;
     rightSpeed = -0.25;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
-    currentAngle = Math.abs(gyro.getAngle());
+    currentAngle = (Math.abs(gyro.getAngle()) - originalAngle);
     System.out.println("Turned " + currentAngle + " degrees left");
   }
 

@@ -134,6 +134,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     SM.initControllers();
     gyro.reset();
+    gyro.calibrate();
   }
 
   @Override
