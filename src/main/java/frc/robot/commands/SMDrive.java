@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -32,6 +33,8 @@ public class SMDrive extends CommandBase {
   private int polarity = 1;
   private boolean bPressed = false;
 
+  private int drive_mode_index = 2;
+
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
@@ -50,7 +53,6 @@ public class SMDrive extends CommandBase {
     joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
 
-
     /*
     try {
       writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Timer.getFPGATimestamp() + ".txt"), StandardCharsets.UTF_8));
@@ -67,11 +69,14 @@ public class SMDrive extends CommandBase {
     double measuredLeft;
     double measuredRight;
     xbox = SM.xBoxController;
+    String[] drivemode = {"Arcade","Tank","Bradford"};
+    SmartDashboard.putString("Drive Mode is",drivemode[drive_mode_index]);
     //if(ArduinoSensors.getInstance().getSwitchBool()){
      //System.out.println(":)");
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
     if (xbox.getRawButtonPressed(7)) {
+      drive_mode_index = (drive_mode_index == 2) ? 0 : drive_mode_index + 1 ;
       useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
@@ -90,29 +95,50 @@ public class SMDrive extends CommandBase {
       polarity *= -1;
       SM.rumbleController(xbox, 0.5, 500);
     }
+
+    switch (drivemode[drive_mode_index]) {
+      default:
+      case "Bradford":
+        measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+        measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+        driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+        break;
+      case "Arcade":
+        measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+        measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
+        driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+        break;
+      case "Tank":
+        measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+        measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+        driveSubsystem.roboDrive.tankDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+        break;
+    }
+
+    /*
     if (useArcadeInsteadOfBradford) {
-      /*
+
 
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);*/
+      driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
       driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
-      /** changed to arcade at top **/
+      // changed to arcade at top
     } else {
       measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
       measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
       driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
 
-      /*
       try {
         writer.write(Timer.getFPGATimestamp() + "measuredLeft" + measuredLeft + " measuredRight" + measuredRight + " rawXRight" + -xbox.getX(GenericHID.Hand.kRight));
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      */
+
     }
+    */
 
     if (RobotBase.isSimulation()) {
       System.out.print("Dive Mode: ");
