@@ -36,6 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
   double traveledInches = 0;
   double traveledFeet = 0;
   public double distanceToDrive = 0;
+  public static double gyroTurnConstant() {return 0.9; } //Multiplies angles by constant
   ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
   public DifferentialDrive getRoboDrive () {

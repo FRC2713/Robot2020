@@ -76,11 +76,11 @@ public class ColorWheelCommand extends CommandBase {
 
       chosenColor = "Yellow";
     }
-    System.out.println("Color is: " + colorString);
-    System.out.println("Red: " + colormatchwheelsubsystem.colorsensor.detectedColor.red);
-    System.out.println("Green: " + colormatchwheelsubsystem.colorsensor.detectedColor.green);
-    System.out.println("Blue: " + colormatchwheelsubsystem.colorsensor.detectedColor.blue);
-    System.out.println("Confidence: " + colormatchwheelsubsystem.colorsensor.match.confidence);
+//    System.out.println("Color is: " + colorString);
+//  System.out.println("Red: " + colormatchwheelsubsystem.colorsensor.detectedColor.red);
+//    System.out.println("Green: " + colormatchwheelsubsystem.colorsensor.detectedColor.green);
+//    System.out.println("Blue: " + colormatchwheelsubsystem.colorsensor.detectedColor.blue);
+//    System.out.println("Confidence: " + colormatchwheelsubsystem.colorsensor.match.confidence);
 
     SmartDashboard.putNumber("Red", colormatchwheelsubsystem.colorsensor.detectedColor.red);
     SmartDashboard.putNumber("Green", colormatchwheelsubsystem.colorsensor.detectedColor.green);

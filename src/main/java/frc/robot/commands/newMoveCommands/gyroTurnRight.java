@@ -17,9 +17,9 @@ public class gyroTurnRight extends CommandBase {
 
   public gyroTurnRight( double Angle, DriveSubsystem driveSubsystem) {
     m_DS = driveSubsystem;
-    targetAngle = Angle;
     addRequirements(driveSubsystem);
     gyro = m_DS.getGyro();
+    targetAngle = gyro.getAngle() + (Angle * 0.8);
   }
 
   @Override
@@ -28,14 +28,15 @@ public class gyroTurnRight extends CommandBase {
 //    gyro.calibrate();
     currentAngle = gyro.getAngle();
     originalAngle = currentAngle;
+    System.out.println("Initial Angle: " + currentAngle);
   }
 
   @Override
   public void execute() {
-    leftSpeed = 0.25;
-    rightSpeed = -0.25;
+    leftSpeed = 0.5;
+    rightSpeed = -0.5;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
-    currentAngle = (Math.abs(gyro.getAngle()) - originalAngle);
+    currentAngle = gyro.getAngle() - originalAngle;
     System.out.println("Turned " + currentAngle + " degrees left");
   }
 
