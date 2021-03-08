@@ -27,6 +27,7 @@ public class SMDrive extends CommandBase {
   private boolean useArcadeInsteadOfBradford = false;
   public boolean polarityBoolean = false;
 
+  private int driveMode = 0;
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
   private int polarity = 1;
@@ -62,17 +63,19 @@ public class SMDrive extends CommandBase {
 
   @Override
   public void execute() {
-
-
     double measuredLeft;
     double measuredRight;
     xbox = SM.xBoxController;
+
     //if(ArduinoSensors.getInstance().getSwitchBool()){
      //System.out.println(":)");
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
     if (xbox.getRawButtonPressed(7)) {
-      useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
+      driveMode++;
+      if (driveMode > 2) {
+        driveMode = 0;
+      }
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
@@ -90,20 +93,31 @@ public class SMDrive extends CommandBase {
       polarity *= -1;
       SM.rumbleController(xbox, 0.5, 500);
     }
-    if (useArcadeInsteadOfBradford) {
-      /*
+    // 0 - Tank, 1 - Arcade, 2 - Bradford
+    switch(driveMode) {
+        //tank
+        case 0:
+            measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+            measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+            driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);
+            System.out.println("Tank Drive Mode");
+        break;
+        //arcade
+        case 1:
+          measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+          measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
+          driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+          System.out.println("Arcade Drive Mode");
+      break;
+      //bradford
+      default:
+      case 2:
+          measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+          measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+          driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+          System.out.println("Bradford Drive Mode");
+      break;
 
-      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-      measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);*/
-      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-      measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
-      /** changed to arcade at top **/
-    } else {
-      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-      measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
 
       /*
       try {
@@ -113,7 +127,7 @@ public class SMDrive extends CommandBase {
       }
       */
     }
-
+    /*
     if (RobotBase.isSimulation()) {
       System.out.print("Dive Mode: ");
       if (useArcadeInsteadOfBradford) {
@@ -125,7 +139,7 @@ public class SMDrive extends CommandBase {
       System.out.println("Turn: " + measuredRight * polarity);
       System.out.println("Polarity: " + polarity);
     }
-
+    */
     lastLeftStickVal = measuredLeft;
     lastRightStickVal = measuredRight;
 
