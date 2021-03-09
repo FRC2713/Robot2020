@@ -23,6 +23,7 @@ public class SM {
   public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
   public static final String XBOX3_NAME = "Controller (Gamepad)";
   public static final String XBOX4_NAME = "Logitech Dual Action";
+  public static final String XBOX5_NAME ="Xbox Controller";
 
 
   public SM() {
@@ -42,6 +43,7 @@ public class SM {
         ||test.getName().equals(XBOX3_NAME)||test.getName().equals(XBOX4_NAME)) {
         if (!test.getName().equals(XBOX4_NAME))xBoxController = new XboxController(i);
         if (test.getName().equals(XBOX4_NAME)) xBoxController = new XboxImpostor(i);
+        if (test.getName().equals(XBOX5_NAME))xBoxController = new XboxController(i);
       } else if (test.getName().equals(ARCADE_NAME)) {
         arcadeController = new Joystick(i);
       } else if (test.getName().equals(ATTACK_NAME)) {
