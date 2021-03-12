@@ -29,6 +29,7 @@ public class SMDrive extends CommandBase {
   private XboxController xbox = SM.xBoxController;
   private boolean useArcadeInsteadOfBradford = false;
   public boolean polarityBoolean = false;
+  private int driveMode = 2;
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
@@ -68,7 +69,11 @@ public class SMDrive extends CommandBase {
     double measuredRight;
     xbox = SM.xBoxController;
 
-    int driveMode = 2;
+    if (xbox.getRawButtonPressed(7)) {
+      driveMode++;
+      if (driveMode > 2) {
+        driveMode = 0;
+      }
     String[] drivemode = {"Tank","Arcade","Bradford"};
     SmartDashboard.putString("Drive Mode is ",drivemode[driveMode]);
 
@@ -76,11 +81,7 @@ public class SMDrive extends CommandBase {
      //System.out.println(":)");
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
-    if (xbox.getRawButtonPressed(7)) {
-      driveMode++;
-      if (driveMode > 2) {
-        driveMode = 0;
-      }
+
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);

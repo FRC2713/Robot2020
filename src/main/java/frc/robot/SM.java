@@ -40,10 +40,9 @@ public class SM {
       Joystick test = new Joystick(i);
       //System.out.println("This is the name of the joystick " + test.getName());
       if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)
-        ||test.getName().equals(XBOX3_NAME)||test.getName().equals(XBOX4_NAME)) {
+        ||test.getName().equals(XBOX3_NAME)||test.getName().equals(XBOX4_NAME)||test.getName().equals(XBOX5_NAME)) {
         if (!test.getName().equals(XBOX4_NAME))xBoxController = new XboxController(i);
         if (test.getName().equals(XBOX4_NAME)) xBoxController = new XboxImpostor(i);
-        if (test.getName().equals(XBOX5_NAME))xBoxController = new XboxController(i);
       } else if (test.getName().equals(ARCADE_NAME)) {
         arcadeController = new Joystick(i);
       } else if (test.getName().equals(ATTACK_NAME)) {
