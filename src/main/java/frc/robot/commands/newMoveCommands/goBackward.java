@@ -34,8 +34,8 @@ public class goBackward extends CommandBase {
 
   @Override
   public void execute() {
-    leftSpeed = -1;
-    rightSpeed = -1;
+    leftSpeed = -0.5;
+    rightSpeed = -0.5;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     newDist = encoder1.getPosition();
     accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1));

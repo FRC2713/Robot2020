@@ -33,8 +33,8 @@ public class gyroTurnLeft extends CommandBase {
 
   @Override
   public void execute() {
-    leftSpeed = -1;
-    rightSpeed = 1;
+    leftSpeed = -0.25;
+    rightSpeed = 0.25;
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
     currentAngle = gyro.getAngle() - originalAngle;
     System.out.println("Turned " + currentAngle + " degrees left");
