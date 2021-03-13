@@ -10,6 +10,7 @@ import frc.robot.RobotMap;
 import frc.robot.SM;
 import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.WitchCommand;
+import frc.robot.iRaidersButton;
 
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -19,11 +20,11 @@ public class ClimberSubsystem extends SubsystemBase {
   public static final CANSparkMax WitchTwo = new CANSparkMax(RobotMap.WitchTwoMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   public static final DigitalInput climberLimitSwitch = new DigitalInput(RobotMap.climberLimitSwitchPort);
 
-  public final JoystickButton climberButton = new JoystickButton (SM.leftAttack, RobotMap.climberButton);
+  public final iRaidersButton climberButton = new iRaidersButton (SM.leftAttack, RobotMap.climberButton);
 
 
-  public final JoystickButton witchDownButton = new JoystickButton(SM.leftAttack, RobotMap.witchUpButton);
-  public final JoystickButton witchUpButton = new JoystickButton(SM.leftAttack, RobotMap.witchDownButton);
+  public final iRaidersButton witchDownButton = new iRaidersButton(SM.leftAttack, RobotMap.witchUpButton);
+  public final iRaidersButton witchUpButton = new iRaidersButton(SM.leftAttack, RobotMap.witchDownButton);
 
   public final ClimbCommand climbCommand = new ClimbCommand(this);
   public final WitchCommand witchCommand = new WitchCommand(this);

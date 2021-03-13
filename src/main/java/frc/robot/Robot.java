@@ -33,7 +33,7 @@ import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  public static RobotContainer m_robotContainer = null;
   private DriveSubsystem driveSubsystem;
   private LightSensor lightsensor = new LightSensor();
   public static final Compressor compressor = new Compressor();

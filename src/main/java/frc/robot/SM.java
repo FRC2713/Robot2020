@@ -65,6 +65,16 @@ public class SM {
     if (leftAttack == null) {
       leftAttack = new Joystick(empty_port);
     }
+
+    if (Robot.m_robotContainer != null) {
+      Robot.m_robotContainer.intakeSubsystem.intakeGateUpButton.updateJoystick(xBoxController);
+      Robot.m_robotContainer.intakeSubsystem.intakeReverse.updateJoystick(xBoxController);
+      Robot.m_robotContainer.intakeSubsystem.humanIntake.updateJoystick(xBoxController);
+
+      Robot.m_robotContainer.climberSubsystem.climberButton.updateJoystick(leftAttack);
+      Robot.m_robotContainer.climberSubsystem.witchUpButton.updateJoystick(leftAttack);
+      Robot.m_robotContainer.climberSubsystem.witchDownButton.updateJoystick(leftAttack);
+    }
   }
 
   /**
