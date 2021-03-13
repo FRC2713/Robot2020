@@ -124,6 +124,7 @@ public class SMDrive extends CommandBase {
       System.out.println("Speed: " + -measuredLeft * polarity);
       System.out.println("Turn: " + measuredRight * polarity);
       System.out.println("Polarity: " + polarity);
+
     }
 
     lastLeftStickVal = measuredLeft;

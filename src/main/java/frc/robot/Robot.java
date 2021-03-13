@@ -11,15 +11,17 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.SM;
+import frc.robot.commands.newMoveCommands.encoderTurnRight;
+import frc.robot.commands.newMoveCommands.gyroTurnLeft;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+
+import java.awt.event.KeyEvent;
 
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.DOWN;
 import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
@@ -31,8 +33,21 @@ import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
 
+
+  public Robot(){
+
+    if(RobotBase.isReal()){
+
+
+
+    }
+
+  }
+
+  private Command m_autonomousCommand;
+  //KeyEvent key;
+  private XboxController xbox = SM.xBoxController;
   private RobotContainer m_robotContainer;
   private DriveSubsystem driveSubsystem;
   private LightSensor lightsensor = new LightSensor();
@@ -44,6 +59,9 @@ public class Robot extends TimedRobot {
   private UsbCamera backCamera;
   private int currCam = 0;
   ADXRS450_Gyro gyro;
+//  encoderTurnRight turn = new encoderTurnRight(5, driveSubsystem);
+  gyroTurnLeft leftGyro = new gyroTurnLeft(90, driveSubsystem);
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -58,34 +76,28 @@ public class Robot extends TimedRobot {
     gyro = driveSubsystem.getGyro();
     gyro.calibrate();
     SmartDashboard.putBoolean("is this running", false);
-    initCamera();
+    //initCamera();
     compressor.start();
   }
   private void initCamera() {
-    try {
-      cs = CameraServer.getInstance();
-      frontCamera = cs.startAutomaticCapture(0);
-      backCamera = cs.startAutomaticCapture(1);
-      frontCamera.setResolution(256, 144);
-      frontCamera.setFPS(30);
-      backCamera.setResolution(256, 144);
-      backCamera.setFPS(30);
-      backCamera.close();
-    } catch(Exception e) {
-      frontCamera = null;
-      backCamera = null;
-    }
-
+    cs = CameraServer.getInstance();
+    frontCamera = cs.startAutomaticCapture(0);
+    backCamera = cs.startAutomaticCapture(1);
+    frontCamera.setResolution(256, 144);
+    frontCamera.setFPS(30);
+    backCamera.setResolution(256, 144);
+    backCamera.setFPS(30);
+    backCamera.close();
   }
   private void changeCamera(){
-    if(currCam == 1 && backCamera != null){
+    if(currCam == 1){
       backCamera.close();
       currCam = 0;
       frontCamera = cs.startAutomaticCapture(currCam);
       System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
       SmartDashboard.putBoolean("is this running", true);
     }
-    else if(currCam == 0 && frontCamera != null){
+    else if(currCam == 0){
       frontCamera.close();
       currCam = 1;
       backCamera = cs.startAutomaticCapture(currCam);
@@ -183,6 +195,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+
     if((m_robotContainer.driveSubsystem.driveCommand.getBPressed())) {
       changeCamera();
 
@@ -190,8 +203,23 @@ public class Robot extends TimedRobot {
     else {
       SmartDashboard.putBoolean("is this running", false);
     }
+    if(xbox.getRawButtonPressed(4))
+        {
+          leftGyro.initialize();
 
-  }
+          leftGyro.execute();
+
+          if(leftGyro.isFinished()){
+
+          driveSubsystem.getRoboDrive().stopMotor();
+        }
+
+    //  driveSubsystem.getRoboDrive().stopMotor();
+    }
+
+    }
+
+
 
   @Override
   public void testInit() {

@@ -43,6 +43,22 @@ public class encoderTurnRight extends CommandBase {
     System.out.println("Traveled " + accumulatedDist + " Feet");
   }
 
+  public void turn90(){
+
+    leftSpeed = 0.25;
+    rightSpeed = -0.25;
+    m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
+    newDist = encoder1.getPosition();
+    accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1)); //adds old distance to encoder input, translated to feet;
+
+    if (accumulatedDist > targetAngle/53.125) { //Guess-and-checked number
+      m_DS.getRoboDrive().stopMotor();
+      Timer.delay(0.25);
+    }
+
+  }
+
+
   @Override
   public boolean isFinished() {
     if (accumulatedDist > targetAngle/53.125) { //Guess-and-checked number
