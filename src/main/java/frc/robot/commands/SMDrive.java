@@ -26,6 +26,7 @@ public class SMDrive extends CommandBase {
   private XboxController xbox = SM.xBoxController;
   private boolean useArcadeInsteadOfBradford = false;
   public boolean polarityBoolean = false;
+  private int driveMode = 0;
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
@@ -72,11 +73,32 @@ public class SMDrive extends CommandBase {
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
     if (xbox.getRawButtonPressed(7)) {
-      useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
+      driveMode++;
+      switch (driveMode) {
+        case 0:
+          ;
+        case 1:
+          ;
+        case 2:
+          ;
+
+
+          break;
+      }
+
+      if (driveMode > 2) {
+        driveMode = 0;
+      }
+    }
+
+    //if (xbox.getRawButtonPressed(7)) {
+      //useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
+      //lastRightStickVal = 0;
+      //lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
-      System.out.println("switch active");
+      System.out.println("switched drive mode");
 
     }
     System.out.println("reverse not active");

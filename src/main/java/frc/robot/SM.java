@@ -38,18 +38,57 @@ public class SM {
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
       //System.out.println("This is the name of the joystick " + test.getName());
-      if (test.getName().equals(XBOX_NAME)||test.getName().equals(XBOX2_NAME)
-        ||test.getName().equals(XBOX3_NAME)||test.getName().equals(XBOX4_NAME)) {
+
+
+
+     /* if (test.getName().equals(XBOX_NAME)||
+        test.getName().equals(XBOX2_NAME)||
+        test.getName().equals(XBOX3_NAME)||
+        test.getName().equals(XBOX4_NAME))
+      {
         if (!test.getName().equals(XBOX4_NAME))xBoxController = new XboxController(i);
         if (test.getName().equals(XBOX4_NAME)) xBoxController = new XboxImpostor(i);
-      } else if (test.getName().equals(ARCADE_NAME)) {
+      }
+      else if (test.getName().equals(ARCADE_NAME)) {
         arcadeController = new Joystick(i);
-      } else if (test.getName().equals(ATTACK_NAME)) {
+      }
+      else if (test.getName().equals(ATTACK_NAME)) {
         leftAttack = new Joystick(i);
       }
       if (test.getName().isEmpty()){
         empty_port = i;
+     }*/
+
+      String XBOX = test.getName();
+
+
+      switch(XBOX){
+
+        case "Controller (XBOX 360 For Windows)":
+        case "Controller (Gamepad for Xbox 360)":
+        case "Controller (Gamepad)":
+        case "Xbox Controller":
+          xBoxController = new XboxController(i);
+          break;
+
+        case "Logitech Dual Action":
+          xBoxController = new XboxImpostor(i);
+          break;
+
+        case "Mayflash Arcade Stick":
+          arcadeController = new Joystick(i);
+          break;
+
+        case "Logitech Attack 3":
+          leftAttack = new Joystick(i);
+          break;
+
+        default:
+          empty_port = i;
+        break;
+
       }
+
     }
     if (xBoxController == null) {
       //System.out.println("THis should not be reached -Brigid");

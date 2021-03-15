@@ -48,6 +48,13 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+
+/*  public Robot(){
+    if(RobotBase.isReal()){
+
+    }
+  } */
+
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
@@ -93,6 +100,9 @@ public class Robot extends TimedRobot {
       SmartDashboard.putBoolean("is this running", true);
     }
   }
+
+
+
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
