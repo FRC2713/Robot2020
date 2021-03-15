@@ -42,7 +42,7 @@ public class goBackward extends CommandBase {
     accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1));
     if (accumulatedDist < targetDist-SLEW_DIST)
     {
-      if (leftSpeed > -1)
+      if (leftSpeed > -0.5)
       {
         leftSpeed -= ACCEL_CONSTANT;
         rightSpeed -= ACCEL_CONSTANT;

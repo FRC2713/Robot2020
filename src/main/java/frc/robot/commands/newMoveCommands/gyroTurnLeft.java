@@ -37,7 +37,7 @@ public class gyroTurnLeft extends CommandBase {
   public void execute() {
     currentAngle = gyro.getAngle() - originalAngle;
     if (currentAngle < targetAngle-SLEW_DIST) {
-      if(leftSpeed > -1) {
+      if(leftSpeed > -0.5) {
         leftSpeed -= ACCEL_CONSTANT;
         rightSpeed += ACCEL_CONSTANT;
         SLEW_DIST = currentAngle;
