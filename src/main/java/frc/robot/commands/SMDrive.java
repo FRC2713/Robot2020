@@ -26,7 +26,6 @@ public class SMDrive extends CommandBase {
   private XboxController xbox = SM.xBoxController;
   private boolean useArcadeInsteadOfBradford = false;
   public boolean polarityBoolean = false;
-  private int driveMode = 0;
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
@@ -69,36 +68,15 @@ public class SMDrive extends CommandBase {
     double measuredRight;
     xbox = SM.xBoxController;
     //if(ArduinoSensors.getInstance().getSwitchBool()){
-     //System.out.println(":)");
+    //System.out.println(":)");
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
     if (xbox.getRawButtonPressed(7)) {
+      useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
-      driveMode++;
-      switch (driveMode) {
-        case 0:
-          ;
-        case 1:
-          ;
-        case 2:
-          ;
-
-
-          break;
-      }
-
-      if (driveMode > 2) {
-        driveMode = 0;
-      }
-    }
-
-    //if (xbox.getRawButtonPressed(7)) {
-      //useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
-      //lastRightStickVal = 0;
-      //lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
-      System.out.println("switched drive mode");
+      System.out.println("switch active");
 
     }
     System.out.println("reverse not active");
@@ -106,7 +84,7 @@ public class SMDrive extends CommandBase {
     //The Xbox command that switches the controls in order to drive backwards
     if (getBPressed()) {
       System.out.println("reverse active");
-    //  Timer.delay(0.5);
+      //  Timer.delay(0.5);
       polarityBoolean = !polarityBoolean;
       ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button
       polarity *= -1;

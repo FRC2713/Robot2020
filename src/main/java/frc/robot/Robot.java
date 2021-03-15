@@ -49,12 +49,6 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
 
-/*  public Robot(){
-    if(RobotBase.isReal()){
-
-    }
-  } */
-
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
