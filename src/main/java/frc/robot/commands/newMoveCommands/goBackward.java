@@ -11,7 +11,7 @@ public class goBackward extends CommandBase {
 //  double newDist = 0;
   double accumulatedDist = 0;
   final double ACCEL_CONSTANT = 0.02; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
-  double SLEW_DIST = 0; //Determines how much distance the robot is given to slow down, in feet - will always be equal to the time taken to speed up.
+  double SLEW_DIST = 1; //Determines how much distance the robot is given to slow down, in feet - will always be equal to the time taken to speed up.
   double leftSpeed = 0;
   double rightSpeed = 0;
   double targetDist = 0;
@@ -42,11 +42,10 @@ public class goBackward extends CommandBase {
     accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1));
     if (accumulatedDist < targetDist-SLEW_DIST)
     {
-      if (leftSpeed > -0.5)
+      if (leftSpeed > -1)
       {
         leftSpeed -= ACCEL_CONSTANT;
         rightSpeed -= ACCEL_CONSTANT;
-        SLEW_DIST = accumulatedDist;
       }
     }
     else
