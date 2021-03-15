@@ -10,7 +10,7 @@ public class gyroTurnLeft extends CommandBase {
   private double currentAngle;
   private double originalAngle;
   final double ACCEL_CONSTANT = 0.02;
-  double SLEW_DIST = 0;
+  double SLEW_DIST = 1;
   private double rightSpeed = 0;
   private double leftSpeed = 0;
   ADXRS450_Gyro gyro;
