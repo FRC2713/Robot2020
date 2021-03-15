@@ -21,7 +21,7 @@ public class gyroTurnRight extends CommandBase {
     m_DS = driveSubsystem;
     addRequirements(driveSubsystem);
     gyro = m_DS.getGyro();
-    targetAngle = gyro.getAngle() + (Angle * 0.8);
+    targetAngle = Angle;
   }
 
   @Override
