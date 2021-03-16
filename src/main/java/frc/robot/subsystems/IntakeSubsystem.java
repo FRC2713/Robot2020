@@ -24,8 +24,9 @@ public class IntakeSubsystem extends SubsystemBase {
   //public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
   public final iRaidersButton intakeReverse = new iRaidersButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
   public final iRaidersButton humanIntake = new iRaidersButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
-  boolean toggleState = true;
-  boolean testyIntake = false;
+  private boolean toggleState = true;
+  private boolean testyIntake = false;
+  private double triggerPreviousValue;
 
 
 
@@ -61,15 +62,17 @@ public class IntakeSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-      if(SM.xBoxController.getTriggerAxis(GenericHID.Hand.kRight) == 1 && !testyIntake){
-        this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON);
-
-        testyIntake = !testyIntake;
+      if (SM.xBoxController.getTriggerAxis(GenericHID.Hand.kRight) == 1 && triggerPreviousValue != 1){//checks if the trigger is being changed from a non-one value
+        if(!testyIntake){
+          testyIntake = !testyIntake;
+        }
+        else if(testyIntake){
+          testyIntake = !testyIntake;
+        }
       }
-      else if(testyIntake){
-        this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED);
-        testyIntake = !testyIntake;
-      }
+      triggerPreviousValue = SM.xBoxController.getTriggerAxis(GenericHID.Hand.kRight);
+      if (!testyIntake) this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON);
+      if (testyIntake)  this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED);
     }
 
     public enum IntakeGatePosition {

@@ -43,6 +43,7 @@ public class IntakeConveyerCommand extends CommandBase {
         //.delay(.5);
         intakeSubsystem.intakeMotor.set(1);
         position = ON;
+        System.out.println("Running IntakeConveyor");
         break;
 
       case STOPPED:

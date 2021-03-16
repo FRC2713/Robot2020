@@ -16,15 +16,6 @@ public class SM {
   public static final int BACKUP_ARCADE_PORT = 1;
   public static final int ATTACK_LEFT_PORT = 2;
 
-  //public static final int ATTACK_RIGHT_PORT = 3;
-  public static final String XBOX_NAME = "Controller (XBOX 360 For Windows)";
-  public static final String ARCADE_NAME = "Mayflash Arcade Stick";
-  public static final String ATTACK_NAME = "Logitech Attack 3";
-  public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
-  public static final String XBOX3_NAME = "Controller (Gamepad)";
-  public static final String XBOX4_NAME = "Logitech Dual Action";
-
-
   public SM() {
     initControllers();
   }
@@ -37,32 +28,7 @@ public class SM {
     int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
-      //System.out.println("This is the name of the joystick " + test.getName());
-
-
-
-     /* if (test.getName().equals(XBOX_NAME)||
-        test.getName().equals(XBOX2_NAME)||
-        test.getName().equals(XBOX3_NAME)||
-        test.getName().equals(XBOX4_NAME))
-      {
-        if (!test.getName().equals(XBOX4_NAME))xBoxController = new XboxController(i);
-        if (test.getName().equals(XBOX4_NAME)) xBoxController = new XboxImpostor(i);
-      }
-      else if (test.getName().equals(ARCADE_NAME)) {
-        arcadeController = new Joystick(i);
-      }
-      else if (test.getName().equals(ATTACK_NAME)) {
-        leftAttack = new Joystick(i);
-      }
-      if (test.getName().isEmpty()){
-        empty_port = i;
-     }*/
-
-      String XBOX = test.getName();
-
-
-      switch(XBOX){
+      switch(test.getName()){
 
         case "Controller (XBOX 360 For Windows)":
         case "Controller (Gamepad for Xbox 360)":
@@ -84,7 +50,9 @@ public class SM {
           break;
 
         default:
-          empty_port = i;
+          if (test.getName().isEmpty()) {
+            empty_port = i;
+          }
         break;
 
       }
