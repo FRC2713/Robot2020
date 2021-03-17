@@ -9,15 +9,15 @@ public class gyroTurnRight extends CommandBase {
   private double targetAngle;
   private double currentAngle;
   private double originalAngle;
-  final double ACCEL_CONSTANT = 0.02;
-  double SLEW_DIST = 1;
+  final double ACCEL_CONSTANT = 0.003;
+  double SLEW_DIST = 45;
   private double rightSpeed = 0;
   private double leftSpeed = 0;
   ADXRS450_Gyro gyro;
 
   private final DriveSubsystem m_DS;
 
-  public gyroTurnRight( double Angle, DriveSubsystem driveSubsystem) {
+  public gyroTurnRight(double Angle, DriveSubsystem driveSubsystem) {
     m_DS = driveSubsystem;
     addRequirements(driveSubsystem);
     gyro = m_DS.getGyro();
@@ -31,6 +31,9 @@ public class gyroTurnRight extends CommandBase {
     currentAngle = gyro.getAngle();
     originalAngle = currentAngle;
     System.out.println("Initial Angle: " + currentAngle);
+    if(SLEW_DIST > (targetAngle/2)) {
+      SLEW_DIST = targetAngle/2;
+    }
   }
 
   @Override
@@ -40,7 +43,6 @@ public class gyroTurnRight extends CommandBase {
       if(leftSpeed < 0.5) {
         leftSpeed += ACCEL_CONSTANT;
         rightSpeed -= ACCEL_CONSTANT;
-        SLEW_DIST = currentAngle;
       }
     }
     else {

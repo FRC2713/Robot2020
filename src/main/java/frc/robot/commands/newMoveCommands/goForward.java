@@ -10,8 +10,8 @@ public class goForward extends CommandBase {
 //  double originalDist = 0;
 //  double newDist = 0;
   double accumulatedDist = 0;
-  final double ACCEL_CONSTANT = 0.02; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
-  double SLEW_DIST = 1; //Determines how much distance the robot is given to slow down, in feet - will always be equal to the time taken to speed up.
+  final double ACCEL_CONSTANT = 0.005; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
+  double SLEW_DIST = 5; //Determines how much distance the robot is given to slow down, in feet - will always be equal to the time taken to speed up.
   double leftSpeed = 0;
   double rightSpeed = 0;
   double targetDist = 0;
@@ -33,6 +33,9 @@ public class goForward extends CommandBase {
 //    originalDist = m_DS.toFeet(encoder1.getPosition());
 //    newDist = originalDist;
     m_DS.resetEncoder(encoder1);
+    if(SLEW_DIST > (targetDist/2)) {
+      SLEW_DIST = targetDist/2;
+    }
   }
 
   @Override

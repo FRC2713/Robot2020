@@ -9,8 +9,8 @@ public class gyroTurnLeft extends CommandBase {
   private double targetAngle;
   private double currentAngle;
   private double originalAngle;
-  final double ACCEL_CONSTANT = 0.02;
-  double SLEW_DIST = 1;
+  final double ACCEL_CONSTANT = 0.003;
+  double SLEW_DIST = 45;
   private double rightSpeed = 0;
   private double leftSpeed = 0;
   ADXRS450_Gyro gyro;
@@ -31,16 +31,18 @@ public class gyroTurnLeft extends CommandBase {
     currentAngle = gyro.getAngle();
     originalAngle = currentAngle;
     System.out.println("Initial Angle: " + currentAngle);
+    if(SLEW_DIST > (targetAngle/2)) {
+      SLEW_DIST = targetAngle/2;
+    }
   }
 
   @Override
   public void execute() {
     currentAngle = gyro.getAngle() - originalAngle;
-    if (currentAngle < targetAngle-SLEW_DIST) {
+    if (Math.abs(currentAngle) < (targetAngle-SLEW_DIST)) {
       if(leftSpeed > -0.5) {
         leftSpeed -= ACCEL_CONSTANT;
         rightSpeed += ACCEL_CONSTANT;
-        SLEW_DIST = currentAngle;
       }
     }
     else {
@@ -58,7 +60,7 @@ public class gyroTurnLeft extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (currentAngle <= targetAngle) {
+    if (Math.abs(currentAngle) >= targetAngle) {
       m_DS.getRoboDrive().stopMotor();
       Timer.delay(0.25);
       return true;
