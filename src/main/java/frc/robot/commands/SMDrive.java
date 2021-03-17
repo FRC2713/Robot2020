@@ -103,9 +103,9 @@ public class SMDrive extends CommandBase {
     switch(driveMode) {
         //tank
         case 0:
-            measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-            measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-            driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);
+          measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+          measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+          driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);
 
           break;
         //arcade
@@ -113,14 +113,16 @@ public class SMDrive extends CommandBase {
           measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
           measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
           driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
-      break;
-      //bradford
-      default:
-      case 2:
+
+          break;
+        //bradford
+        default:
+        case 2:
           measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
           measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
           driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
-      break;
+
+          break;
 
 
       /*
@@ -143,7 +145,7 @@ public class SMDrive extends CommandBase {
       System.out.println("Turn: " + measuredRight * polarity);
       System.out.println("Polarity: " + polarity);
     }
-    /*
+
     lastLeftStickVal = measuredLeft;
     lastRightStickVal = measuredRight;
 
@@ -158,7 +160,8 @@ public class SMDrive extends CommandBase {
   public void end(boolean interrupted) {
     driveSubsystem.roboDrive.stopMotor();
     DriverStation.reportWarning("Stopped SMDrive", false);
-    //try {writer.close();} catch (Exception ex) {/*ignore*/}
+    //try { writer.close(); } catch (Exception ex) {/*ignore*/}
+    }
 
 
   public boolean getBPressed(){
