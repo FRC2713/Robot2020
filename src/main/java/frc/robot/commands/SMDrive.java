@@ -105,7 +105,7 @@ public class SMDrive extends CommandBase {
         case 0:
           measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
           measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-          driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);
+          driveSubsystem.roboDrive.tankDrive(-measuredLeft *polarity, -measuredRight * polarity, true);
 
           break;
         //arcade
