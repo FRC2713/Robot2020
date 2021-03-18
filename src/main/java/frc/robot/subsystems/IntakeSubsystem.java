@@ -71,8 +71,8 @@ public class IntakeSubsystem extends SubsystemBase {
         }
       }
       triggerPreviousValue = SM.xBoxController.getTriggerAxis(GenericHID.Hand.kRight);
-      if (!testyIntake) this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON);
-      if (testyIntake)  this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED);
+      if (testyIntake) this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON);
+      if (!testyIntake)  this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED);
     }
 
     public enum IntakeGatePosition {

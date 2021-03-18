@@ -69,30 +69,30 @@ public class SMDrive extends CommandBase {
     double measuredRight;
     xbox = SM.xBoxController;
 
-    if (xbox.getRawButtonPressed(7)) {
-      driveMode++;
-      if (driveMode > 2) {
-        driveMode = 0;
-      }
-    String[] drivemode = {"Tank","Arcade","Bradford"};
-    SmartDashboard.putString("Drive Mode is ",drivemode[driveMode]);
 
     //if(ArduinoSensors.getInstance().getSwitchBool()){
     //System.out.println(":)");
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
 
+    if (xbox.getRawButtonPressed(7)) {
+      driveMode++;
+      if (driveMode > 2) {
+        driveMode = 0;
+      }
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
       System.out.println("switch active");
 
     }
-    System.out.println("reverse not active");
+    String[] drivemode = {"Tank","Arcade","Bradford"};
+    SmartDashboard.putString("Drive Mode is ",drivemode[driveMode]);
+    if (!polarityBoolean) System.out.println("reverse not active");
+    if (polarityBoolean) System.out.println("reverse active");
 
     //The Xbox command that switches the controls in order to drive backwards
     if (getBPressed()) {
-      System.out.println("reverse active");
       //  Timer.delay(0.5);
       polarityBoolean = !polarityBoolean;
       ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button
@@ -124,23 +124,19 @@ public class SMDrive extends CommandBase {
 
           break;
 
+    }
 
-      /*
+     /*
       try {
         writer.write(Timer.getFPGATimestamp() + "measuredLeft" + measuredLeft + " measuredRight" + measuredRight + " rawXRight" + -xbox.getX(GenericHID.Hand.kRight));
       } catch (IOException ex) {
         ex.printStackTrace();
       }
       */
-    }
 
     if (RobotBase.isSimulation()) {
       System.out.print("Dive Mode: ");
-      if (useArcadeInsteadOfBradford) {
-        System.out.println("Arcade");
-      } else {
-        System.out.println("Bradford");
-      }
+      System.out.println(drivemode[driveMode]);
       System.out.println("Speed: " + -measuredLeft * polarity);
       System.out.println("Turn: " + measuredRight * polarity);
       System.out.println("Polarity: " + polarity);
