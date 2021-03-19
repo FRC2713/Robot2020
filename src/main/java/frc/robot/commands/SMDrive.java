@@ -27,8 +27,8 @@ public class SMDrive extends CommandBase {
 
   private DriveSubsystem driveSubsystem;
   private XboxController xbox = SM.xBoxController;
-  private boolean useArcadeInsteadOfBradford = false;
-  public boolean polarityBoolean = false;
+  private boolean polarityBoolean = false;
+  String[] drivemode = {"Tank","Arcade","Bradford"};
   private int driveMode = 2;
 
   private double lastLeftStickVal = 0;
@@ -38,9 +38,9 @@ public class SMDrive extends CommandBase {
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
-  String chosenColor = "no color";
+  private String chosenColor = "no color";
 
-  Writer writer;
+  private Writer writer;
 
   public SMDrive(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
@@ -52,7 +52,6 @@ public class SMDrive extends CommandBase {
     DriverStation.reportWarning("Starting SMDrive", false);
     joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
-
 
     /*
     try {
@@ -86,10 +85,8 @@ public class SMDrive extends CommandBase {
       System.out.println("switch active");
 
     }
-    String[] drivemode = {"Tank","Arcade","Bradford"};
+
     SmartDashboard.putString("Drive Mode is ",drivemode[driveMode]);
-    if (!polarityBoolean) System.out.println("reverse not active");
-    if (polarityBoolean) System.out.println("reverse active");
 
     //The Xbox command that switches the controls in order to drive backwards
     if (getBPressed()) {
@@ -99,6 +96,10 @@ public class SMDrive extends CommandBase {
       polarity *= -1;
       SM.rumbleController(xbox, 0.5, 500);
     }
+
+    if (!polarityBoolean) System.out.println("reverse not active");
+    if (polarityBoolean) System.out.println("reverse active");
+
     // 0 - Tank, 1 - Arcade, 2 - Bradford
     switch(driveMode) {
         //tank
