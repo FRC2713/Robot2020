@@ -18,6 +18,8 @@ public class gyroTurnRight extends CommandBase {
   private final DriveSubsystem m_DS;
 
   public gyroTurnRight(double Angle, DriveSubsystem driveSubsystem) {
+    //System.out.println("POM Create gyroTurnRight " + Object.idnum + " angle" + Angle);
+    System.out.println("POM Create gyroTurnRight " +  " angle" + Angle);
     m_DS = driveSubsystem;
     addRequirements(driveSubsystem);
     gyro = m_DS.getGyro();
