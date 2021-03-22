@@ -30,7 +30,7 @@ public class SMDrive extends CommandBase {
   private boolean polarityBoolean = false;
   String[] drivemode = {"Tank","Arcade","Bradford"};
   private int driveMode = 2;
-
+  private final double SLEW_DEFAULT = .03;
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
   private int polarity = 1;
@@ -50,6 +50,7 @@ public class SMDrive extends CommandBase {
   @Override
   public void initialize() {
     DriverStation.reportWarning("Starting SMDrive", false);
+    joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", SLEW_DEFAULT); //This is the slew variable. Bigger number = less slew, and vice versa.
     joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
 
@@ -68,6 +69,8 @@ public class SMDrive extends CommandBase {
     double measuredRight;
     xbox = SM.xBoxController;
 
+    SmartDashboard.putNumber("The Slew limit is: ", joystickChangeLimit);
+    double slewSmartDashboard = SmartDashboard.getNumber("The Slew limit is: ", .03);
 
     //if(ArduinoSensors.getInstance().getSwitchBool()){
     //System.out.println(":)");

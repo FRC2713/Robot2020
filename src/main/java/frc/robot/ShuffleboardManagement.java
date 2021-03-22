@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -23,6 +24,7 @@ public class ShuffleboardManagement {
 
   public NetworkTableEntry slewLimit;
   public NetworkTableEntry reversedControls;
+  public NetworkTableEntry slewMeter;
   private ShuffleboardTab shuffleTab;
   public ShuffleboardManagement() {
     /* This is how to declare HashMap */
@@ -68,6 +70,12 @@ public class ShuffleboardManagement {
     slewLimit = Shuffleboard.getTab("Test")
       .add("Slew Limit", true)
       .withWidget("Toggle Button")
+      .getEntry();
+
+    slewMeter = Shuffleboard.getTab("Slew Meter")
+      .add("Slew", true)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1))
       .getEntry();
 
     reversedControls = Shuffleboard.getTab("Test")
