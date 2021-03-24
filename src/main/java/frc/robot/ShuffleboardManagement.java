@@ -25,6 +25,7 @@ public class ShuffleboardManagement {
   public NetworkTableEntry slewLimit;
   public NetworkTableEntry reversedControls;
   public NetworkTableEntry slewMeter;
+  public NetworkTableEntry maxSpeed;
   private ShuffleboardTab shuffleTab;
   public ShuffleboardManagement() {
     /* This is how to declare HashMap */
@@ -76,6 +77,12 @@ public class ShuffleboardManagement {
       .add("Slew", true)
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1))
+      .getEntry();
+
+    maxSpeed = Shuffleboard.getTab("Max Speed")
+      .add("Max Speed", true)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 100))
       .getEntry();
 
     reversedControls = Shuffleboard.getTab("Test")
