@@ -9,7 +9,10 @@ import frc.robot.subsystems.DriveSubsystem;
 public class goBackward extends CommandBase {
   //  double originalDist = 0;
 //  double newDist = 0;
+  double leftDist = 0;
+  double rightDist = 0;
   double accumulatedDist = 0;
+  double error = 0;
   final double ACCEL_CONSTANT = 0.005; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
   double SLEW_DIST = 5; //Determines how much distance the robot is given to slow down, in feet - will always be equal to the time taken to speed up.
   double leftSpeed = 0;
@@ -24,31 +27,37 @@ public class goBackward extends CommandBase {
     m_DS = driveSubsystem;
     targetDist = distanceToTravel;
     addRequirements(driveSubsystem); //establishes drive subsystem as subsystem used
-    accumulatedDist = 0;
   }
 
   @Override
   public void initialize() {
     encoder1 = m_DS.getEncoder(1);
+    encoder2 = m_DS.getEncoder(2);
 //    originalDist = m_DS.toFeet(encoder1.getPosition());
 //    newDist = originalDist;
     m_DS.resetEncoder(encoder1);
+    m_DS.resetEncoder(encoder2);
     if(SLEW_DIST > (targetDist/2)) {
       SLEW_DIST = targetDist/2;
     }
   }
 
+
   @Override
   public void execute()
   {
 //    newDist = encoder1.getPosition();
-    accumulatedDist = Math.abs(m_DS.improvedEncoderDist(encoder1));
+    leftDist = Math.abs(m_DS.improvedEncoderDist(encoder1));
+    rightDist = Math.abs(m_DS.improvedEncoderDist(encoder2));
+    accumulatedDist = (leftDist + rightDist)/2;
+    error = leftDist/rightDist;
+
     if (accumulatedDist < targetDist-SLEW_DIST)
     {
       if (leftSpeed > -1)
       {
         leftSpeed -= ACCEL_CONSTANT;
-        rightSpeed -= ACCEL_CONSTANT;
+        rightSpeed = (leftSpeed * -error);
       }
     }
     else
@@ -56,7 +65,7 @@ public class goBackward extends CommandBase {
       if(leftSpeed > ACCEL_CONSTANT)
       {
         leftSpeed += ACCEL_CONSTANT;
-        rightSpeed += ACCEL_CONSTANT;
+        rightSpeed = (leftSpeed * error);
       }
       else
       {
@@ -64,7 +73,10 @@ public class goBackward extends CommandBase {
       }
     }
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
-    System.out.println("Traveled " + accumulatedDist + " Feet");
+    if (m_DS.printIterator() == true) {
+      System.out.println("Traveled " + accumulatedDist + " Feet");
+    }
+
   }
 
   @Override
