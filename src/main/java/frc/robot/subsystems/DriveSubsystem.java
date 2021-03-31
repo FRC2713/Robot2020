@@ -35,6 +35,8 @@ public class DriveSubsystem extends SubsystemBase {
   double old_E_Value = 0;
   double traveledInches = 0;
   double traveledFeet = 0;
+  double i = 0;
+  double printIterator = 5;
   public double distanceToDrive = 0;
   public static double gyroTurnConstant() {return 0.9; } //Multiplies angles by constant
   ADXRS450_Gyro gyro = new ADXRS450_Gyro();
@@ -57,6 +59,11 @@ public class DriveSubsystem extends SubsystemBase {
       return encoder4;
     }
     else return null;
+  }
+
+  public boolean printIterator() {
+    if (i == printIterator) { return true; }
+    else { return false;}
   }
 
   public ADXRS450_Gyro getGyro() {
@@ -95,9 +102,9 @@ public class DriveSubsystem extends SubsystemBase {
     backRight.follow(frontRight);
 
     encoder1 = frontLeft.getEncoder();
-    encoder2 = backRight.getEncoder();
-    encoder3 = frontRight.getEncoder();
-    encoder4 = frontLeft.getEncoder();
+    encoder2 = frontRight.getEncoder();
+    encoder3 = backLeft.getEncoder();
+    encoder4 = backRight.getEncoder();
 
     driveCommand = new SMDrive(this);
     roboDrive = new DifferentialDrive(frontLeft, frontRight);
@@ -112,6 +119,8 @@ public class DriveSubsystem extends SubsystemBase {
     double value2 = encoder2.getPosition();
     double value3 = encoder3.getPosition();
     double value4 = encoder4.getPosition();
+    i++;
+    if (i == 5) {i = 0;}
     //System.out.println("The value of encoder 1 is: " + value);
     //System.out.println("The value of encoder 2 is: " + value2);
     //System.out.println("The value of encoder 3 is: " + value3);
@@ -132,7 +141,9 @@ public class DriveSubsystem extends SubsystemBase {
     double traveledUnits = (current_E_Value - old_E_Value);
     traveledInches = toInches(traveledUnits);
     old_E_Value = current_E_Value;
-    System.out.println("Traveled " + traveledInches + "Inches");
+    if (printIterator() == true) {
+      System.out.println("Traveled " + traveledInches + "Inches");
+    }
     return traveledInches;
   }
 
@@ -140,7 +151,10 @@ public class DriveSubsystem extends SubsystemBase {
     current_E_Value = encoder.getPosition();
     double traveledUnits = (current_E_Value - old_E_Value);
     traveledFeet = toFeet(traveledUnits);
-    System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
+    if (printIterator() == true) {
+      System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
+    }
+
     return traveledFeet;
   }
 
