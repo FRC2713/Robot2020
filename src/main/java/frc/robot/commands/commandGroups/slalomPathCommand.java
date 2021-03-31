@@ -1,11 +1,14 @@
 package frc.robot.commands.commandGroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.newMoveCommands.encoderTurnLeft;
+import frc.robot.commands.newMoveCommands.encoderTurnRight;
+import frc.robot.commands.newMoveCommands.goForward;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class slalomPathCommand extends SequentialCommandGroup {
-  public slalomPathCommand(DriveSubsystem driveSubsystem) {
-    /*addCommands(
+  public slalomPathCommand(DriveSubsystem drivesubsystem) {
+    addCommands(
 
       new encoderTurnLeft(45, drivesubsystem),
 
@@ -38,7 +41,7 @@ public class slalomPathCommand extends SequentialCommandGroup {
       new encoderTurnRight(45, drivesubsystem),
 
       new goForward(75.08/12, drivesubsystem)
-    );*/
+    );
 
   }
 }
