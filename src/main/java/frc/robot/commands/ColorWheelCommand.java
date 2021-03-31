@@ -89,7 +89,7 @@ public class ColorWheelCommand extends CommandBase {
     //SmartDashboard.putNumber("Confidence", colormatchwheelsubsystem.colorsensor.match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
 
-    System.out.println("hey look this is working");
+    //System.out.println("hey look this is working");
 
 
 
