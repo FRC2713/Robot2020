@@ -84,6 +84,8 @@ public class SM {
     }
   }
 
+
+
   /**
    * Rumbles a given controller for a specified time
    * @param stick Controller to rumble
@@ -110,6 +112,7 @@ public class SM {
     } else {
       _setRumble(stick, intensity, rumbleType);
     }
+
   }
 
   private static void _setRumble(GenericHID stick, double intensity, GenericHID.RumbleType rumbleType) {
@@ -138,3 +141,4 @@ public class SM {
     return new DoubleSolenoid(forwardChannel, reverseChannel);
   }
 }
+
