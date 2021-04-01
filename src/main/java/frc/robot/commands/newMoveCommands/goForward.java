@@ -13,7 +13,7 @@ public class goForward extends CommandBase {
   double rightDist = 0;
   double accumulatedDist = 0;
   double error = 1;
-  final double ACCEL_CONSTANT = 0.006; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
+  final double ACCEL_CONSTANT = 0.005; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
   double SLEW_DIST = 5; //Determines how much distance the robot is given to slow down, in feet - will always be equal to the time taken to speed up.
   double leftSpeed = 0;
   double rightSpeed = 0;
