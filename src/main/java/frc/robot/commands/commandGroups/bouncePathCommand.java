@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.newMoveCommands.*;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class bouncePathCommand extends SequentialCommandGroup{
+public class bouncePathCommand extends SequentialCommandGroup {
   public bouncePathCommand(DriveSubsystem drivesubsystem) {
 
     //bounce path
@@ -49,7 +49,6 @@ public class bouncePathCommand extends SequentialCommandGroup{
       new goBackward(42.426, drivesubsystem)
 
       );
-
 
   }
 }
