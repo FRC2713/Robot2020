@@ -32,11 +32,11 @@ public class goBackward extends CommandBase {
   @Override
   public void initialize() {
     encoder1 = m_DS.getEncoder(1);
-    encoder2 = m_DS.getEncoder(2);
+//    encoder2 = m_DS.getEncoder(2);
 //    originalDist = m_DS.toFeet(encoder1.getPosition());
 //    newDist = originalDist;
     m_DS.resetEncoder(encoder1);
-    m_DS.resetEncoder(encoder2);
+//    m_DS.resetEncoder(encoder2);
     if(SLEW_DIST > (targetDist/2)) {
       SLEW_DIST = targetDist/2;
     }
@@ -48,16 +48,16 @@ public class goBackward extends CommandBase {
   {
 //    newDist = encoder1.getPosition();
     leftDist = Math.abs(m_DS.improvedEncoderDist(encoder1));
-    rightDist = Math.abs(m_DS.improvedEncoderDist(encoder2));
-    accumulatedDist = (leftDist + rightDist)/2;
-    error = leftDist/rightDist;
+//    rightDist = Math.abs(m_DS.improvedEncoderDist(encoder2));
+    accumulatedDist = leftDist;
+//    error = leftDist;
 
     if (accumulatedDist < targetDist-SLEW_DIST)
     {
       if (leftSpeed > -1)
       {
         leftSpeed -= ACCEL_CONSTANT;
-        rightSpeed = (leftSpeed * -error);
+        rightSpeed -= ACCEL_CONSTANT;
       }
     }
     else
@@ -65,7 +65,7 @@ public class goBackward extends CommandBase {
       if(leftSpeed > ACCEL_CONSTANT)
       {
         leftSpeed += ACCEL_CONSTANT;
-        rightSpeed = (leftSpeed * error);
+        rightSpeed += ACCEL_CONSTANT;
       }
       else
       {
