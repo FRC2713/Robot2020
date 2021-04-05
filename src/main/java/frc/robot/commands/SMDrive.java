@@ -13,8 +13,7 @@ import frc.robot.SM;
 import frc.robot.ShuffleboardManagement;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
+import frc.robot.commands.buttonCommands.left90;
 
 import java.io.Writer;
 import java.util.Map;
@@ -35,6 +34,9 @@ public class SMDrive extends CommandBase {
   private double lastRightStickVal = 0;
   private int polarity = 1;
   private boolean bPressed = false;
+  private boolean autoTurn = false;
+  private int povDeg = -1;
+  left90 turnLeft = new left90();
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
@@ -100,8 +102,27 @@ public class SMDrive extends CommandBase {
     if (!polarityBoolean) System.out.println("reverse not active");
     if (polarityBoolean) System.out.println("reverse active");
 
+    //POV (D-pad) button commands linked to the turn functions
+    povDeg = xbox.getPOV();
+    switch (povDeg) {
+      default:
+      case -1:
+        autoTurn = false;
+
+        break;
+
+      //Left 90
+      case 90:
+        autoTurn = true;
+        break;
+    }
+
+
     // 0 - Tank, 1 - Arcade, 2 - Bradford
-    switch(driveMode) {
+
+    if(!autoTurn) {
+
+      switch (driveMode) {
         //tank
         case 0:
           measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
@@ -135,16 +156,17 @@ public class SMDrive extends CommandBase {
       }
       */
 
-    if (RobotBase.isSimulation()) {
-      System.out.print("Dive Mode: ");
-      System.out.println(drivemode[driveMode]);
-      System.out.println("Speed: " + -measuredLeft * polarity);
-      System.out.println("Turn: " + measuredRight * polarity);
-      System.out.println("Polarity: " + polarity);
-    }
+      if (RobotBase.isSimulation()) {
+        System.out.print("Dive Mode: ");
+        System.out.println(drivemode[driveMode]);
+        System.out.println("Speed: " + -measuredLeft * polarity);
+        System.out.println("Turn: " + measuredRight * polarity);
+        System.out.println("Polarity: " + polarity);
+      }
 
-    lastLeftStickVal = measuredLeft;
-    lastRightStickVal = measuredRight;
+      lastLeftStickVal = measuredLeft;
+      lastRightStickVal = measuredRight;
+    }
 
     if(SM.xBoxController.getBButtonPressed()){
       setBPressed();
