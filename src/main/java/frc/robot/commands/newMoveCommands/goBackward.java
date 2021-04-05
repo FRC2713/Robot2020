@@ -48,9 +48,9 @@ public class goBackward extends CommandBase {
   {
 //    newDist = encoder1.getPosition();
     leftDist = Math.abs(m_DS.improvedEncoderDist(encoder1));
-    rightDist = Math.abs(m_DS.improvedEncoderDist(encoder2));
-    accumulatedDist = (leftDist + rightDist)/2;
-    error = leftDist/rightDist;
+    //rightDist = Math.abs(m_DS.improvedEncoderDist(encoder2));
+    accumulatedDist = /*(leftDist + rightDist)/2*/leftDist;
+   // error = leftDist/rightDist;
 
     if (accumulatedDist < targetDist-SLEW_DIST)
     {

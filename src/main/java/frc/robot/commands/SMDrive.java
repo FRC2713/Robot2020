@@ -12,6 +12,9 @@ import frc.robot.RobotContainer;
 import frc.robot.SM;
 import frc.robot.ShuffleboardManagement;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
 
 import java.io.Writer;
 import java.util.Map;
@@ -24,20 +27,20 @@ public class SMDrive extends CommandBase {
 
   private DriveSubsystem driveSubsystem;
   private XboxController xbox = SM.xBoxController;
-  private boolean useArcadeInsteadOfBradford = false;
-  public boolean polarityBoolean = false;
+  private boolean polarityBoolean = false;
+  String[] drivemode = {"Tank","Arcade","Bradford"};
+  private int driveMode = 2;
 
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
   private int polarity = 1;
   private boolean bPressed = false;
-
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
-  String chosenColor = "no color";
+  private String chosenColor = "no color";
 
-  Writer writer;
+  private Writer writer;
 
   public SMDrive(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
@@ -50,7 +53,6 @@ public class SMDrive extends CommandBase {
     joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
     driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
 
-
     /*
     try {
       writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Timer.getFPGATimestamp() + ".txt"), StandardCharsets.UTF_8));
@@ -62,65 +64,80 @@ public class SMDrive extends CommandBase {
 
   @Override
   public void execute() {
-
-
     double measuredLeft;
     double measuredRight;
     xbox = SM.xBoxController;
+
+
     //if(ArduinoSensors.getInstance().getSwitchBool()){
-     //System.out.println(":)");
+    //System.out.println(":)");
     //}
     //System.out.println(ArduinoSensors.getInstance().getLRFinches());
+
     if (xbox.getRawButtonPressed(7)) {
-      useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
+      driveMode++;
+      if (driveMode > 2) {
+        driveMode = 0;
+      }
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       SM.rumbleController(xbox, .5, 500);
       System.out.println("switch active");
 
     }
-    System.out.println("reverse not active");
+
+    SmartDashboard.putString("Drive Mode is ",drivemode[driveMode]);
 
     //The Xbox command that switches the controls in order to drive backwards
     if (getBPressed()) {
-      System.out.println("reverse active");
-    //  Timer.delay(0.5);
+      //  Timer.delay(0.5);
       polarityBoolean = !polarityBoolean;
       ShuffleboardManagement.getInstance().setReversedControlValue(polarityBoolean); //connects shuffleboard to b button
       polarity *= -1;
       SM.rumbleController(xbox, 0.5, 500);
     }
-    if (useArcadeInsteadOfBradford) {
-      /*
 
-      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-      measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.tankDrive(measuredLeft, measuredRight, true);*/
-      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-      measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
-      /** changed to arcade at top **/
-    } else {
-      measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
-      measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
-      driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+    if (!polarityBoolean) System.out.println("reverse not active");
+    if (polarityBoolean) System.out.println("reverse active");
 
-      /*
+    // 0 - Tank, 1 - Arcade, 2 - Bradford
+    switch(driveMode) {
+        //tank
+        case 0:
+          measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+          measuredRight = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+          driveSubsystem.roboDrive.tankDrive(-measuredLeft *polarity, -measuredRight * polarity, true);
+
+          break;
+        //arcade
+        case 1:
+          measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+          measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kLeft), lastRightStickVal, joystickChangeLimit);
+          driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+
+          break;
+        //bradford
+        default:
+        case 2:
+          measuredLeft = DriveSubsystem.slewLimit(xbox.getY(GenericHID.Hand.kLeft), lastLeftStickVal, joystickChangeLimit);
+          measuredRight = DriveSubsystem.slewLimit(xbox.getX(GenericHID.Hand.kRight), lastRightStickVal, joystickChangeLimit);
+          driveSubsystem.roboDrive.arcadeDrive(-measuredLeft* polarity, measuredRight* polarity, true);
+
+          break;
+
+    }
+
+     /*
       try {
         writer.write(Timer.getFPGATimestamp() + "measuredLeft" + measuredLeft + " measuredRight" + measuredRight + " rawXRight" + -xbox.getX(GenericHID.Hand.kRight));
       } catch (IOException ex) {
         ex.printStackTrace();
       }
       */
-    }
 
     if (RobotBase.isSimulation()) {
       System.out.print("Dive Mode: ");
-      if (useArcadeInsteadOfBradford) {
-        System.out.println("Arcade");
-      } else {
-        System.out.println("Bradford");
-      }
+      System.out.println(drivemode[driveMode]);
       System.out.println("Speed: " + -measuredLeft * polarity);
       System.out.println("Turn: " + measuredRight * polarity);
       System.out.println("Polarity: " + polarity);
@@ -140,8 +157,9 @@ public class SMDrive extends CommandBase {
   public void end(boolean interrupted) {
     driveSubsystem.roboDrive.stopMotor();
     DriverStation.reportWarning("Stopped SMDrive", false);
-    //try {writer.close();} catch (Exception ex) {/*ignore*/}
-  }
+    //try { writer.close(); } catch (Exception ex) {/*ignore*/}
+    }
+
 
   public boolean getBPressed(){
     return bPressed;

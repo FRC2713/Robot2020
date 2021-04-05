@@ -82,14 +82,12 @@ public class Robot extends TimedRobot {
       backCamera.close();
       currCam = 0;
       frontCamera = cs.startAutomaticCapture(currCam);
-      System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
       SmartDashboard.putBoolean("is this running", true);
     }
     else if(currCam == 0 && frontCamera != null){
       frontCamera.close();
       currCam = 1;
       backCamera = cs.startAutomaticCapture(currCam);
-      System.out.println("hi folkssssssssssssssssssss!!!!!!!!!!!!!!");
       SmartDashboard.putBoolean("is this running", true);
     }
   }
@@ -112,6 +110,7 @@ public class Robot extends TimedRobot {
     //blightsensor.printOut();
     SmartDashboard.putBoolean("Gyro Connected?", gyro.isConnected());
     SmartDashboard.putNumber("GyroAngle", gyro.getAngle());
+
     if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE){
       //System.out.println("this is a test; 1");
     }

@@ -9,18 +9,19 @@ import frc.robot.subsystems.DriveSubsystem;
 public class slalomPathCommand extends SequentialCommandGroup {
   public slalomPathCommand(DriveSubsystem drivesubsystem) {
     addCommands(
+      new goForward(2, drivesubsystem),
 
-      new encoderTurnLeft(45, drivesubsystem),
+      new encoderTurnLeft(55, drivesubsystem),
 
-      new goForward(76.011/12, drivesubsystem),
+      new goForward((76.011-4)/12, drivesubsystem),
 
-      new encoderTurnRight(45, drivesubsystem),
+      new encoderTurnRight(55, drivesubsystem),
 
-      new goForward(132.504/12, drivesubsystem),
+      new goForward(9+4/12, drivesubsystem),//first long straight
 
-      new encoderTurnRight(45, drivesubsystem),
+      new encoderTurnRight(60, drivesubsystem),
 
-      new goForward(76.011/12, drivesubsystem),
+      new goForward(76.011/12+2, drivesubsystem),
 
       new encoderTurnLeft(90, drivesubsystem),
 
