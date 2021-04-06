@@ -22,8 +22,6 @@ import static frc.robot.RobotMap.REGULAR_SPEED;
 
 public class SMDrive extends CommandBase {
 
-  //This class ...
-
   private DriveSubsystem driveSubsystem;
   private XboxController xbox = SM.xBoxController;
   private boolean polarityBoolean = false;
@@ -36,7 +34,7 @@ public class SMDrive extends CommandBase {
   private boolean bPressed = false;
   private boolean autoTurn = false;
   private int povDeg = -1;
-  left90 turnLeft = new left90();
+  left90 turnLeft = new left90(driveSubsystem);
   //Ultrasonic ultra = new Ultrasonic(RobotMap.ultraSonicPing,RobotMap.ultraSonicEcho);
 
   private double joystickChangeLimit;
@@ -108,12 +106,12 @@ public class SMDrive extends CommandBase {
       default:
       case -1:
         autoTurn = false;
-
         break;
 
       //Left 90
       case 90:
         autoTurn = true;
+        turnLeft.turnLeft90();
         break;
     }
 

@@ -7,27 +7,26 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.newMoveCommands.gyroTurnLeft;
 
-public class left90 extends CommandBase {
+public class left90 {
 
-  ADXRS450_Gyro gyro;
-  DriveSubsystem drive = new DriveSubsystem();
+  private DriveSubsystem m_DS;
   private double turnFactor = 90;
-  gyroTurnLeft gyroLeft = new gyroTurnLeft(turnFactor, drive);
 
-  public left90() {
 
+  public left90(DriveSubsystem driveSubsystem) {
+    m_DS = driveSubsystem;
   }
+
+  //drive = new DriveSubsystem();
+
 
   public void turnLeft90() {
-//turn code goes here
-
-  if(!gyroLeft.isFinished()) {
-    gyroLeft.execute(); //yeah i do think you guys would be better off maybe just finding a way to directly find a way to use command
-    System.out.println("Charles is it working :smerk:");
-  }
-
-  gyroLeft.isFinished();
-
+   /* if(!gyroLeft.isFinished()) { //it should! in theory! im not 100% sure how commands work outside of command groups
+      gyroLeft.execute(); //yeah i do think you guys would be better off maybe just finding a way to directly find a way to use command
+      System.out.println("Charles is it working :smerk:");
+    } */
+    gyroTurnLeft gyroLeft = new gyroTurnLeft(turnFactor, m_DS);
+   // }
   }
 
 }
