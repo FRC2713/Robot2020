@@ -17,31 +17,31 @@ public class slalomPathCommand extends SequentialCommandGroup {
 
       new encoderTurnRight(55, drivesubsystem),
 
-      new goForward(9+4/12, drivesubsystem),//first long straight
+      new goForward(9+10.5/12, drivesubsystem),//first long straight
 
       new encoderTurnRight(60, drivesubsystem),
 
-      new goForward(76.011/12+2, drivesubsystem),
+      new goForward(76.011/12+2, drivesubsystem),//go between cones
 
-      new encoderTurnLeft(90, drivesubsystem),
+      new encoderTurnLeft(90, drivesubsystem),//first turn around top
 
-      new goForward(42.426/12, drivesubsystem),
+      new goForward(42.426/12, drivesubsystem),//drive to top
 
-      new encoderTurnLeft(90, drivesubsystem),
+      new encoderTurnLeft(90, drivesubsystem),//turn at top
 
-      new goForward(42.426/12, drivesubsystem),
+      new goForward(61.526/12, drivesubsystem),
 
-      new encoderTurnLeft(90, drivesubsystem),
+      new encoderTurnLeft(106, drivesubsystem),
 
-      new goForward(75.06/12, drivesubsystem),
+      new goForward(93.06/12, drivesubsystem),
 
-      new encoderTurnRight(45, drivesubsystem),
+      new encoderTurnRight(54, drivesubsystem),
 
-      new goForward(133.849/12, drivesubsystem),
+      new goForward(118.849/12, drivesubsystem),//final long straight back
 
-      new encoderTurnRight(45, drivesubsystem),
+      new encoderTurnRight(65, drivesubsystem),
 
-      new goForward(75.08/12, drivesubsystem)
+      new goForward(97.08/12, drivesubsystem)
     );
 
   }
