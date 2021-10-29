@@ -21,8 +21,7 @@ import frc.robot.SM;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
-import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.DOWN;
-import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -155,8 +154,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    m_robotContainer.intakeSubsystem.intakeGateCommand.setIntakeGatePosition(DOWN);
-    m_robotContainer.intakeSubsystem.humanIntakeCommand.setIntakeGatePosition(IntakeSubsystem.HumanIntakePosition.DOWN);
+    //m_robotContainer.intakeSubsystem.intakeGateCommand.setIntakeGatePosition(DOWN);
+    //m_robotContainer.intakeSubsystem.humanIntakeCommand.setIntakeGatePosition(IntakeSubsystem.HumanIntakePosition.DOWN);
 
   }
 

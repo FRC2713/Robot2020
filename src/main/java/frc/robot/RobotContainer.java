@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.IntakeGateCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.IntakeArmCommand;
 import frc.robot.commands.commandGroups.*;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -20,6 +21,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
+import frc.robot.util.ToggleIntake;
 
 
 /**
@@ -46,14 +48,11 @@ public class RobotContainer {
   private final initLineOnly initLineOnly = new initLineOnly(driveSubsystem);
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-  private final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(intakeSubsystem);
-  private final scoreFront scoreFront = new scoreFront(driveSubsystem, intakeSubsystem, intakeGateCommand);
   private final experimentalScoreFront experimentalScoreFront = new experimentalScoreFront(driveSubsystem, intakeSubsystem);
-  private final scoreLeft scoreLeft = new scoreLeft(driveSubsystem, intakeSubsystem, intakeGateCommand);
-  private final scoreRight scoreRight = new scoreRight(driveSubsystem, intakeSubsystem, intakeGateCommand);
   private final calibrateAutonomous calibrateAutonomous = new calibrateAutonomous(driveSubsystem);
   private final barrelPathCommand barrelPathCommand = new barrelPathCommand(driveSubsystem);
 
+  private final XboxController driveController = new XboxController(0);
 
   /**
    * The container for the robot.  Contains subsystems, SM devices, and commands.
@@ -70,8 +69,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    intakeSubsystem.initControls();
+
     climberSubsystem.initControls();
+    new JoystickButton(driveController, XboxController.Button.kA.value)
+      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.FORWARD)).whenReleased(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
+    new JoystickButton(driveController, XboxController.Button.kB.value)
+      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.BACKWARD)).whenReleased(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
   }
 
 

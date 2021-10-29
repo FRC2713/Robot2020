@@ -34,6 +34,7 @@ public class SM {
         case "Controller (Gamepad for Xbox 360)":
         case "Controller (Gamepad)":
         case "Xbox Controller":
+        case "Controller (Xbox One For Windows)":
           xBoxController = new XboxController(i);
           break;
 
@@ -72,16 +73,16 @@ public class SM {
     if (leftAttack == null) {
       leftAttack = new Joystick(empty_port);
     }
-
+/*
     if (Robot.m_robotContainer != null) {
       Robot.m_robotContainer.intakeSubsystem.intakeGateUpButton.updateJoystick(xBoxController);
       Robot.m_robotContainer.intakeSubsystem.intakeReverse.updateJoystick(xBoxController);
-      Robot.m_robotContainer.intakeSubsystem.humanIntake.updateJoystick(xBoxController);
+      Robot.m_robotContainer.intakeSubsystem.humanIntake.updateJoystick(xBoxController);cls
 
       Robot.m_robotContainer.climberSubsystem.climberButton.updateJoystick(leftAttack);
       Robot.m_robotContainer.climberSubsystem.witchUpButton.updateJoystick(leftAttack);
       Robot.m_robotContainer.climberSubsystem.witchDownButton.updateJoystick(leftAttack);
-    }
+    }*/
   }
 
 

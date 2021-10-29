@@ -2,47 +2,50 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.util.ToggleIntake;
 
 import static java.math.RoundingMode.DOWN;
 import static java.math.RoundingMode.UP;
 
-public class IntakeArmCommand {
-   public IntakeArmCommand(IntakeSubsystem intakeSubsystem) {
-    this.intakeSubsystem = intakeSubsystem;
-    update();
+public class IntakeArmCommand extends CommandBase {
+  public final IntakeSubsystem intake;
+  public ToggleIntake toggle;
+
+  public IntakeArmCommand(IntakeSubsystem in, ToggleIntake tog){
+    this.intake = in;
+    toggle = tog;
   }
 
-  public void setIntakeArmPosition(IntakeSubsystem.IntakeArmPosition inputState) {
-    position = inputState;
+  @Override
+  public void initialize() {
+
   }
 
-  public IntakeSubsystem.IntakeArmPosition getIntakeArmPosition() {
-    return position;
-  }
-  private IntakeSubsystem intakeSubsystem;
-  private IntakeSubsystem.IntakeArmPosition position = IntakeSubsystem.IntakeArmPosition.UP;
-
-  private void update() {
-    switch (position) {
-      default:
-      case UP:
-        intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kReverse);
-        position = IntakeSubsystem.IntakeArmPosition.UP;
-        break;
-
-      case DOWN:
-        intakeSubsystem.gateSolenoid.set(DoubleSolenoid.Value.kForward);
-        position = IntakeSubsystem.IntakeArmPosition.DOWN;
-        break;
-
+  @Override
+  public void execute() {
+    if(toggle==ToggleIntake.FORWARD) {
+      this.intake.setIntakeMotor(1.0);
+    }
+    else if(toggle==ToggleIntake.BACKWARD){
+      this.intake.setIntakeMotor(-1.0);
+    }
+    else if(toggle==ToggleIntake.STOP){
+      this.intake.setIntakeMotor(0.0);
     }
   }
 
-  public boolean setIntakeJointPosition(IntakeSubsystem.IntakeArmPosition desiredState) {
-    //currentState = desiredState;
+  @Override
+  public void end(boolean interrupted) {
+
+  }
+
+  @Override
+  public boolean isFinished() {
     return true;
   }
+
 
 }
 
