@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ConfigureBed;
 import frc.robot.Robot;
@@ -28,6 +29,7 @@ public class DriveSubsystem extends SubsystemBase {
   CANEncoder encoder2;
   CANEncoder encoder3;
   CANEncoder encoder4;
+  ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   //Differential drive coordinates motors, used for tank + arcade drive
   public SMDrive driveCommand;
   public DifferentialDrive roboDrive;
@@ -39,7 +41,11 @@ public class DriveSubsystem extends SubsystemBase {
   double printIterator = 5;
   public double distanceToDrive = 0;
   public static double gyroTurnConstant() {return 0.9; } //Multiplies angles by constant
-  ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
+  @Override
+  public void setDefaultCommand(Command defaultCommand) {
+    super.setDefaultCommand(defaultCommand);
+  }
 
   public DifferentialDrive getRoboDrive () {
     return roboDrive;
@@ -86,7 +92,6 @@ public class DriveSubsystem extends SubsystemBase {
       frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-
     }
     else{
       System.out.println("An error has occurred with the jumper");
@@ -111,6 +116,11 @@ public class DriveSubsystem extends SubsystemBase {
 
     roboDrive.setDeadband(RobotMap.DEADBAND);
     setDefaultCommand(driveCommand);
+  }
+
+
+  public void vroom(double leftSpeed, double rightSpeed) {
+    roboDrive.tankDrive(leftSpeed, rightSpeed);
   }
 
   @Override

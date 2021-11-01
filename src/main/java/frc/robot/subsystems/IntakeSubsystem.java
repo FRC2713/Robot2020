@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -27,7 +28,6 @@ public class IntakeSubsystem extends SubsystemBase {
   private boolean toggleState = true;
   private boolean testyIntake = false;
   private double triggerPreviousValue;
-
 
 
   //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
