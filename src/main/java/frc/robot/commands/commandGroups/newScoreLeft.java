@@ -5,9 +5,10 @@ import frc.robot.commands.oldMoveCommands.moveBackward;
 import frc.robot.commands.oldMoveCommands.moveForward;
 import frc.robot.commands.oldMoveCommands.turnLeft45;
 import frc.robot.commands.oldMoveCommands.turnRight45;
-import frc.robot.commands.outputGateCommand;
+import frc.robot.commands.OutputGateCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.util.ToggleGate;
 
 public class newScoreLeft extends SequentialCommandGroup {
   public newScoreLeft(DriveSubsystem driveSubsystem, IntakeSubsystem intakeSubsystem) {
@@ -16,7 +17,7 @@ public class newScoreLeft extends SequentialCommandGroup {
 
       new turnLeft45(driveSubsystem, 30),
 
-      new outputGateCommand(intakeSubsystem),
+      new OutputGateCommand(intakeSubsystem, ToggleGate.OPEN),
 
       new turnRight45(driveSubsystem, 30),
 
