@@ -73,10 +73,6 @@ public class goBackward extends CommandBase {
       }
     }
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
-    if (m_DS.printIterator() == true) {
-      System.out.println("Traveled " + accumulatedDist + " Feet");
-    }
-
   }
 
   @Override

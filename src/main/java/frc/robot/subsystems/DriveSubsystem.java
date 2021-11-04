@@ -20,10 +20,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   /*Creates motors, getting motor controller (CANSparkMax) ports from RobotMap
   * MAKE SURE TEST BED IS SET TO BRUSHED*/
-  private CANSparkMax frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  private CANSparkMax frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  private CANSparkMax backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  private CANSparkMax backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+  private CANSparkMax frontLeft;
+  private CANSparkMax frontRight;
+  private CANSparkMax backLeft;
+  private CANSparkMax backRight;
 
   CANEncoder encoder1;
   CANEncoder encoder2;
@@ -31,21 +31,8 @@ public class DriveSubsystem extends SubsystemBase {
   CANEncoder encoder4;
   ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   //Differential drive coordinates motors, used for tank + arcade drive
-  public SMDrive driveCommand;
   public DifferentialDrive roboDrive;
-  double current_E_Value = 0;
-  double old_E_Value = 0;
-  double traveledInches = 0;
-  double traveledFeet = 0;
-  double i = 0;
-  double printIterator = 5;
-  public double distanceToDrive = 0;
-  public static double gyroTurnConstant() {return 0.9; } //Multiplies angles by constant
 
-  @Override
-  public void setDefaultCommand(Command defaultCommand) {
-    super.setDefaultCommand(defaultCommand);
-  }
 
   public DifferentialDrive getRoboDrive () {
     return roboDrive;
@@ -67,40 +54,17 @@ public class DriveSubsystem extends SubsystemBase {
     else return null;
   }
 
-  public boolean printIterator() {
-    if (i == printIterator) { return true; }
-    else { return false;}
-  }
-
   public ADXRS450_Gyro getGyro() {
     return gyro;
   }
 
   public DriveSubsystem() {
 
-    if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.ONE || ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.THREE){
-      //System.out.println("this is a test; 1");
       frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
       frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
       backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
       backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    }
-    else if(ConfigureBed.getInstance().configBedInit()== ConfigureBed.Jumper.TWO){
-      //System.out.println("this is a test; 2");
-      frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-      frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-      backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-      backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-    }
-    else{
-      System.out.println("An error has occurred with the jumper");
-      //System.exit(-1);
-      //frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-      //backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-    }
     Robot.initializeSparkDefaults(frontLeft, frontRight);
 
     backLeft.follow(frontLeft);
@@ -111,26 +75,18 @@ public class DriveSubsystem extends SubsystemBase {
     encoder3 = backLeft.getEncoder();
     encoder4 = backRight.getEncoder();
 
-    driveCommand = new SMDrive(this);
     roboDrive = new DifferentialDrive(frontLeft, frontRight);
 
     roboDrive.setDeadband(RobotMap.DEADBAND);
-    setDefaultCommand(driveCommand);
   }
 
 
-  public void vroom(double leftSpeed, double rightSpeed) {
-    roboDrive.tankDrive(leftSpeed, rightSpeed);
+  public void vroom(double speed, double rotation) {
+    roboDrive.arcadeDrive(speed, rotation);
   }
 
   @Override
   public void periodic() {
-    double value = encoder1.getPosition();
-    double value2 = encoder2.getPosition();
-    double value3 = encoder3.getPosition();
-    double value4 = encoder4.getPosition();
-    i++;
-    if (i == 5) {i = 0;}
     //System.out.println("The value of encoder 1 is: " + value);
     //System.out.println("The value of encoder 2 is: " + value2);
     //System.out.println("The value of encoder 3 is: " + value3);
@@ -140,32 +96,14 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void resetEncoder(CANEncoder encoder) {
-    old_E_Value = encoder.getPosition();
-    traveledInches = 0;
-    traveledFeet = 0;
   }
 
   public double encoderDistance(CANEncoder encoder) {
-    double traveledInches = 0;
-    current_E_Value = encoder.getPosition();
-    double traveledUnits = (current_E_Value - old_E_Value);
-    traveledInches = toInches(traveledUnits);
-    old_E_Value = current_E_Value;
-    if (printIterator() == true) {
-      System.out.println("Traveled " + traveledInches + "Inches");
-    }
-    return traveledInches;
+  return 0;
   }
 
   public double improvedEncoderDist(CANEncoder encoder) { //Now a constantly saved number (rather than constantly recalculated from 0), and returns distance in feet, making autonomous code look a lot nicer
-    current_E_Value = encoder.getPosition();
-    double traveledUnits = (current_E_Value - old_E_Value);
-    traveledFeet = toFeet(traveledUnits);
-    if (printIterator() == true) {
-      System.out.println("Improved encoderDistance method is working. Output: " + traveledFeet + " Feet since last reset.");
-    }
-
-    return traveledFeet;
+return 0;
   }
 
   private double toInches(double encoderValue)  {

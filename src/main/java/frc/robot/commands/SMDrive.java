@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import frc.robot.ArduinoSensors;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.SM;
 import frc.robot.ShuffleboardManagement;
 import frc.robot.subsystems.DriveSubsystem;
@@ -50,8 +49,8 @@ public class SMDrive extends CommandBase {
   @Override
   public void initialize() {
     DriverStation.reportWarning("Starting SMDrive", false);
-    joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
-    driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
+//    joystickChangeLimit = RobotContainer.prefs.getDouble("JoystickChangeLimit", .03); //This is the slew variable. Bigger number = less slew, and vice versa.
+//    driveSubsystem.roboDrive.setMaxOutput(RobotContainer.prefs.getFloat("SMMaxSpeed", REGULAR_SPEED));
 
     /*
     try {

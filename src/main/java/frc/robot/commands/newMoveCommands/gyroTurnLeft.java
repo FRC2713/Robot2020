@@ -30,9 +30,6 @@ public class gyroTurnLeft extends CommandBase {
 //    gyro.calibrate();
     currentAngle = gyro.getAngle();
     originalAngle = currentAngle;
-    if (m_DS.printIterator() == true) {
-      System.out.println("Initial Angle: " + currentAngle);
-    }
 
     if(SLEW_DIST > (targetAngle/2)) {
       SLEW_DIST = targetAngle/2;
@@ -58,10 +55,6 @@ public class gyroTurnLeft extends CommandBase {
       }
     }
     m_DS.getRoboDrive().tankDrive(leftSpeed, rightSpeed);
-    if (m_DS.printIterator() == true) {
-      System.out.println("Turned " + currentAngle + " degrees left");
-    }
-
   }
 
   @Override

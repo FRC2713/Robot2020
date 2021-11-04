@@ -33,7 +33,7 @@ import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  public static RobotContainer m_robotContainer = null;
+  public static RobotContainerTheSequel m_robotContainerTheSequel = null;
   private DriveSubsystem driveSubsystem;
   private LightSensor lightsensor = new LightSensor();
   public static final Compressor compressor = new Compressor();
@@ -54,8 +54,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
 
-    m_robotContainer = new RobotContainer();
-    driveSubsystem = m_robotContainer.driveSubsystem;
+    m_robotContainerTheSequel = new RobotContainerTheSequel();
+    driveSubsystem = m_robotContainerTheSequel.driveSubsystem;
     gyro = driveSubsystem.getGyro();
     gyro.calibrate();
     SmartDashboard.putBoolean("is this running", false);
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    SM.initControllers();
+//    SM.initControllers();
     //gyro.reset();
   }
 
@@ -145,20 +145,16 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
+   * This autonomous runs the autonomous command selected by your {@link} class.
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    m_autonomousCommand = null;
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    m_robotContainer.intakeSubsystem.intakeGateCommand.setIntakeGatePosition(DOWN);
-    m_robotContainer.intakeSubsystem.humanIntakeCommand.setIntakeGatePosition(IntakeSubsystem.HumanIntakePosition.DOWN);
-
-  }
+ }
 
   /**
    * This function is called periodically during autonomous.
@@ -187,14 +183,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    if((m_robotContainer.driveSubsystem.driveCommand.getBPressed())) {
-      changeCamera();
-
-    }
-    else {
-      SmartDashboard.putBoolean("is this running", false);
-    }
-
   }
 
   @Override

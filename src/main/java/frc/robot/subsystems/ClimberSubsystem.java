@@ -37,10 +37,10 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void initControls() {
-    climberButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition()));
-
-    witchUpButton.whileHeld(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.UP)));
-    witchDownButton.whileHeld(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.DOWN)));
+//    climberButton.whileHeld(new InstantCommand(() -> climbCommand.setClimberPosition()));
+//
+//    witchUpButton.whileHeld(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.UP)));
+//    witchDownButton.whileHeld(new InstantCommand(() -> witchCommand.setWitchPosition(ClimberSubsystem.WitchPosition.DOWN)));
   }
   //public enum ClimberPosition {
  //   UP, DOWN, STOPPED
