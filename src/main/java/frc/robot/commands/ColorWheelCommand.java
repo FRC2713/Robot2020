@@ -8,12 +8,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.ColorSensor;
 import frc.robot.RobotMap;
-import frc.robot.SM;
 import frc.robot.subsystems.ColorWheelSubsystem;
 
 public class ColorWheelCommand extends CommandBase {
 
-  private XboxController xbox = SM.xBoxController;
+  // private XboxController xbox = SM.xBoxController;
   private ColorWheelSubsystem colormatchwheelsubsystem;
   public int stop = -1;
   public String chosenColor = "no color";
@@ -48,34 +47,34 @@ public class ColorWheelCommand extends CommandBase {
      * Open Smart Dashboard or Shuffleboard to see the color detected by the
      * sensor.
      */
-    if (xbox.getRawButtonPressed(1)) {
-      SM.rumbleController(xbox, .5, 500);
-      chosenColorInt ++;
-      if(chosenColorInt >= 5){
+    // if (xbox.getRawButtonPressed(1)) {
+    //   SM.rumbleController(xbox, .5, 500);
+    //   chosenColorInt ++;
+    //   if(chosenColorInt >= 5){
 
-        chosenColorInt = 1;
+    //     chosenColorInt = 1;
 
-      }
+    //   }
 
-    }
+    // }
 
-    if(chosenColorInt == 1){
+    // if(chosenColorInt == 1){
 
-      chosenColor = "Red";
-    }
+    //   chosenColor = "Red";
+    // }
 
-    if(chosenColorInt == 2){
+    // if(chosenColorInt == 2){
 
-      chosenColor = "Green";
-    }
-    if(chosenColorInt == 3){
+    //   chosenColor = "Green";
+    // }
+    // if(chosenColorInt == 3){
 
-      chosenColor = "Blue";
-    }
-    if(chosenColorInt == 4){
+    //   chosenColor = "Blue";
+    // }
+    // if(chosenColorInt == 4){
 
-      chosenColor = "Yellow";
-    }
+    //   chosenColor = "Yellow";
+    // }
 //    System.out.println("Color is: " + colorString);
 //  System.out.println("Red: " + colormatchwheelsubsystem.colorsensor.detectedColor.red);
 //    System.out.println("Green: " + colormatchwheelsubsystem.colorsensor.detectedColor.green);
@@ -111,22 +110,22 @@ public class ColorWheelCommand extends CommandBase {
     }
 
 
-    if (xbox.getRawButtonPressed(4)) {
-        //if (colorsensor.getColor() == chosenColor) {
-         // colormathwheelsubsystem.sensorMotor.set(0);
-     // stop = stop * -1;
-      SM.rumbleController(xbox, .4, 200);
+    // if (xbox.getRawButtonPressed(4)) {
+    //     //if (colorsensor.getColor() == chosenColor) {
+    //      // colormathwheelsubsystem.sensorMotor.set(0);
+    //  // stop = stop * -1;
+    //   SM.rumbleController(xbox, .4, 200);
 
-      //} else {
-     // if(stop == 1) {
+    //   //} else {
+    //  // if(stop == 1) {
 
-        colormatchwheelsubsystem.sensorMotor.set(0.5);
+    //     colormatchwheelsubsystem.sensorMotor.set(0.5);
 
-     // }else{
-       // colormatchwheelsubsystem.sensorMotor.set(0);
-     // }
+    //  // }else{
+    //    // colormatchwheelsubsystem.sensorMotor.set(0);
+    //  // }
 
-    }
+    // }
 
   }
 

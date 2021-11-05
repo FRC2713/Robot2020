@@ -20,6 +20,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.visionSubsystems.PixySubsystem;
 import frc.robot.util.ToggleIntake;
@@ -39,7 +40,6 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
 
-  private final SM sm = new SM(); //Subsystem Management (SM) needs to be instantiated first
   public  static Preferences prefs = Preferences.getInstance();
 
   public final DriveSubsystem driveSubsystem = new DriveSubsystem();
@@ -71,6 +71,17 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     climberSubsystem.initControls();
+
+    driveSubsystem.setDefaultCommand(new RunCommand(
+      () -> {
+        // function logic
+        driveSubsystem.vroom(
+          driveController.getTriggerAxis(GenericHID.Hand.kRight) - driveController.getTriggerAxis(GenericHID.Hand.kLeft),
+          driveController.getX(GenericHID.Hand.kLeft)
+        );
+      }, driveSubsystem
+    ));
+
     new JoystickButton(driveController, XboxController.Button.kX.value)
       .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
 
