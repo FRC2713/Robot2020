@@ -21,14 +21,20 @@ public class IntakeArmCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if(toggle==ToggleIntake.FORWARD) {
+    if(toggle==ToggleIntake.IN) {
       this.intake.setIntakeMotor(1.0);
+      this.intake.setConveyorMotor(1.0);
+      this.intake.setSolState(true);
     }
-    else if(toggle==ToggleIntake.BACKWARD){
+    else if(toggle==ToggleIntake.OUT){
       this.intake.setIntakeMotor(-1.0);
+      this.intake.setConveyorMotor(-1.0);
+      this.intake.setSolState(true);
     }
     else if(toggle==ToggleIntake.STOP){
       this.intake.setIntakeMotor(0.0);
+      this.intake.setConveyorMotor(0.0);
+      this.intake.setSolState(false);
     }
   }
 

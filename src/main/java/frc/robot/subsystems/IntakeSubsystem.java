@@ -12,7 +12,8 @@ public class IntakeSubsystem extends SubsystemBase {
   public final CANSparkMax intakeArm = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   public final DoubleSolenoid intakeArmSolenoid = SM.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
   public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
-  public final DoubleSolenoid humanIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.humanIntakeUpNode, RobotMap.humanIntakeDownNode);
+  private boolean isGateOpen = false;
+  //public final DoubleSolenoid humanIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.humanIntakeUpNode, RobotMap.humanIntakeDownNode);
   //public final iRaidersButton intakeGateUpButton = new iRaidersButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
   //public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
   //public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
@@ -45,23 +46,33 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void setIntakeMotor(double speed) {
     intakeArm.set(speed);
+  }
+  public void setConveyorMotor(double speed){
     intakePulley.set(speed);
   }
+
   public void setSolState(boolean state){
     if(state) {
-      intakeArmSolenoid.set(Value.kForward);
+      System.out.println("ARM : " + state);
+      intakeArmSolenoid.set(Value.kReverse);
     }
     else {
-      intakeArmSolenoid.set(Value.kReverse);
+      System.out.println("ARM : " + state);
+      intakeArmSolenoid.set(Value.kForward);
     }
   }
   public void setGateState(boolean isOpen){
     if(isOpen){
       gateSolenoid.set(Value.kForward);//open
+      isGateOpen = true;
     }
     else{
       gateSolenoid.set(Value.kReverse);//closed
+      isGateOpen = false;
     }
+  }
+  public boolean isGateOpen(){
+    return isGateOpen;
   }
 
 }

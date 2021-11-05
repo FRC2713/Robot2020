@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.IntakeArmCommand;
+import frc.robot.commands.OutputGateCommand;
 import frc.robot.commands.commandGroups.*;
 import frc.robot.commands.visionCommands.PixyTracking;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -48,7 +49,6 @@ public class RobotContainer {
   private final initLineOnly initLineOnly = new initLineOnly(driveSubsystem);
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-  private final experimentalScoreFront experimentalScoreFront = new experimentalScoreFront(driveSubsystem, intakeSubsystem);
   private final calibrateAutonomous calibrateAutonomous = new calibrateAutonomous(driveSubsystem);
   private final barrelPathCommand barrelPathCommand = new barrelPathCommand(driveSubsystem);
 
@@ -71,10 +71,15 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     climberSubsystem.initControls();
+    new JoystickButton(driveController, XboxController.Button.kX.value)
+      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
+
     new JoystickButton(driveController, XboxController.Button.kA.value)
-      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.FORWARD)).whenReleased(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
+      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.IN)).whenReleased(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
     new JoystickButton(driveController, XboxController.Button.kB.value)
-      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.BACKWARD)).whenReleased(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
+      .whenPressed(new IntakeArmCommand(intakeSubsystem, ToggleIntake.OUT)).whenReleased(new IntakeArmCommand(intakeSubsystem, ToggleIntake.STOP));
+    new JoystickButton(driveController, XboxController.Button.kY.value)
+      .whenPressed(new OutputGateCommand(intakeSubsystem));
   }
 
 
