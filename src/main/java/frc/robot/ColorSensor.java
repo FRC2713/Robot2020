@@ -23,7 +23,7 @@ public class ColorSensor {
    */
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private XboxController xbox = SM.xBoxController;
+  // private XboxController xbox = SM.xBoxController;
   private int color = 0;
 
   /**

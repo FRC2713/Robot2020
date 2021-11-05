@@ -17,12 +17,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.SM;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
-import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.DOWN;
-import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,7 +31,7 @@ import static frc.robot.subsystems.IntakeSubsystem.IntakeGatePosition.UP;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  public static RobotContainerTheSequel m_robotContainerTheSequel = null;
+  public static RobotContainer m_robotContainerTheSequel = null;
   private DriveSubsystem driveSubsystem;
   private LightSensor lightsensor = new LightSensor();
   public static final Compressor compressor = new Compressor();
@@ -54,7 +52,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
 
-    m_robotContainerTheSequel = new RobotContainerTheSequel();
+    m_robotContainerTheSequel = new RobotContainer();
     driveSubsystem = m_robotContainerTheSequel.driveSubsystem;
     gyro = driveSubsystem.getGyro();
     gyro.calibrate();
@@ -154,7 +152,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
- }
+  }
 
   /**
    * This function is called periodically during autonomous.

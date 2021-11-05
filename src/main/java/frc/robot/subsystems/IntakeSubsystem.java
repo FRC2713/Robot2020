@@ -3,37 +3,34 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.*;
-import frc.robot.commands.HumanIntakeCommand;
-import frc.robot.commands.IntakeArmCommand;
-import frc.robot.commands.IntakeConveyerCommand;
-import frc.robot.commands.IntakeGateCommand;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class IntakeSubsystem extends SubsystemBase {
-  public final CANSparkMax intakeMotor = new CANSparkMax(RobotMap.intakeTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  public final CANSparkMax intakeArmMotor = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
-  public final DoubleSolenoid intakeArmSolenoid = SM.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
-  public final DoubleSolenoid gateSolenoid = SM.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
-  public final DoubleSolenoid humanIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.humanIntakeUpNode, RobotMap.humanIntakeDownNode);
-  public final iRaidersButton intakeGateUpButton = new iRaidersButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
- // public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
+  public final CANSparkMax intakePulley = new CANSparkMax(RobotMap.intakeTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+  public final CANSparkMax intakeArm = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
+  public final DoubleSolenoid intakeArmSolenoid = new DoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
+  public final DoubleSolenoid gateSolenoid = new DoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
+  private boolean isGateOpen = false;
+  //public final DoubleSolenoid humanIntakeSolenoid = SM.getDoubleSolenoid(RobotMap.humanIntakeUpNode, RobotMap.humanIntakeDownNode);
+  //public final iRaidersButton intakeGateUpButton = new iRaidersButton(SM.xBoxController, RobotMap.intakeGateUpButtonNum);
+  //public final JoystickButton intakeGateDownButton = new JoystickButton(SM.xBoxController, RobotMap.intakeGateDownButtonNum);
   //public final JoystickButton intakeOnButton = new JoystickButton(SM.xBoxController, RobotMap.intakeOnButtonNum);
-  public final iRaidersButton intakeReverse = new iRaidersButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
-  public final iRaidersButton humanIntake = new iRaidersButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
-  private boolean toggleState = true;
-  private boolean testyIntake = false;
-  private double triggerPreviousValue;
+  //public final iRaidersButton intakeReverse = new iRaidersButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
+  //public final iRaidersButton humanIntake = new iRaidersButton(SM.xBoxController, RobotMap.reverseIntakeButtonNum);
+  //private boolean toggleState = true;
+  //private boolean testyIntake = false;
+  //private double triggerPreviousValue;
 
 
-  //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
-  public final HumanIntakeCommand humanIntakeCommand = new HumanIntakeCommand(this);
-  public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
-  public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this);
+  /*
+    //public final IntakeCountCommand intakeCountCommand = new IntakeCountCommand(this);
+    public final HumanIntakeCommand humanIntakeCommand = new HumanIntakeCommand(this);
+    public final IntakeGateCommand intakeGateCommand = new IntakeGateCommand(this);
+    public final IntakeConveyerCommand intakeConveyerCommand = new IntakeConveyerCommand(this);
+
+   */
   public IntakeSubsystem() {
 
     // Robot.initializeSparkDefaults(intakeMotor, intakeConveyor);
@@ -41,59 +38,42 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
 
-    public void initTeleop () {
-      //new EncoderReporter(intakeTalon).start();
+  public void initTeleop() {
+    //new EncoderReporter(intakeTalon).start();
 
-      //Robot.initializeTalonDefaults(intakeTalon);
-    }
-
-    public void initControls() {
-
-      intakeGateUpButton.whenReleased(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.UP)));
-      intakeGateUpButton.whenPressed(new InstantCommand(() -> intakeGateCommand.setIntakeGatePosition(IntakeGatePosition.DOWN)));
-      //intakeOnButton.whenPressed(new InstantCommand(() -> (toggleState)? intakeConveyerCommand.setIntakeMode(IntakePosition.ON): intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED))));
-      //intakeArmButton.whenReleased(new InstantCommand(() -> this.intakeArmCommand.setIntakeArmPosition(IntakeArmPosition.UP)));
-      //intakeOnButton.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON)));
-      //intakeOnButton.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
-      intakeReverse.whenPressed(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.REVERSED)));
-      intakeReverse.whenReleased(new InstantCommand(() -> this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED)));
-
-    }
-
-    @Override
-    public void periodic() {
-      if (SM.xBoxController.getTriggerAxis(GenericHID.Hand.kRight) == 1 && triggerPreviousValue != 1){//checks if the trigger is being changed from a non-one value
-        if(!testyIntake){
-          testyIntake = !testyIntake;
-        }
-        else if(testyIntake){
-          testyIntake = !testyIntake;
-        }
-      }
-      triggerPreviousValue = SM.xBoxController.getTriggerAxis(GenericHID.Hand.kRight);
-      if (testyIntake) this.intakeConveyerCommand.setIntakeMode(IntakePosition.ON);
-      if (!testyIntake)  this.intakeConveyerCommand.setIntakeMode(IntakePosition.STOPPED);
-    }
-
-    public enum IntakeGatePosition {
-      UP, DOWN
-    }
-
-    public enum IntakePosition {
-      ON, STOPPED, REVERSED
-    }
-
-    public enum IntakeArmPosition {
-      UP, DOWN
-    }
-    public enum HumanIntakePosition {
-      UP, DOWN
-    }
+    //Robot.initializeTalonDefaults(intakeTalon);
   }
 
+  public void setIntakeMotor(double speed) {
+    intakeArm.set(speed);
+  }
+  public void setConveyorMotor(double speed){
+    intakePulley.set(speed);
+  }
 
+  public void setSolState(boolean state){
+    if(state) {
+      System.out.println("ARM : " + state);
+      intakeArmSolenoid.set(Value.kReverse);
+    }
+    else {
+      System.out.println("ARM : " + state);
+      intakeArmSolenoid.set(Value.kForward);
+    }
+  }
+  public void setGateState(boolean isOpen){
+    if(isOpen){
+      gateSolenoid.set(Value.kForward);//open
+      isGateOpen = true;
+    }
+    else{
+      gateSolenoid.set(Value.kReverse);//closed
+      isGateOpen = false;
+    }
+  }
+  public boolean isGateOpen(){
+    return isGateOpen;
+  }
 
-
-
-
+}
 
